@@ -157,4 +157,4 @@ class: center, middle
 # Thanks!
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).  
-Scripts and files are available at my [**github page**]().  
+Scripts and files are available at my [**github page**](https://github.com/HanSingle/HanSingle.github.io/).  
