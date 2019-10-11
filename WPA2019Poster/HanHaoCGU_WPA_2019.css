@@ -1,0 +1,37 @@
+/* Whole document: */
+
+body{
+  font-family: "Arial";
+  /*background-color: #e5f6ff;*/
+  background-color: #cc543a;
+ 
+}
+
+
+/*
+.bg-primary {
+  background-color: rgba(204, 84, 58, 0.9);
+}
+
+*/
+
+a {
+    text-decoration: none;
+}
+
+/* unvisited link */
+a {
+    color: black;
+}
+
+a {
+  box-shadow: none;
+}
+
+/* mouse over link */
+/*
+a:hover {
+    color: grey;
+    text-decoration: none;
+}
+*/
