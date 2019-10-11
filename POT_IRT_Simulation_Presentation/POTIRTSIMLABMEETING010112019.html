@@ -22,7 +22,7 @@ class: center, middle, inverse, title-slide
 
 # POT-IRT-Simulation-V1.1-Presentation
 ### Han
-### 2019/10/10 (updated: 2019-10-10)
+### 2019/10/10 (updated: 2019-10-11)
 
 ---
 
@@ -73,16 +73,19 @@ background-image: url('https://miro.medium.com/max/600/0*6pfb8IIpkihGKZT6.png')
 background-position: 50% 50%
 ## Process Overlap Theory (POT)
 ---
+
 ## Purpose
 
 --
 
 ### Use simulation approach to demonstrate that the positive manifold can emerge from the covariance among test scores in the absence of a general cognitive ability.
+
 --
 
 ### Demonstrate how broad abilities factors emerge from the introduction of a distinction between domain-general and domain-specific processes, and from the manipulation of the probabilities that each type of process is sampled by different types of tests.
 
 ---
+
 ## Summary Of simulation Procedure
 
 --
@@ -90,19 +93,23 @@ background-position: 50% 50%
 ### Specification of cognitive processes
 - 4 types of processes: Executive function, fluid reasoning, verbal, spatial
 - Orthogonal, from a standardized multivariate normal distribution
+
 --
 
-### Calculation of aggregate process abilite values
+### Calculation of aggregated process ability values
 - Process Overlap Model (POT) vs. General Sampling Model (GSM)
+
 --
 
 ### Simulation of item responses
 - Multidimentional IRT function
-- `\(a_{i} = 1\)` and `\(b_{i} = 0\)`
+- `\(a_{i} = 1\)` and `\(b_{i} = N(0,1)\)`
+
 --
 
 ### Confirmatory factor analyses
 - uni-factor model vs. higher-order model
+
 ---
 class: inverse, left, middle
 
@@ -138,7 +145,7 @@ nc &lt;- ne + nf + nv + ns
 
 - In GSM, no domains are specified when sampling the cognitive processes
 
-- when performing any item from any of the 9 tasks , the probabilities of the 200 cognitive processes being sampled are all equal.
+- when performing any item from any of the 9 tasks, the probabilities of the 200 cognitive processes being sampled are all equal.
 
 - In this GSM simulation, the probability is .10. Therefore for each item, a total of about 20 processes is sampled.
 
@@ -386,7 +393,7 @@ g.model &lt;- '
    &lt;td style="text-align:right;"&gt; 56390.88 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; GSM-g &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; GSM-G &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 14.30 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.94 &lt;/td&gt;
@@ -412,7 +419,7 @@ class: center, middle
 
 # Thanks!
 
-Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).  
+Slides were created via the R package [**xaringan**](https://github.com/yihui/xaringan).  
 Scripts and files are available at my [**github page**](https://github.com/HanSingle/HanSingle.github.io/).
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
