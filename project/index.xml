@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | Han Hao Cog Psych</title>
+    <link>/project/</link>
+      <atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2020</copyright><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/Titleboard.jpg</url>
+      <title>Projects</title>
+      <link>/project/</link>
+    </image>
+    
+    <item>
+      <title>Formative Model in Lavaan</title>
+      <link>/project/formfactor/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>/project/formfactor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Analysis with Repeat Measures in Generalized Mixed Effects Model</title>
+      <link>/project/glmm/</link>
+      <pubDate>Thu, 27 Apr 1916 00:00:00 +0000</pubDate>
+      <guid>/project/glmm/</guid>
+      <description>
+
+
+&lt;div id=&#34;package-and-data-preparation&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Package and Data Preparation&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(psych) # For descriptives and ANOVA, and else
+library(ez) # For ANOVA
+library(tidyverse) # This is a collection of packages for data wrangling and visualizing
+library(Rmisc)
+library(reshape2) # For reorganizing data
+#library(lsr)
+library(lme4) # For generalized linear mixed effect model
+library(lmerTest) # For p values in generalized linear mixed effect model
+#library(emmeans)
+#library(dplyr)
+#library(forcats)
+library(DescTools)
+#library(SuppDists)
+library(effsize)
+library(ggpubr)
+#library(MVN)
+library(r2glmm)
+
+dat &amp;lt;- read.csv(&amp;quot;Demo Data Das.csv&amp;quot;) # Read in the csv data&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data-forging&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Data forging&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# A quick look at the first several rows of the data. This is the wide format in which each row contains all information from one individual.
+head(dat)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   X D1S D2S D3S D1D D2D D3D     Speed         WMC
+## 1 1   6   6  10   3   4   2  52.57522  0.86260286
+## 2 2  10   6   8   4   5   1  87.14825  0.41562595
+## 3 3   8  10   9   5   2   3  65.23954 -1.74653932
+## 4 4  10   9   9   3   2   3 106.95063 -0.03135097
+## 5 5   7   9   9   3   3   4  89.83073  1.50946304
+## 6 6   7   8   2   5   6   4 161.63888  0.75637916&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# This function melt a wide-format data into long-formant in which each row contains information from one trial.
+dat2 &amp;lt;- melt(dat, measure.vars = c(&amp;quot;D1S&amp;quot;,&amp;quot;D2S&amp;quot;,&amp;quot;D3S&amp;quot;, &amp;quot;D1D&amp;quot;,&amp;quot;D2D&amp;quot;,&amp;quot;D3D&amp;quot;), variable.name = &amp;quot;Condition&amp;quot;, value.name = &amp;quot;Score&amp;quot;)
+
+# Spliting the string variable &amp;quot;condition&amp;quot; into two seperate (repeated measure) variables
+dat3 &amp;lt;- separate(dat2, Condition, sep = 2, into = c(&amp;quot;Factor1&amp;quot;,&amp;quot;Factor2&amp;quot;), remove = TRUE)
+
+# I recoded the ID variable to a factor (for the ANOVA analyses, otherwise R will treat it as a DV)
+dat3$X &amp;lt;- as.factor(dat3$X)
+# Factor 1 has 3 levels and I took out the 3rd level (otherwise I will have to have 2 dummy-coded variables for Factor1 in regression).
+dat3Final &amp;lt;-subset(dat3, Factor1 != &amp;quot;D3&amp;quot;)
+
+# Now the current data are formatted as a &amp;#39;perfect&amp;#39; long format
+head(dat3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   X     Speed         WMC Factor1 Factor2 Score
+## 1 1  52.57522  0.86260286      D1       S     6
+## 2 2  87.14825  0.41562595      D1       S    10
+## 3 3  65.23954 -1.74653932      D1       S     8
+## 4 4 106.95063 -0.03135097      D1       S    10
+## 5 5  89.83073  1.50946304      D1       S     7
+## 6 6 161.63888  0.75637916      D1       S     7&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;anova-with-ezanova-package&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;ANOVA with “ezANOVA” Package&lt;/h3&gt;
+&lt;p&gt;This package gives 3 options for us to calculate Sums of Squares, and the following note is copied directly from their documentation:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Numeric value (either 1, 2 or 3) specifying the Sums of Squares “type” to employ when data are unbalanced (eg. when group sizes differ). type = 2 is the default because this will yield identical ANOVA results as type = 1 when data are balanced but type = 2 will additionally yield various assumption tests where appropriate. When data are unbalanced, users are warned that they should give special consideration to the value of type. type=3 will emulate the approach taken by popular commercial statistics packages like SAS and SPSS, but users are warned that this approach is not without criticism.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Type 1
+ezANOVA(dat3Final, dv = .(Score), wid = .(X), within = .(Factor1, Factor2), type = 1, return_aov = TRUE, detailed = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## $ANOVA
+##            Effect DFn DFd       SSn      SSd           F            p p&amp;lt;.05
+## 1         Factor1   1  89   0.40000  94.1000   0.3783209 5.400727e-01      
+## 2         Factor2   1  89 846.40000 530.1000 142.1045086 3.864254e-20     *
+## 3 Factor1:Factor2   1  89  20.54444 133.9556  13.6497180 3.798565e-04     *
+##           ges
+## 1 0.000527318
+## 2 0.527498096
+## 3 0.026383003
+## 
+## $aov
+## 
+## Call:
+## aov(formula = formula(aov_formula), data = data)
+## 
+## Grand Mean: 6.038889
+## 
+## Stratum 1: X
+## 
+## Terms:
+##                 Residuals
+## Sum of Squares   217.9556
+## Deg. of Freedom        89
+## 
+## Residual standard error: 1.564909
+## 
+## Stratum 2: X:Factor1
+## 
+## Terms:
+##                 Factor1 Residuals
+## Sum of Squares      0.4      94.1
+## Deg. of Freedom       1        89
+## 
+## Residual standard error: 1.028253
+## 1 out of 2 effects not estimable
+## Estimated effects are balanced
+## 
+## Stratum 3: X:Factor2
+## 
+## Terms:
+##                 Factor2 Residuals
+## Sum of Squares    846.4     530.1
+## Deg. of Freedom       1        89
+## 
+## Residual standard error: 2.440529
+## 1 out of 2 effects not estimable
+## Estimated effects are balanced
+## 
+## Stratum 4: X:Factor1:Factor2
+## 
+## Terms:
+##                 Factor1:Factor2 Residuals
+## Sum of Squares         20.54444 133.95556
+## Deg. of Freedom               1        89
+## 
+## Residual standard error: 1.226833
+## Estimated effects are balanced&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Type 3
+ezANOVA(dat3Final, dv = .(Score), wid = .(X), within = .(Factor1, Factor2), type = 3, return_aov = TRUE, detailed = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## $ANOVA
+##            Effect DFn DFd         SSn      SSd            F            p p&amp;lt;.05
+## 1     (Intercept)   1  89 13128.54444 217.9556 5360.9115518 2.558857e-81     *
+## 2         Factor1   1  89     0.40000  94.1000    0.3783209 5.400727e-01      
+## 3         Factor2   1  89   846.40000 530.1000  142.1045086 3.864254e-20     *
+## 4 Factor1:Factor2   1  89    20.54444 133.9556   13.6497180 3.798565e-04     *
+##            ges
+## 1 0.9307951118
+## 2 0.0004096216
+## 3 0.4644141782
+## 4 0.0206133848
+## 
+## $aov
+## 
+## Call:
+## aov(formula = formula(aov_formula), data = data)
+## 
+## Grand Mean: 6.038889
+## 
+## Stratum 1: X
+## 
+## Terms:
+##                 Residuals
+## Sum of Squares   217.9556
+## Deg. of Freedom        89
+## 
+## Residual standard error: 1.564909
+## 
+## Stratum 2: X:Factor1
+## 
+## Terms:
+##                 Factor1 Residuals
+## Sum of Squares      0.4      94.1
+## Deg. of Freedom       1        89
+## 
+## Residual standard error: 1.028253
+## 1 out of 2 effects not estimable
+## Estimated effects are balanced
+## 
+## Stratum 3: X:Factor2
+## 
+## Terms:
+##                 Factor2 Residuals
+## Sum of Squares    846.4     530.1
+## Deg. of Freedom       1        89
+## 
+## Residual standard error: 2.440529
+## 1 out of 2 effects not estimable
+## Estimated effects are balanced
+## 
+## Stratum 4: X:Factor1:Factor2
+## 
+## Terms:
+##                 Factor1:Factor2 Residuals
+## Sum of Squares         20.54444 133.95556
+## Deg. of Freedom               1        89
+## 
+## Residual standard error: 1.226833
+## Estimated effects are balanced&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;anova-with-aov-function&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;ANOVA with “aov” Function&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;AnovaModel &amp;lt;- aov(Score ~ Factor1*Factor2 + Error(X/(Factor1*Factor2)), data = dat3)
+summary(AnovaModel)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Error: X
+##           Df Sum Sq Mean Sq F value Pr(&amp;gt;F)
+## Residuals 89  255.7   2.873               
+## 
+## Error: X:Factor1
+##            Df Sum Sq Mean Sq F value  Pr(&amp;gt;F)    
+## Factor1     2  47.69  23.846   17.19 1.5e-07 ***
+## Residuals 178 246.97   1.387                    
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## Error: X:Factor2
+##           Df Sum Sq Mean Sq F value Pr(&amp;gt;F)    
+## Factor2    1 1822.3    1822   226.6 &amp;lt;2e-16 ***
+## Residuals 89  715.7       8                   
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## Error: X:Factor1:Factor2
+##                  Df Sum Sq Mean Sq F value  Pr(&amp;gt;F)    
+## Factor1:Factor2   2  120.2   60.08   36.64 4.7e-14 ***
+## Residuals       178  291.8    1.64                    
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Effect sizes
+EtaSq(AnovaModel, type = 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                     eta.sq eta.sq.part eta.sq.gen
+## Factor1         0.01362519   0.1618527 0.03061484
+## Factor2         0.52062030   0.7180224 0.54684319
+## Factor1:Factor2 0.03432802   0.2916487 0.07370411&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;anova-plot&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;ANOVA Plot&lt;/h3&gt;
+&lt;p&gt;This is just a quick visualization of the condition differences.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;DescribeSummary &amp;lt;- summarySE(dat3Final, measurevar = &amp;quot;Score&amp;quot;, groupvars = c(&amp;quot;Factor1&amp;quot;,&amp;quot;Factor2&amp;quot;))
+
+pd = position_dodge(0.9)
+
+ggplot(DescribeSummary, aes(x=Factor1, y=Score, fill=Factor2)) + 
+  geom_errorbar(aes(ymin=Score-se, 
+                    ymax=Score+se), 
+                width=.2, size=1, position=pd) +
+  geom_bar(position = &amp;quot;dodge&amp;quot;, stat = &amp;quot;identity&amp;quot;, alpha = 0.7) +
+  coord_cartesian(ylim=c(2,9))+
+  theme_classic() +
+  scale_fill_grey(start = .1, end = .8) +
+  theme(
+    axis.title.y = element_text(vjust= 1.8),
+    axis.title.x = element_text(vjust= -0.5),
+    axis.title = element_text(face = &amp;quot;bold&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/project/GLMM/index_files/figure-html/ANOVAViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;generalized-linear-mixed-effect-model&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Generalized Linear Mixed Effect Model&lt;/h3&gt;
+&lt;p&gt;I just attached the scripts that I used in my own project, but I also just started to use GLMM so there is still a huge lot I am not 100% clear about the analysis.&lt;br /&gt;
+Here I dummy-coded the two factors, and specify the random intercept without considering any indivdiual level effect of the fectors (nothing except (1|X) in the “random term” in the formula).&lt;/p&gt;
+&lt;p&gt;This is some data I fictioned so here it seems the fitted model “lmmodel1” is singular: there might be too few variance in at least one effect, or it could also be a miss specification of the model.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Dummy coding
+dat3Final$F1Dummy &amp;lt;- dummy(dat3Final$Factor1,&amp;quot;D2&amp;quot;)
+dat3Final$F2Dummy &amp;lt;- dummy(dat3Final$Factor2,&amp;quot;S&amp;quot;)
+
+# Model specification and estimation
+lmmodel1 &amp;lt;- lmer(Score ~ WMC*F1Dummy*F2Dummy + (1|X), data = dat3Final, REML = FALSE)
+summary(lmmodel1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed model fit by maximum likelihood . t-tests use Satterthwaite&amp;#39;s
+##   method [lmerModLmerTest]
+## Formula: Score ~ WMC * F1Dummy * F2Dummy + (1 | X)
+##    Data: dat3Final
+## 
+##      AIC      BIC   logLik deviance df.resid 
+##   1395.6   1434.5   -687.8   1375.6      350 
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.3869 -0.7239  0.1256  0.7391  1.8144 
+## 
+## Random effects:
+##  Groups   Name        Variance  Std.Dev. 
+##  X        (Intercept) 9.840e-19 9.919e-10
+##  Residual             2.673e+00 1.635e+00
+## Number of obs: 360, groups:  X, 90
+## 
+## Fixed effects:
+##                      Estimate Std. Error        df t value Pr(&amp;gt;|t|)    
+## (Intercept)           4.77778    0.17234 360.00000  27.722  &amp;lt; 2e-16 ***
+## WMC                  -0.06142    0.21428 360.00000  -0.287  0.77458    
+## F1Dummy              -0.54444    0.24373 360.00000  -2.234  0.02611 *  
+## F2Dummy               2.58889    0.24373 360.00000  10.622  &amp;lt; 2e-16 ***
+## WMC:F1Dummy           0.13748    0.30304 360.00000   0.454  0.65035    
+## WMC:F2Dummy           0.35115    0.30304 360.00000   1.159  0.24733    
+## F1Dummy:F2Dummy       0.95556    0.34469 360.00000   2.772  0.00586 ** 
+## WMC:F1Dummy:F2Dummy  -0.04944    0.42857 360.00000  -0.115  0.90823    
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) WMC    F1Dmmy F2Dmmy WMC:F1Dm WMC:F2 F1D:F2
+## WMC          0.000                                            
+## F1Dummy     -0.707  0.000                                     
+## F2Dummy     -0.707  0.000  0.500                              
+## WMC:F1Dummy  0.000 -0.707  0.000  0.000                       
+## WMC:F2Dummy  0.000 -0.707  0.000  0.000  0.500                
+## F1Dmmy:F2Dm  0.500  0.000 -0.707 -0.707  0.000    0.000       
+## WMC:F1D:F2D  0.000  0.500  0.000  0.000 -0.707   -0.707  0.000
+## convergence code: 0
+## boundary (singular) fit: see ?isSingular&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Looking at the group effects
+anova(lmmodel1, type = 3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Type III Analysis of Variance Table with Satterthwaite&amp;#39;s method
+##                      Sum Sq Mean Sq NumDF DenDF  F value    Pr(&amp;gt;F)    
+## WMC                   0.220   0.220     1   360   0.0821  0.774576    
+## F1Dummy              13.339  13.339     1   360   4.9898  0.026111 *  
+## F2Dummy             301.606 301.606     1   360 112.8248 &amp;lt; 2.2e-16 ***
+## WMC:F1Dummy           0.550   0.550     1   360   0.2058  0.650347    
+## WMC:F2Dummy           3.589   3.589     1   360   1.3427  0.247334    
+## F1Dummy:F2Dummy      20.544  20.544     1   360   7.6853  0.005857 ** 
+## WMC:F1Dummy:F2Dummy   0.036   0.036     1   360   0.0133  0.908226    
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Effect sizes. I googled and found this R2beta people report but I am still trying to understand what it really means.
+r2beta(model = lmmodel1, partial = T)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                Effect   Rsq upper.CL lower.CL
+## 1               Model 0.487    0.555    0.426
+## 4             F2Dummy 0.245    0.321    0.175
+## 7     F1Dummy:F2Dummy 0.022    0.061    0.002
+## 3             F1Dummy 0.014    0.049    0.000
+## 6         WMC:F2Dummy 0.004    0.028    0.000
+## 5         WMC:F1Dummy 0.001    0.017    0.000
+## 2                 WMC 0.000    0.016    0.000
+## 8 WMC:F1Dummy:F2Dummy 0.000    0.015    0.000&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;glmm-visualization&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;GLMM Visualization&lt;/h3&gt;
+&lt;p&gt;I use these codes to visualize my GLMM data. It should be of help to break the conditions down and visualize the correlations beween the continous predictor and the outcome (performance) by unique conditions.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;split_plot &amp;lt;- ggplot(aes(WMC, Score), data = dat3Final) + 
+  geom_point() + 
+  stat_smooth(method = &amp;quot;lm&amp;quot;, col = &amp;quot;red&amp;quot;, size = 2, alpha = 0.3) +
+  facet_wrap(~ Factor1*Factor2) + 
+  theme_classic2() + 
+  xlab(&amp;quot;WMC&amp;quot;) + 
+  ylab(&amp;quot;Test score&amp;quot;)
+split_plot&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/project/GLMM/index_files/figure-html/GLMMViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
