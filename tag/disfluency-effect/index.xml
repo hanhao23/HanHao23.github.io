@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Disfluency Effect | Han Hao Cog Psych</title>
-    <link>/tag/disfluency-effect/</link>
-      <atom:link href="/tag/disfluency-effect/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://hanhao23.github.io/tag/disfluency-effect/</link>
+      <atom:link href="https://hanhao23.github.io/tag/disfluency-effect/index.xml" rel="self" type="application/rss+xml" />
     <description>Disfluency Effect</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2020</copyright><lastBuildDate>Fri, 08 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/Titleboard.jpg</url>
+      <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Disfluency Effect</title>
-      <link>/tag/disfluency-effect/</link>
+      <link>https://hanhao23.github.io/tag/disfluency-effect/</link>
     </image>
     
     <item>
       <title>The Impact of Auditory Distraction on Reading Comprehension - An Individual Differences Investigation</title>
-      <link>/publication/disfluency/</link>
+      <link>https://hanhao23.github.io/publication/disfluency/</link>
       <pubDate>Fri, 08 May 2020 00:00:00 +0000</pubDate>
-      <guid>/publication/disfluency/</guid>
+      <guid>https://hanhao23.github.io/publication/disfluency/</guid>
       <description>&lt;!---
 Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
 files/HanHaoCGU_Psychonomics_2019.png
