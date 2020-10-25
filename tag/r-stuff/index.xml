@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R Stuff | Han Hao Cog Psych</title>
-    <link>https://hanhao23.github.io/tag/r-stuff/</link>
-      <atom:link href="https://hanhao23.github.io/tag/r-stuff/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tag/r-stuff/</link>
+      <atom:link href="/tag/r-stuff/index.xml" rel="self" type="application/rss+xml" />
     <description>R Stuff</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2020</copyright><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
+      <url>/img/Titleboard.jpg</url>
       <title>R Stuff</title>
-      <link>https://hanhao23.github.io/tag/r-stuff/</link>
+      <link>/tag/r-stuff/</link>
     </image>
     
     <item>
       <title>Formative Model in Lavaan</title>
-      <link>https://hanhao23.github.io/project/formfactor/</link>
+      <link>/project/formfactor/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/project/formfactor/</guid>
+      <guid>/project/formfactor/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data Analysis with Repeat Measures in Generalized Mixed Effects Model</title>
-      <link>https://hanhao23.github.io/project/glmm/</link>
+      <link>/project/glmm/</link>
       <pubDate>Thu, 27 Apr 1916 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/project/glmm/</guid>
+      <guid>/project/glmm/</guid>
       <description>
 
 
@@ -264,7 +264,7 @@ ggplot(DescribeSummary, aes(x=Factor1, y=Score, fill=Factor2)) +
     axis.title.y = element_text(vjust= 1.8),
     axis.title.x = element_text(vjust= -0.5),
     axis.title = element_text(face = &amp;quot;bold&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/GLMM/index_files/figure-html/ANOVAViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/project/GLMM/index_files/figure-html/ANOVAViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;generalized-linear-mixed-effect-model&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Generalized Linear Mixed Effect Model&lt;/h3&gt;
@@ -356,7 +356,7 @@ r2beta(model = lmmodel1, partial = T)&lt;/code&gt;&lt;/pre&gt;
   xlab(&amp;quot;WMC&amp;quot;) + 
   ylab(&amp;quot;Test score&amp;quot;)
 split_plot&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/GLMM/index_files/figure-html/GLMMViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/project/GLMM/index_files/figure-html/GLMMViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

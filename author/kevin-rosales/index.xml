@@ -2,21 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kevin Rosales | Han Hao Cog Psych</title>
-    <link>https://hanhao23.github.io/author/kevin-rosales/</link>
-      <atom:link href="https://hanhao23.github.io/author/kevin-rosales/index.xml" rel="self" type="application/rss+xml" />
+    <link>/author/kevin-rosales/</link>
+      <atom:link href="/author/kevin-rosales/index.xml" rel="self" type="application/rss+xml" />
     <description>Kevin Rosales</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2020</copyright><lastBuildDate>Tue, 30 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2020</copyright><lastBuildDate>Sat, 21 Nov 2020 16:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
+      <url>/img/Titleboard.jpg</url>
       <title>Kevin Rosales</title>
-      <link>https://hanhao23.github.io/author/kevin-rosales/</link>
+      <link>/author/kevin-rosales/</link>
     </image>
     
     <item>
       <title>An Examination of Domain-Specificity Differences in Complex Span Tasks through Item Response Theory</title>
-      <link>https://hanhao23.github.io/publication/uniirt/</link>
+      <link>/talk/2020psychonomics/</link>
+      <pubDate>Sat, 21 Nov 2020 16:00:00 +0000</pubDate>
+      <guid>/talk/2020psychonomics/</guid>
+      <description>&lt;!---
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+Slides can be added in a few ways:
+
+- **Create** slides using Academic&#39;s [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
+- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
+- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+
+Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
+--&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>An Examination of Domain-Specificity Differences in Complex Span Tasks through Item Response Theory</title>
+      <link>/publication/uniirt/</link>
       <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/publication/uniirt/</guid>
+      <guid>/publication/uniirt/</guid>
       <description>&lt;!---
 &lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
