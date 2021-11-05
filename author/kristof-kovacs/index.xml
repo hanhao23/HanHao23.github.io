@@ -5,12 +5,52 @@
     <link>https://hanhao23.github.io/author/kristof-kovacs/</link>
       <atom:link href="https://hanhao23.github.io/author/kristof-kovacs/index.xml" rel="self" type="application/rss+xml" />
     <description>Kristof Kovacs</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2021</copyright><lastBuildDate>Mon, 23 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2021</copyright><lastBuildDate>Sat, 04 Sep 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Kristof Kovacs</title>
       <link>https://hanhao23.github.io/author/kristof-kovacs/</link>
     </image>
+    
+    <item>
+      <title>Rethinking the Relationship of Working Memory and Intelligence - A Perspective based on Process Overlap Theory</title>
+      <link>https://hanhao23.github.io/talk/2021isir/</link>
+      <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/2021isir/</guid>
+      <description>&lt;!---
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+Slides can be added in a few ways:
+
+- **Create** slides using Academic&#39;s [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
+- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
+- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+
+Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
+--&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Individual Differences in Attention and Intelligence</title>
+      <link>https://hanhao23.github.io/publication/individual-differences-in-attention-and-intelligence-a-united-cognitive-psychometric-approach/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/individual-differences-in-attention-and-intelligence-a-united-cognitive-psychometric-approach/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The Struggle Is Real</title>
+      <link>https://hanhao23.github.io/publication/the-struggle-is-real/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/the-struggle-is-real/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>General Intelligence Explained (Away)</title>
@@ -33,30 +73,6 @@
 
 
 Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
---&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Rethinking the Relationship of Working Memory and Intelligence - A Perspective based on Process Overlap Theory</title>
-      <link>https://hanhao23.github.io/talk/2021isir/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/talk/2021isir/</guid>
-      <description>&lt;!---
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-
-Slides can be added in a few ways:
-
-- **Create** slides using Academic&#39;s [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
-- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
-- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
-
-Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
 --&gt;
 </description>
     </item>

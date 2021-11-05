@@ -5,7 +5,7 @@
     <link>https://hanhao23.github.io/author/andrew-r.-a.-conway/</link>
       <atom:link href="https://hanhao23.github.io/author/andrew-r.-a.-conway/index.xml" rel="self" type="application/rss+xml" />
     <description>Andrew R. A. Conway</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2021</copyright><lastBuildDate>Sat, 21 Nov 2020 16:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2021</copyright><lastBuildDate>Fri, 08 Oct 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Andrew R. A. Conway</title>
@@ -13,9 +13,53 @@
     </image>
     
     <item>
+      <title>The Impact of Auditory Distraction on Reading Comprehension</title>
+      <link>https://hanhao23.github.io/publication/the-impact-of-auditory-distraction-on-reading-comprehension/</link>
+      <pubDate>Fri, 08 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/the-impact-of-auditory-distraction-on-reading-comprehension/</guid>
+      <description>&lt;!---
+Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+files/HanHaoCGU_Psychonomics_2019.png
+--&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rethinking the Relationship of Working Memory and Intelligence - A Perspective based on Process Overlap Theory</title>
+      <link>https://hanhao23.github.io/talk/2021isir/</link>
+      <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/2021isir/</guid>
+      <description>&lt;!---
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+Slides can be added in a few ways:
+
+- **Create** slides using Academic&#39;s [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
+- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
+- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+
+Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
+--&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Individual Differences in Attention and Intelligence</title>
+      <link>https://hanhao23.github.io/publication/individual-differences-in-attention-and-intelligence-a-united-cognitive-psychometric-approach/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/individual-differences-in-attention-and-intelligence-a-united-cognitive-psychometric-approach/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>An Examination of Domain-Specificity Differences in Complex Span Tasks through Item Response Theory</title>
       <link>https://hanhao23.github.io/talk/2020psychonomics/</link>
-      <pubDate>Sat, 21 Nov 2020 16:00:00 +0000</pubDate>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
       <guid>https://hanhao23.github.io/talk/2020psychonomics/</guid>
       <description>&lt;!---
 &lt;div class=&#34;alert alert-note&#34;&gt;
@@ -34,6 +78,14 @@ Slides can be added in a few ways:
 Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
 --&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>The Struggle Is Real</title>
+      <link>https://hanhao23.github.io/publication/the-struggle-is-real/</link>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/the-struggle-is-real/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -111,32 +163,8 @@ Supplementary notes can be added here, including [code and math](https://sourcet
     <item>
       <title>The Impact of Auditory Distraction on Reading Comprehension</title>
       <link>https://hanhao23.github.io/talk/2019psychonomics/</link>
-      <pubDate>Sun, 17 Nov 2019 13:00:00 +0000</pubDate>
+      <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
       <guid>https://hanhao23.github.io/talk/2019psychonomics/</guid>
-      <description>&lt;!---
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-
-Slides can be added in a few ways:
-
-- **Create** slides using Academic&#39;s [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
-- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
-- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
-
-Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
---&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Rethinking the Relationship of Working Memory and Intelligence - A Perspective based on Process Overlap Theory</title>
-      <link>https://hanhao23.github.io/talk/2021isir/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/talk/2021isir/</guid>
       <description>&lt;!---
 &lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
