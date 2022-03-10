@@ -5,7 +5,7 @@
     <link>https://hanhao23.github.io/author/han-hao/</link>
       <atom:link href="https://hanhao23.github.io/author/han-hao/index.xml" rel="self" type="application/rss+xml" />
     <description>Han Hao</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2022</copyright><lastBuildDate>Tue, 30 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2022</copyright><lastBuildDate>Fri, 08 Oct 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Han Hao</title>
@@ -13,27 +13,20 @@
     </image>
     
     <item>
-      <title>An Examination of Domain-Specificity Differences in Complex Span Tasks through Item Response Theory</title>
-      <link>https://hanhao23.github.io/publication/uniirt/</link>
-      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/publication/uniirt/</guid>
+      <title>The Impact of Auditory Distraction on Reading Comprehension</title>
+      <link>https://hanhao23.github.io/publication/the-impact-of-auditory-distraction-on-reading-comprehension/</link>
+      <pubDate>Fri, 08 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/the-impact-of-auditory-distraction-on-reading-comprehension/</guid>
       <description>&lt;!---
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-
 Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
---&gt;&lt;blockquote&gt;
-&lt;/blockquote&gt;
+files/HanHaoCGU_Psychonomics_2019.png
+--&gt;
 </description>
     </item>
     
-  </channel>
-</rss>
-nk>https://hanhao23.github.io/talk/2021isir/</link>
+    <item>
+      <title>Rethinking the Relationship of Working Memory and Intelligence - A Perspective based on Process Overlap Theory</title>
+      <link>https://hanhao23.github.io/talk/2021isir/</link>
       <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
       <guid>https://hanhao23.github.io/talk/2021isir/</guid>
       <description>&lt;!---

@@ -1,0 +1,254 @@
+---
+title: 'Intro to Item Response Modeling in R'
+subtitle: 'An Tutorial on MIRT Package'
+author: 'Han Hao'
+date: 'Updated at: `r Sys.Date()`'
+slug: irt-tutorial-in-r-with-mirt-package
+categories:
+  - R
+  - Demo
+tags:
+  - Item Response Theory
+  - R Markdown
+  - Working Memory
+  - R Stuff
+  - Psychometrics
+  - Academic
+  - Stats
+summary: ''
+authors: []
+lastmod: '2022-03-09T17:58:47-08:00'
+featured: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+output:
+  bookdown::html_document2:
+    toc: true
+    toc_float: true
+    code_folding: hide
+    fig_caption: true
+df_print: paged
+---
+
+
+# Overview
+
+The goal of this document is to introduce applications of R for item response theory (IRT) modeling. Specifically, this document is focused on introducing basic IRT analyses for beginners using the ["mirt" package](https://cran.r-project.org/web/packages/mirt/mirt.pdf) (Chalmers, 2012). It is not intended to be a full introduction to data analysis in R, nor to basic mathematics of item response theory. Instead, this tutorial will introduce the key concepts of IRT and important features of corresponding R packages/functions that facilitate IRT modeling for beginners. For a quick reference on the basics of IRT, please see the last section of recommended readings.  
+
+In this tutorial, I will go over these topics and present brief R examples that cover the basic uses of "mirt" for different types of IRT analyses:  
++ 1. Key concepts in IRT;  
++ 2. Unidimensional Dichotomous IRT Models;  
++ 3. Unidimensional Polytomous IRT Models; 
++ 4. Multidimensional IRT Models;  
++ 5. Advanced Topics.
+
+## Install and Load Packages
+The first step is to make sure you have the R packages needed in this tutorial. We can obtain the "mirt" package from CRAN (using "install.packages('mirt')"), or install the development version of the package from Github using the following codes:
+
+```{r install, eval=FALSE, include=TRUE}
+
+install.packages('devtools')
+library('devtools')
+install_github('philchalmers/mirt')
+
+```
+
+We need the following packages in this tutorial:
+
+```{r setup, warning = FALSE, results = 'hide', message = FALSE, echo=FALSE}
+
+# library(tidyverse) # For data wrangling and basic visualizations
+library(psych) # For descriptive stats and assumption checks
+library(mirt) # IRT modeling
+
+```
+
+
+# Prepare the Data
+The next step is to read in and prepare corresponding data files for the tutorial. The two data files are available at here: [ReadingSpan](https://hanhao23.github.io/files/WMI_Read_Han_Wide.csv) and [RotationSpan](https://hanhao23.github.io/files/WMI_Rot_Han_Wide.csv). 
+
+```{r datapre}
+# Conway et al. (2019) Data
+wmir <- read.csv("WMI_Read_Han_wide.csv")[,-1]
+wmirot <- read.csv("WMI_Rot_Han_wide.csv")[,-1]
+
+colnames(wmir) <- c("Subject", 
+                   "V1.3", "V1.4","V1.5", "V1.6", "V1.7",
+                   "V2.3", "V2.4","V2.5", "V2.6", "V2.7",
+                   "V3.3", "V3.4","V3.5", "V3.6", "V3.7")
+
+colnames(wmirot) <- c("Subject", 
+                   "S1.2","S1.3", "S1.4","S1.5", 
+                   "S2.2","S2.3", "S2.4","S2.5", 
+                   "S3.2","S3.3", "S3.4","S3.5")
+
+
+# Wmi is the full dataset (N = 261)
+wmi <- merge(wmir, wmirot, by = "Subject")
+
+
+```
+
+
+# Key Concepts in Item Respons Theory
+
+In this section we will briefly go over some key concepts and terms we will be using in this IRT tutorial.  
+
+**Scale**: In this tutorial, a scale refers to any quantitative system that is designed to reflect an individual's standing or level of ability on a latent construct or latent trait. A scale consists of multiple manifest items. These items can be questions in a survey, problems in a test, or trials in an experiment. 
++ **Dichotomous IRT models** are applied to the items with two possible response categories (yes/no, correct/incorrect, etc.)
++ **Polytomous IRT models** are applicable if the items have more than two possible response categories (Likert-type response scale, questions with partial credits, etc.)
+
+**Dimensionality**: The number of distinguishable attributes that a scale reflect.  
++ For **unidimensional IRT models**, it is assumed that the scale only reflect one dimension, such that all items in the scale are assumed to reflect a unitary latent trait.  
++ For **multidimensional IRT models**, multiple dimensions can be reflected and estimated, such that the responses to the items in the scales are assumed to reflect properties of multiple latent traits.  
+
+**Theta** ($\Theta$): the latent construct or trait that is measured by the scale. It represents individual differences on the latent construct being measured.  
+
+**Information**: an index to characterize the precision of measurement of the item or the test on the underlying latent construct, with high information denoting more precision. In IRT, this index is represented as a function of persons at different levels, such that the information function reflects the range of trait level over which this item or this test is most useful for distinguishing among individuals.  
+
+**Item Characteristic Curve** (ICC): AKA item trace curve. ICC represents an item response function that models the relationship between a person's probability for endorsing an item category (p) and the level on the construct measured by the scale ($\Theta$). For this purpose, the slope of the item characteristic curve is used to assess whether a specific item mean score has either a steeper curve (i.e., high value) or whether the item has a wider curve (i.e., low value) and, therefore, cannot adequately differentiate based on ability level.  
+
+**Item Difficulty Parameter** (*b*): the trait level on the latent scale where a person has a 50% chance of responding positively to the item. This definition of item difficulty applies to dichotomous models. For polytomous models, multiple threshold parameters (*d*s) are estimated for an item. Generally, for an item with k possible response categories, a total of k-1 parameters would be estimated so that the latent trait difference between response categories are accounted for.  
++ Conceptually, the role of item difficulty parameters in an IRT model is equivalent to the intercepts of manifests in a latent factor model.  
+
+**Item Discrimination Parameter** (*a*): how accurately a given item can differentiate individuals based on ability level. describes the strength of an item’s discrimination between people with trait levels below and above the threshold *b*. This parameter is also interpreted as describing how an item is related to the latent trait measured by the scale. In other words, the *a* parameter for an item reflects the magnitude of item reliability (how much the item is contributing to total score variance).
++ Conceptually, the role of item discrimination parameters in an IRT model is equivalent to the factor loadings of manifests in a latent factor model.  
+
+The "mirt" package includes an interactive graphical interface (shiny app) to allow the parameters to be modified in an IRT exemplar item in real time. To facilitate understanding of these key concepts, you can run the line of code below in your R console to activate an interactive shiny app with examplar item trace plots for different types of IRT models.  
+
+```{r MIRT Shiny Itemplot, eval=FALSE, include=TRUE}
+
+itemplot(shiny = TRUE)
+
+```
+
+# Unidimensional Dichotomous IRT Models
+
+In this section we will start with the basic unidimensional dichotomous model, in which all items are assumed to measure one latent trait, and the responses to items are all binary (0 = incorrect/no, 1 = correct/yes). We will use the rotation span dataset ()
+
+```{r unidich data}
+dat1 <- key2binary(wmirot[,-1],
+    key = rep(c(2,3,4,5),3))
+head(dat1)
+```
+
+## Assumption Checks
+
+```{r}
+
+```
+
+
+## Rasch Model
+
+```{r unidich Rasch}
+
+uniDich.model1 <- mirt.model("rotation = 1 - 12")
+
+uniDich.result1 <- mirt::mirt(dat1, uniDich.model1, itemtype = "Rasch", SE = TRUE)
+
+```
+
+```{r}
+M2(uniDich.result1)
+```
+
+
+```{r}
+itemfit(uniDich.result1)
+```
+
+
+```{r}
+coef(uniDich.result1,simplify = TRUE, IRTpar = TRUE)$items
+```
+
+
+```{r}
+plot(uniDich.result1, type = "trace")
+plot(uniDich.result1, which.items = c(1,5,9), type = "infotrace")
+```
+
+
+```{r}
+itemplot(uniDich.result1, item = 1, type = "trace", CE = TRUE)
+```
+
+
+```{r}
+plot(uniDich.result1, type = "infoSE")
+```
+
+## 2PL Model
+
+```{r unidich 2PL}
+
+uniDich.model2 <- mirt.model("rotation = 1 - 12")
+
+uniDich.result2 <- mirt::mirt(dat1, uniDich.model2, itemtype = "2PL", SE = TRUE)
+
+```
+
+
+```{r}
+M2(uniDich.result2)
+
+itemfit(uniDich.result2)
+```
+
+
+```{r}
+coef(uniDich.result2,simplify = TRUE, IRTpar = TRUE)$items
+```
+
+
+```{r}
+plot(uniDich.result2, type = "trace")
+```
+
+## Model Specification
+
+```{r}
+uniDich.model3 <- mirt.model("rotation = 1 - 12
+                             CONSTRAIN = (1,5,9,a1), (2,6,10,a1),(3,7,11,a1),(4,8,12,a1)")
+
+uniDich.result3 <- mirt::mirt(dat1, uniDich.model3, itemtype = "2PL", SE = TRUE)
+```
+
+```{r}
+M2(uniDich.result3)
+
+itemfit(uniDich.result3)
+```
+
+
+```{r}
+coef(uniDich.result3,simplify = TRUE, IRTpar = TRUE)$items
+```
+
+
+```{r}
+plot(uniDich.result3, type = "trace")
+```
+
+```{r}
+anova(uniDich.result2,uniDich.result3)
+```
+
+# Unidimensional Polytomous IRT Model
+
+```{r unipoly data}
+dat2 <- as.matrix(wmirot[,-1])
+head(dat2)
+```
+
+```{r unipoly 2PL}
+
+unipoly.model1 <- mirt.model("rotation = 1 - 12")
+
+unipoly.result1 <- mirt::mirt(dat2, uniDich.model2, itemtype = "gpcm", SE = TRUE)
+
+```

@@ -5,12 +5,342 @@
     <link>https://hanhao23.github.io/tag/stats/</link>
       <atom:link href="https://hanhao23.github.io/tag/stats/index.xml" rel="self" type="application/rss+xml" />
     <description>Stats</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2022</copyright><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2022</copyright><lastBuildDate>Wed, 09 Mar 2022 17:58:47 -0800</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Stats</title>
       <link>https://hanhao23.github.io/tag/stats/</link>
     </image>
+    
+    <item>
+      <title>Intro to Item Response Modeling in R</title>
+      <link>https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/</link>
+      <pubDate>Wed, 09 Mar 2022 17:58:47 -0800</pubDate>
+      <guid>https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/</guid>
+      <description>
+&lt;script src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;overview&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Overview&lt;/h1&gt;
+&lt;p&gt;The goal of this document is to introduce applications of R for item response theory (IRT) modeling. Specifically, this document is focused on introducing basic IRT analyses for beginners using the &lt;a href=&#34;https://cran.r-project.org/web/packages/mirt/mirt.pdf&#34;&gt;“mirt” package&lt;/a&gt; (Chalmers, 2012). It is not intended to be a full introduction to data analysis in R, nor to basic mathematics of item response theory. Instead, this tutorial will introduce the key concepts of IRT and important features of corresponding R packages/functions that facilitate IRT modeling for beginners. For a quick reference on the basics of IRT, please see the last section of recommended readings.&lt;/p&gt;
+&lt;p&gt;In this tutorial, I will go over these topics and present brief R examples that cover the basic uses of “mirt” for different types of IRT analyses:&lt;br /&gt;
++ 1. Key concepts in IRT;&lt;br /&gt;
++ 2. Unidimensional Dichotomous IRT Models;&lt;br /&gt;
++ 3. Unidimensional Polytomous IRT Models;
++ 4. Multidimensional IRT Models;&lt;br /&gt;
++ 5. Advanced Topics.&lt;/p&gt;
+&lt;div id=&#34;install-and-load-packages&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Install and Load Packages&lt;/h2&gt;
+&lt;p&gt;The first step is to make sure you have the R packages needed in this tutorial. We can obtain the “mirt” package from CRAN (using “install.packages(‘mirt’)”), or install the development version of the package from Github using the following codes:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;#39;devtools&amp;#39;)
+library(&amp;#39;devtools&amp;#39;)
+install_github(&amp;#39;philchalmers/mirt&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We need the following packages in this tutorial:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;prepare-the-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Prepare the Data&lt;/h1&gt;
+&lt;p&gt;The next step is to read in and prepare corresponding data files for the tutorial. The two data files are available at here: &lt;a href=&#34;https://hanhao23.github.io/files/WMI_Read_Han_Wide.csv&#34;&gt;ReadingSpan&lt;/a&gt; and &lt;a href=&#34;https://hanhao23.github.io/files/WMI_Rot_Han_Wide.csv&#34;&gt;RotationSpan&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Conway et al. (2019) Data
+wmir &amp;lt;- read.csv(&amp;quot;WMI_Read_Han_wide.csv&amp;quot;)[,-1]
+wmirot &amp;lt;- read.csv(&amp;quot;WMI_Rot_Han_wide.csv&amp;quot;)[,-1]
+
+colnames(wmir) &amp;lt;- c(&amp;quot;Subject&amp;quot;, 
+                   &amp;quot;V1.3&amp;quot;, &amp;quot;V1.4&amp;quot;,&amp;quot;V1.5&amp;quot;, &amp;quot;V1.6&amp;quot;, &amp;quot;V1.7&amp;quot;,
+                   &amp;quot;V2.3&amp;quot;, &amp;quot;V2.4&amp;quot;,&amp;quot;V2.5&amp;quot;, &amp;quot;V2.6&amp;quot;, &amp;quot;V2.7&amp;quot;,
+                   &amp;quot;V3.3&amp;quot;, &amp;quot;V3.4&amp;quot;,&amp;quot;V3.5&amp;quot;, &amp;quot;V3.6&amp;quot;, &amp;quot;V3.7&amp;quot;)
+
+colnames(wmirot) &amp;lt;- c(&amp;quot;Subject&amp;quot;, 
+                   &amp;quot;S1.2&amp;quot;,&amp;quot;S1.3&amp;quot;, &amp;quot;S1.4&amp;quot;,&amp;quot;S1.5&amp;quot;, 
+                   &amp;quot;S2.2&amp;quot;,&amp;quot;S2.3&amp;quot;, &amp;quot;S2.4&amp;quot;,&amp;quot;S2.5&amp;quot;, 
+                   &amp;quot;S3.2&amp;quot;,&amp;quot;S3.3&amp;quot;, &amp;quot;S3.4&amp;quot;,&amp;quot;S3.5&amp;quot;)
+
+
+# Wmi is the full dataset (N = 261)
+wmi &amp;lt;- merge(wmir, wmirot, by = &amp;quot;Subject&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;key-concepts-in-item-respons-theory&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Key Concepts in Item Respons Theory&lt;/h1&gt;
+&lt;p&gt;In this section we will briefly go over some key concepts and terms we will be using in this IRT tutorial.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Scale&lt;/strong&gt;: In this tutorial, a scale refers to any quantitative system that is designed to reflect an individual’s standing or level of ability on a latent construct or latent trait. A scale consists of multiple manifest items. These items can be questions in a survey, problems in a test, or trials in an experiment.
++ &lt;strong&gt;Dichotomous IRT models&lt;/strong&gt; are applied to the items with two possible response categories (yes/no, correct/incorrect, etc.)
++ &lt;strong&gt;Polytomous IRT models&lt;/strong&gt; are applicable if the items have more than two possible response categories (Likert-type response scale, questions with partial credits, etc.)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dimensionality&lt;/strong&gt;: The number of distinguishable attributes that a scale reflect.&lt;br /&gt;
++ For &lt;strong&gt;unidimensional IRT models&lt;/strong&gt;, it is assumed that the scale only reflect one dimension, such that all items in the scale are assumed to reflect a unitary latent trait.&lt;br /&gt;
++ For &lt;strong&gt;multidimensional IRT models&lt;/strong&gt;, multiple dimensions can be reflected and estimated, such that the responses to the items in the scales are assumed to reflect properties of multiple latent traits.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theta&lt;/strong&gt; (&lt;span class=&#34;math inline&#34;&gt;\(\Theta\)&lt;/span&gt;): the latent construct or trait that is measured by the scale. It represents individual differences on the latent construct being measured.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Information&lt;/strong&gt;: an index to characterize the precision of measurement of the item or the test on the underlying latent construct, with high information denoting more precision. In IRT, this index is represented as a function of persons at different levels, such that the information function reflects the range of trait level over which this item or this test is most useful for distinguishing among individuals.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Item Characteristic Curve&lt;/strong&gt; (ICC): AKA item trace curve. ICC represents an item response function that models the relationship between a person’s probability for endorsing an item category (p) and the level on the construct measured by the scale (&lt;span class=&#34;math inline&#34;&gt;\(\Theta\)&lt;/span&gt;). For this purpose, the slope of the item characteristic curve is used to assess whether a specific item mean score has either a steeper curve (i.e., high value) or whether the item has a wider curve (i.e., low value) and, therefore, cannot adequately differentiate based on ability level.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Item Difficulty Parameter&lt;/strong&gt; (&lt;em&gt;b&lt;/em&gt;): the trait level on the latent scale where a person has a 50% chance of responding positively to the item. This definition of item difficulty applies to dichotomous models. For polytomous models, multiple threshold parameters (&lt;em&gt;d&lt;/em&gt;s) are estimated for an item. Generally, for an item with k possible response categories, a total of k-1 parameters would be estimated so that the latent trait difference between response categories are accounted for.&lt;br /&gt;
++ Conceptually, the role of item difficulty parameters in an IRT model is equivalent to the intercepts of manifests in a latent factor model.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Item Discrimination Parameter&lt;/strong&gt; (&lt;em&gt;a&lt;/em&gt;): how accurately a given item can differentiate individuals based on ability level. describes the strength of an item’s discrimination between people with trait levels below and above the threshold &lt;em&gt;b&lt;/em&gt;. This parameter is also interpreted as describing how an item is related to the latent trait measured by the scale. In other words, the &lt;em&gt;a&lt;/em&gt; parameter for an item reflects the magnitude of item reliability (how much the item is contributing to total score variance).
++ Conceptually, the role of item discrimination parameters in an IRT model is equivalent to the factor loadings of manifests in a latent factor model.&lt;/p&gt;
+&lt;p&gt;The “mirt” package includes an interactive graphical interface (shiny app) to allow the parameters to be modified in an IRT exemplar item in real time. To facilitate understanding of these key concepts, you can run the line of code below in your R console to activate an interactive shiny app with examplar item trace plots for different types of IRT models.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemplot(shiny = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;unidimensional-dichotomous-irt-models&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Unidimensional Dichotomous IRT Models&lt;/h1&gt;
+&lt;p&gt;In this section we will start with the basic unidimensional dichotomous model, in which all items are assumed to measure one latent trait, and the responses to items are all binary (0 = incorrect/no, 1 = correct/yes). We will use the rotation span dataset ()&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dat1 &amp;lt;- key2binary(wmirot[,-1],
+    key = rep(c(2,3,4,5),3))
+head(dat1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      S1.2 S1.3 S1.4 S1.5 S2.2 S2.3 S2.4 S2.5 S3.2 S3.3 S3.4 S3.5
+## [1,]    1    0    0    0    0    1    0    0    0    0    0    0
+## [2,]    1    0    0    0    1    1    0    0    1    0    0    0
+## [3,]    1    0    1    0    1    1    1    0    0    0    0    0
+## [4,]    1    0    0    0    1    0    0    0    1    0    0    0
+## [5,]    1    1    1    1    1    1    1    0    1    1    1    0
+## [6,]    1    1    0    0    1    1    1    0    1    0    0    0&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;assumption-checks&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Assumption Checks&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;rasch-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Rasch Model&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;uniDich.model1 &amp;lt;- mirt.model(&amp;quot;rotation = 1 - 12&amp;quot;)
+
+uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;Rasch&amp;quot;, SE = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+Iteration: 1, Log-Lik: -1462.943, Max-Change: 0.13668
+Iteration: 2, Log-Lik: -1460.268, Max-Change: 0.11989
+Iteration: 3, Log-Lik: -1458.867, Max-Change: 0.09419
+Iteration: 4, Log-Lik: -1458.268, Max-Change: 0.10264
+Iteration: 5, Log-Lik: -1457.656, Max-Change: 0.04291
+Iteration: 6, Log-Lik: -1457.539, Max-Change: 0.03021
+Iteration: 7, Log-Lik: -1457.482, Max-Change: 0.02727
+Iteration: 8, Log-Lik: -1457.451, Max-Change: 0.01277
+Iteration: 9, Log-Lik: -1457.441, Max-Change: 0.00874
+Iteration: 10, Log-Lik: -1457.437, Max-Change: 0.00753
+Iteration: 11, Log-Lik: -1457.435, Max-Change: 0.00364
+Iteration: 12, Log-Lik: -1457.434, Max-Change: 0.00247
+Iteration: 13, Log-Lik: -1457.434, Max-Change: 0.00210
+Iteration: 14, Log-Lik: -1457.433, Max-Change: 0.00102
+Iteration: 15, Log-Lik: -1457.433, Max-Change: 0.00067
+Iteration: 16, Log-Lik: -1457.433, Max-Change: 0.00057
+Iteration: 17, Log-Lik: -1457.433, Max-Change: 0.00028
+Iteration: 18, Log-Lik: -1457.433, Max-Change: 0.00019
+Iteration: 19, Log-Lik: -1457.433, Max-Change: 0.00018
+Iteration: 20, Log-Lik: -1457.433, Max-Change: 0.00008
+## 
+## Calculating information matrix...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;M2(uniDich.result1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             M2 df         p RMSEA RMSEA_5   RMSEA_95      SRMSR      TLI CFI
+## stats 57.35425 65 0.7388255     0       0 0.02786493 0.05863013 1.016119   1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemfit(uniDich.result1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    item   S_X2 df.S_X2 RMSEA.S_X2 p.S_X2
+## 1  S1.2  7.250       5      0.042  0.203
+## 2  S1.3 11.494       6      0.059  0.074
+## 3  S1.4  7.566       6      0.032  0.272
+## 4  S1.5  6.330       5      0.032  0.275
+## 5  S2.2  4.483       6      0.000  0.612
+## 6  S2.3  5.462       6      0.000  0.486
+## 7  S2.4  5.275       6      0.000  0.509
+## 8  S2.5  3.816       5      0.000  0.576
+## 9  S3.2  1.528       6      0.000  0.958
+## 10 S3.3  7.055       6      0.026  0.316
+## 11 S3.4  5.081       6      0.000  0.533
+## 12 S3.5  8.589       5      0.052  0.127&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;coef(uniDich.result1,simplify = TRUE, IRTpar = TRUE)$items&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      a          b g u
+## S1.2 1 -3.0033640 0 1
+## S1.3 1 -0.9388653 0 1
+## S1.4 1  0.5864289 0 1
+## S1.5 1  2.4373369 0 1
+## S2.2 1 -2.6395716 0 1
+## S2.3 1 -1.4247025 0 1
+## S2.4 1  0.5864289 0 1
+## S2.5 1  2.3201998 0 1
+## S3.2 1 -2.3398445 0 1
+## S3.3 1 -0.9845155 0 1
+## S3.4 1  0.3420016 0 1
+## S3.5 1  2.3201998 0 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result1, type = &amp;quot;trace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result1, which.items = c(1,5,9), type = &amp;quot;infotrace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unnamed-chunk-5-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemplot(uniDich.result1, item = 1, type = &amp;quot;trace&amp;quot;, CE = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result1, type = &amp;quot;infoSE&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pl-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;2PL Model&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;uniDich.model2 &amp;lt;- mirt.model(&amp;quot;rotation = 1 - 12&amp;quot;)
+
+uniDich.result2 &amp;lt;- mirt::mirt(dat1, uniDich.model2, itemtype = &amp;quot;2PL&amp;quot;, SE = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+Iteration: 1, Log-Lik: -1471.180, Max-Change: 0.42160
+Iteration: 2, Log-Lik: -1455.945, Max-Change: 0.22201
+Iteration: 3, Log-Lik: -1452.043, Max-Change: 0.12852
+Iteration: 4, Log-Lik: -1450.808, Max-Change: 0.06917
+Iteration: 5, Log-Lik: -1450.477, Max-Change: 0.03824
+Iteration: 6, Log-Lik: -1450.377, Max-Change: 0.02270
+Iteration: 7, Log-Lik: -1450.334, Max-Change: 0.00988
+Iteration: 8, Log-Lik: -1450.328, Max-Change: 0.00572
+Iteration: 9, Log-Lik: -1450.325, Max-Change: 0.00351
+Iteration: 10, Log-Lik: -1450.323, Max-Change: 0.00103
+Iteration: 11, Log-Lik: -1450.322, Max-Change: 0.00093
+Iteration: 12, Log-Lik: -1450.322, Max-Change: 0.00047
+Iteration: 13, Log-Lik: -1450.322, Max-Change: 0.00028
+Iteration: 14, Log-Lik: -1450.322, Max-Change: 0.00027
+Iteration: 15, Log-Lik: -1450.322, Max-Change: 0.00021
+Iteration: 16, Log-Lik: -1450.322, Max-Change: 0.00029
+Iteration: 17, Log-Lik: -1450.322, Max-Change: 0.00031
+Iteration: 18, Log-Lik: -1450.322, Max-Change: 0.00041
+Iteration: 19, Log-Lik: -1450.322, Max-Change: 0.00013
+Iteration: 20, Log-Lik: -1450.322, Max-Change: 0.00019
+Iteration: 21, Log-Lik: -1450.322, Max-Change: 0.00021
+Iteration: 22, Log-Lik: -1450.322, Max-Change: 0.00009
+## 
+## Calculating information matrix...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;M2(uniDich.result2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             M2 df         p RMSEA RMSEA_5   RMSEA_95      SRMSR      TLI CFI
+## stats 40.90802 54 0.9054692     0       0 0.01662836 0.04004632 1.033223   1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemfit(uniDich.result2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    item   S_X2 df.S_X2 RMSEA.S_X2 p.S_X2
+## 1  S1.2  1.607       6      0.000  0.952
+## 2  S1.3 10.427       4      0.078  0.034
+## 3  S1.4  6.922       5      0.038  0.227
+## 4  S1.5  5.373       5      0.017  0.372
+## 5  S2.2  4.646       5      0.000  0.461
+## 6  S2.3  2.783       5      0.000  0.733
+## 7  S2.4  3.550       6      0.000  0.737
+## 8  S2.5  3.390       5      0.000  0.640
+## 9  S3.2  1.839       5      0.000  0.871
+## 10 S3.3  7.201       6      0.028  0.303
+## 11 S3.4  6.146       6      0.010  0.407
+## 12 S3.5  7.840       5      0.047  0.165&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;coef(uniDich.result2,simplify = TRUE, IRTpar = TRUE)$items&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##              a          b g u
+## S1.2 0.8196465 -3.2455844 0 1
+## S1.3 1.7771645 -0.6171063 0 1
+## S1.4 1.3365861  0.4431670 0 1
+## S1.5 1.2963837  1.9023919 0 1
+## S2.2 1.7058414 -1.7589910 0 1
+## S2.3 1.3696765 -1.0753956 0 1
+## S2.4 0.8589407  0.5905375 0 1
+## S2.5 0.9387174  2.2626112 0 1
+## S3.2 1.4477736 -1.7033180 0 1
+## S3.3 1.5741235 -0.6888211 0 1
+## S3.4 1.2459076  0.2655880 0 1
+## S3.5 0.9445384  2.2521152 0 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result2, type = &amp;quot;trace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;model-specification&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Model Specification&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;uniDich.model3 &amp;lt;- mirt.model(&amp;quot;rotation = 1 - 12
+                             CONSTRAIN = (1,5,9,a1), (2,6,10,a1),(3,7,11,a1),(4,8,12,a1)&amp;quot;)
+
+uniDich.result3 &amp;lt;- mirt::mirt(dat1, uniDich.model3, itemtype = &amp;quot;2PL&amp;quot;, SE = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+Iteration: 1, Log-Lik: -1471.180, Max-Change: 0.31053
+Iteration: 2, Log-Lik: -1458.910, Max-Change: 0.17139
+Iteration: 3, Log-Lik: -1455.919, Max-Change: 0.09510
+Iteration: 4, Log-Lik: -1454.992, Max-Change: 0.04842
+Iteration: 5, Log-Lik: -1454.774, Max-Change: 0.02735
+Iteration: 6, Log-Lik: -1454.702, Max-Change: 0.01570
+Iteration: 7, Log-Lik: -1454.672, Max-Change: 0.00682
+Iteration: 8, Log-Lik: -1454.667, Max-Change: 0.00388
+Iteration: 9, Log-Lik: -1454.666, Max-Change: 0.00214
+Iteration: 10, Log-Lik: -1454.665, Max-Change: 0.00119
+Iteration: 11, Log-Lik: -1454.665, Max-Change: 0.00066
+Iteration: 12, Log-Lik: -1454.664, Max-Change: 0.00037
+Iteration: 13, Log-Lik: -1454.664, Max-Change: 0.00013
+Iteration: 14, Log-Lik: -1454.664, Max-Change: 0.00008
+## 
+## Calculating information matrix...&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;M2(uniDich.result3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             M2 df         p RMSEA RMSEA_5   RMSEA_95      SRMSR      TLI CFI
+## stats 48.13573 62 0.9016688     0       0 0.01653092 0.04851792 1.030643   1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemfit(uniDich.result3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    item   S_X2 df.S_X2 RMSEA.S_X2 p.S_X2
+## 1  S1.2  6.776       5      0.037  0.238
+## 2  S1.3 10.198       6      0.052  0.117
+## 3  S1.4  7.444       6      0.030  0.282
+## 4  S1.5  6.669       5      0.036  0.246
+## 5  S2.2  4.493       6      0.000  0.610
+## 6  S2.3  4.495       5      0.000  0.480
+## 7  S2.4  4.915       6      0.000  0.555
+## 8  S2.5  3.674       5      0.000  0.597
+## 9  S3.2  1.665       6      0.000  0.948
+## 10 S3.3  7.181       6      0.027  0.304
+## 11 S3.4  5.931       6      0.000  0.431
+## 12 S3.5  8.061       5      0.048  0.153&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;coef(uniDich.result3,simplify = TRUE, IRTpar = TRUE)$items&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             a          b g u
+## S1.2 1.314847 -2.3120591 0 1
+## S1.3 1.551951 -0.6626354 0 1
+## S1.4 1.127870  0.4902232 0 1
+## S1.5 1.036344  2.2120724 0 1
+## S2.2 1.314847 -2.0337955 0 1
+## S2.3 1.551951 -1.0029799 0 1
+## S2.4 1.127870  0.4902232 0 1
+## S2.5 1.036344  2.1036240 0 1
+## S3.2 1.314847 -1.8044209 0 1
+## S3.3 1.551951 -0.6946542 0 1
+## S3.4 1.127870  0.2815835 0 1
+## S3.5 1.036344  2.1036240 0 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result3, type = &amp;quot;trace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(uniDich.result2,uniDich.result3)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Model 1: mirt::mirt(data = dat1, model = uniDich.model3, itemtype = &amp;quot;2PL&amp;quot;, 
+##     SE = TRUE)
+## Model 2: mirt::mirt(data = dat1, model = uniDich.model2, itemtype = &amp;quot;2PL&amp;quot;, 
+##     SE = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        AIC     AICc    SABIC       HQ      BIC    logLik    X2  df    p
+## 1 2941.329 2943.549 2947.695 2964.276 2998.422 -1454.664   NaN NaN  NaN
+## 2 2948.644 2953.708 2958.194 2983.065 3034.285 -1450.322 8.684   8 0.37&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;unidimensional-polytomous-irt-model&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Unidimensional Polytomous IRT Model&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dat2 &amp;lt;- as.matrix(wmirot[,-1])
+head(dat2)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      S1.2 S1.3 S1.4 S1.5 S2.2 S2.3 S2.4 S2.5 S3.2 S3.3 S3.4 S3.5
+## [1,]    2    1    0    0    0    3    1    0    1    1    0    0
+## [2,]    2    2    1    1    2    3    2    2    2    2    1    1
+## [3,]    2    1    4    1    2    3    4    1    1    2    0    3
+## [4,]    2    2    3    1    2    0    1    1    2    2    3    4
+## [5,]    2    3    4    5    2    3    4    4    2    3    4    2
+## [6,]    2    3    0    2    2    3    4    3    2    1    2    1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unipoly.model1 &amp;lt;- mirt.model(&amp;quot;rotation = 1 - 12&amp;quot;)
+
+unipoly.result1 &amp;lt;- mirt::mirt(dat2, uniDich.model2, itemtype = &amp;quot;gpcm&amp;quot;, SE = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+Iteration: 1, Log-Lik: -3668.531, Max-Change: 2.24331
+Iteration: 2, Log-Lik: -3382.971, Max-Change: 0.22730
+Iteration: 3, Log-Lik: -3372.950, Max-Change: 0.13469
+Iteration: 4, Log-Lik: -3368.610, Max-Change: 0.08457
+Iteration: 5, Log-Lik: -3366.773, Max-Change: 0.06445
+Iteration: 6, Log-Lik: -3365.795, Max-Change: 0.04883
+Iteration: 7, Log-Lik: -3365.222, Max-Change: 0.02171
+Iteration: 8, Log-Lik: -3365.118, Max-Change: 0.01576
+Iteration: 9, Log-Lik: -3365.079, Max-Change: 0.00957
+Iteration: 10, Log-Lik: -3365.057, Max-Change: 0.00842
+Iteration: 11, Log-Lik: -3365.053, Max-Change: 0.00147
+Iteration: 12, Log-Lik: -3365.051, Max-Change: 0.00275
+Iteration: 13, Log-Lik: -3365.050, Max-Change: 0.00087
+Iteration: 14, Log-Lik: -3365.050, Max-Change: 0.00015
+Iteration: 15, Log-Lik: -3365.050, Max-Change: 0.00049
+Iteration: 16, Log-Lik: -3365.050, Max-Change: 0.00066
+Iteration: 17, Log-Lik: -3365.050, Max-Change: 0.00013
+Iteration: 18, Log-Lik: -3365.050, Max-Change: 0.00039
+Iteration: 19, Log-Lik: -3365.050, Max-Change: 0.00013
+Iteration: 20, Log-Lik: -3365.050, Max-Change: 0.00039
+Iteration: 21, Log-Lik: -3365.050, Max-Change: 0.00041
+Iteration: 22, Log-Lik: -3365.050, Max-Change: 0.00019
+Iteration: 23, Log-Lik: -3365.050, Max-Change: 0.00021
+Iteration: 24, Log-Lik: -3365.050, Max-Change: 0.00026
+Iteration: 25, Log-Lik: -3365.050, Max-Change: 0.00024
+Iteration: 26, Log-Lik: -3365.050, Max-Change: 0.00031
+Iteration: 27, Log-Lik: -3365.050, Max-Change: 0.00008
+## 
+## Calculating information matrix...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Formative Model in Lavaan</title>
@@ -26,6 +356,7 @@
       <pubDate>Thu, 27 Apr 1916 00:00:00 +0000</pubDate>
       <guid>https://hanhao23.github.io/project/glmm/</guid>
       <description>
+&lt;script src=&#34;https://hanhao23.github.io/project/glmm/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;package-and-data-preparation&#34; class=&#34;section level3&#34;&gt;
@@ -264,7 +595,7 @@ ggplot(DescribeSummary, aes(x=Factor1, y=Score, fill=Factor2)) +
     axis.title.y = element_text(vjust= 1.8),
     axis.title.x = element_text(vjust= -0.5),
     axis.title = element_text(face = &amp;quot;bold&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/GLMM/index_files/figure-html/ANOVAViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/glmm/index_files/figure-html/ANOVAViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;generalized-linear-mixed-effect-model&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Generalized Linear Mixed Effect Model&lt;/h3&gt;
@@ -318,7 +649,7 @@ summary(lmmodel1)&lt;/code&gt;&lt;/pre&gt;
 ## WMC:F2Dummy  0.000 -0.707  0.000  0.000  0.500                
 ## F1Dmmy:F2Dm  0.500  0.000 -0.707 -0.707  0.000    0.000       
 ## WMC:F1D:F2D  0.000  0.500  0.000  0.000 -0.707   -0.707  0.000
-## convergence code: 0
+## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see ?isSingular&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Looking at the group effects
 anova(lmmodel1, type = 3)&lt;/code&gt;&lt;/pre&gt;
@@ -356,7 +687,7 @@ r2beta(model = lmmodel1, partial = T)&lt;/code&gt;&lt;/pre&gt;
   xlab(&amp;quot;WMC&amp;quot;) + 
   ylab(&amp;quot;Test score&amp;quot;)
 split_plot&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/GLMM/index_files/figure-html/GLMMViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/glmm/index_files/figure-html/GLMMViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
