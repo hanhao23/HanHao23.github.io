@@ -5,12 +5,20 @@
     <link>https://hanhao23.github.io/tag/academic/</link>
       <atom:link href="https://hanhao23.github.io/tag/academic/index.xml" rel="self" type="application/rss+xml" />
     <description>Academic</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2024</copyright><lastBuildDate>Wed, 09 Mar 2022 17:58:47 -0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2024</copyright><lastBuildDate>Wed, 08 May 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Academic</title>
       <link>https://hanhao23.github.io/tag/academic/</link>
     </image>
+    
+    <item>
+      <title>Bridging cognitive and psychometric Models of Cognitive Abilities</title>
+      <link>https://hanhao23.github.io/talk/tarletonjobtalk/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/tarletonjobtalk/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Intro to Item Response Modeling in R</title>
