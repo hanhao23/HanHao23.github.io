@@ -21,12 +21,155 @@
     </item>
     
     <item>
+      <title>Academic: the website builder for Hugo</title>
+      <link>https://hanhao23.github.io/post/getting-started/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/post/getting-started/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Create a free website with Academic using Markdown, Jupyter, or RStudio. Choose a beautiful color theme and build anything with the Page Builder - over 40 &lt;em&gt;widgets&lt;/em&gt;, &lt;em&gt;themes&lt;/em&gt;, and &lt;em&gt;language packs&lt;/em&gt; included!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Check out the latest &lt;strong&gt;demo&lt;/strong&gt;&lt;/a&gt; of what you&amp;rsquo;ll get in less than 10 minutes, or 
+&lt;a href=&#34;https://sourcethemes.com/academic/#expo&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;view the &lt;strong&gt;showcase&lt;/strong&gt;&lt;/a&gt; of personal, project, and business sites.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;👉 
+&lt;a href=&#34;#install&#34;&gt;&lt;strong&gt;Get Started&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;📚 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View the &lt;strong&gt;documentation&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💬 
+&lt;a href=&#34;https://discourse.gohugo.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Ask a question&lt;/strong&gt; on the forum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;👥 
+&lt;a href=&#34;https://spectrum.chat/academic&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chat with the &lt;strong&gt;community&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;🐦 Twitter: 
+&lt;a href=&#34;https://twitter.com/source_themes&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@source_themes&lt;/a&gt; 
+&lt;a href=&#34;https://twitter.com/GeorgeCushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@GeorgeCushen&lt;/a&gt; 
+&lt;a href=&#34;https://twitter.com/search?q=%23MadeWithAcademic&amp;amp;src=typd&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#MadeWithAcademic&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💡 
+&lt;a href=&#34;https://github.com/gcushen/hugo-academic/issues&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Request a &lt;strong&gt;feature&lt;/strong&gt; or report a &lt;strong&gt;bug&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;⬆️ &lt;strong&gt;Updating?&lt;/strong&gt; View the 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/update/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Update Guide&lt;/a&gt; and 
+&lt;a href=&#34;https://sourcethemes.com/academic/updates/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Release Notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;❤️ &lt;strong&gt;Support development&lt;/strong&gt; of Academic:
+&lt;ul&gt;
+&lt;li&gt;☕️ 
+&lt;a href=&#34;https://paypal.me/cushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Donate a coffee&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💵 
+&lt;a href=&#34;https://www.patreon.com/cushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Become a backer on &lt;strong&gt;Patreon&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;🖼️ 
+&lt;a href=&#34;https://www.redbubble.com/people/neutreno/works/34387919-academic&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Decorate your laptop or journal with an Academic &lt;strong&gt;sticker&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;👕 
+&lt;a href=&#34;https://academic.threadless.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wear the &lt;strong&gt;T-shirt&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;👩‍💻 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/contribute/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Contribute&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-academic-is-mobile-first-with-a-responsive-design-to-ensure-that-your-site-looks-stunning-on-every-device&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png&#34; data-caption=&#34;Academic is mobile first with a responsive design to ensure that your site looks stunning on every device.&#34;&gt;
+
+
+  &lt;img src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Academic is mobile first with a responsive design to ensure that your site looks stunning on every device.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Key features:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Page builder&lt;/strong&gt; - Create &lt;em&gt;anything&lt;/em&gt; with 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/page-builder/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;widgets&lt;/strong&gt;&lt;/a&gt; and 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;elements&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Edit any type of content&lt;/strong&gt; - Blog posts, publications, talks, slides, projects, and more!&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Create content&lt;/strong&gt; in 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Markdown&lt;/strong&gt;&lt;/a&gt;, 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/jupyter/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Jupyter&lt;/strong&gt;&lt;/a&gt;, or 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-rstudio&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;RStudio&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Plugin System&lt;/strong&gt; - Fully customizable 
+&lt;a href=&#34;https://sourcethemes.com/academic/themes/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;color&lt;/strong&gt; and &lt;strong&gt;font themes&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Display Code and Math&lt;/strong&gt; - Code highlighting and 
+&lt;a href=&#34;https://en.wikibooks.org/wiki/LaTeX/Mathematics&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LaTeX math&lt;/a&gt; supported&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integrations&lt;/strong&gt; - 
+&lt;a href=&#34;https://analytics.google.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Analytics&lt;/a&gt;, 
+&lt;a href=&#34;https://disqus.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Disqus commenting&lt;/a&gt;, Maps, Contact Forms, and more!&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Beautiful Site&lt;/strong&gt; - Simple and refreshing one page design&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Industry-Leading SEO&lt;/strong&gt; - Help get your website found on search engines and social media&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Media Galleries&lt;/strong&gt; - Display your images and videos with captions in a customizable gallery&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mobile Friendly&lt;/strong&gt; - Look amazing on every screen with a mobile friendly version of your site&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-language&lt;/strong&gt; - 15+ language packs including English, 中文, and Português&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-user&lt;/strong&gt; - Each author gets their own profile page&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Privacy Pack&lt;/strong&gt; - Assists with GDPR&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stand Out&lt;/strong&gt; - Bring your site to life with animation, parallax backgrounds, and scroll effects&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;One-Click Deployment&lt;/strong&gt; - No servers. No databases. Only files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
+&lt;p&gt;Academic comes with &lt;strong&gt;automatic day (light) and night (dark) mode&lt;/strong&gt; built-in. Alternatively, visitors can  choose their preferred mode - click the sun/moon icon in the top right of the 
+&lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Demo&lt;/a&gt; to see it in action! Day/night mode can also be disabled by the site admin in &lt;code&gt;params.toml&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://sourcethemes.com/academic/themes/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Choose a stunning &lt;strong&gt;theme&lt;/strong&gt; and &lt;strong&gt;font&lt;/strong&gt;&lt;/a&gt; for your site. Themes are fully 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/customization/#custom-theme&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;customizable&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;ecosystem&#34;&gt;Ecosystem&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;
+&lt;a href=&#34;https://github.com/sourcethemes/academic-admin&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Academic Admin&lt;/a&gt;:&lt;/strong&gt; An admin tool to import publications from BibTeX or import assets for an offline site&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;
+&lt;a href=&#34;https://github.com/sourcethemes/academic-scripts&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Academic Scripts&lt;/a&gt;:&lt;/strong&gt; Scripts to help migrate content to new versions of Academic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
+&lt;p&gt;You can choose from one of the following four methods to install:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-web-browser&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;one-click install using your web browser (recommended)&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-git&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;install on your computer using &lt;strong&gt;Git&lt;/strong&gt; with the Command Prompt/Terminal app&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-zip&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;install on your computer by downloading the &lt;strong&gt;ZIP files&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-rstudio&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;install on your computer with &lt;strong&gt;RStudio&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Then 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/get-started/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;personalize and deploy your new site&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;updating&#34;&gt;Updating&lt;/h2&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/update/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View the Update Guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Feel free to &lt;em&gt;star&lt;/em&gt; the project on 
+&lt;a href=&#34;https://github.com/gcushen/hugo-academic/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Github&lt;/a&gt; to help keep track of 
+&lt;a href=&#34;https://sourcethemes.com/academic/updates&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;updates&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;license&#34;&gt;License&lt;/h2&gt;
+&lt;p&gt;Copyright 2016-present 
+&lt;a href=&#34;https://georgecushen.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;George Cushen&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Released under the 
+&lt;a href=&#34;https://github.com/gcushen/hugo-academic/blob/master/LICENSE.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MIT&lt;/a&gt; license.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Intro to Item Response Modeling in R</title>
-      <link>https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/</link>
-      <pubDate>Wed, 09 Mar 2022 17:58:47 -0800</pubDate>
-      <guid>https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/</guid>
+      <link>https://hanhao23.github.io/project/irttutorial/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/project/irttutorial/</guid>
       <description>
-&lt;script src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;overview&#34; class=&#34;section level1&#34;&gt;
@@ -174,7 +317,7 @@ uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;
 &lt;p&gt;we can now investigate model fit statistics using the “M2” function, which provides the M2 index, the M2-based root mean square error of approximation (RMSEA), the standardized root mean square residual (SRMSR), and comparative fit index (CFI &amp;amp; TLI) to assess adequacy of model fit. A set of arbitrary cutoff values for the fit indices are provided here: RMSEA &amp;lt; .06; SRMSR &amp;lt; .08; CFI &amp;gt; .95; TLI &amp;gt; .95. Models with fit indices that saturate these cutoff values are commonly considered to have good fit. In this example, the non-significant M2 and all fit indices indicated great fit.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;M2(uniDich.result1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##             M2 df         p RMSEA RMSEA_5   RMSEA_95      SRMSR      TLI CFI
-## stats 57.35425 65 0.7388255     0       0 0.02786493 0.05863013 1.016119   1&lt;/code&gt;&lt;/pre&gt;
+## stats 57.35425 65 0.7388256     0       0 0.02786492 0.05863013 1.016119   1&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In IRT analyses, we can also assess how well each item fits the model. This is especially useful for item inspection and scale revision. The “itemfit” function provides S-X2 index as well as RMSEA values to assess the degree of item fit for each item. Non-significant S-X2 values and RMSEA &amp;lt; .06 are usually considered evidence of adequate fit for an item. In the current example, all items seem to fit the model well based on the indices.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemfit(uniDich.result1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    item   S_X2 df.S_X2 RMSEA.S_X2 p.S_X2
@@ -208,7 +351,11 @@ uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;
 ## S3.4    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000    NA 0.156
 ## S3.5    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000    NA
 ## 
-## LD matrix (lower triangle) and standardized values:
+## LD matrix (lower triangle) and standardized values.
+## 
+## Upper triangle summary:
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -0.128  -0.043  -0.014   0.000   0.060   0.109 
 ## 
 ##       S1.2   S1.3   S1.4   S1.5   S2.2   S2.3   S2.4   S2.5   S3.2   S3.3
 ## S1.2    NA -0.015 -0.035  0.062 -0.021 -0.038 -0.035 -0.128  0.074 -0.091
@@ -239,12 +386,12 @@ uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;
 &lt;p&gt;Other than the model fits and item fits, the “mirt” package also provides methods for calculating person fit statistics such as Zh statistics using the “personfit” function. In general, person fit statistics indicate how much a person’s responses on this test deviates from the the model prediction. See the “mirt” documentation and &lt;a href=&#34;https://doi.org/10.1111/j.2044-8317.1985.tb00817.x&#34;&gt;Drasgow, Levine, and Williams (1985)&lt;/a&gt; for further details.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(personfit(uniDich.result1))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      outfit    z.outfit     infit     z.infit         Zh
-## 1 0.5429718  0.02890873 0.9234628 -0.06855285  0.3245494
-## 2 0.3222275 -0.81981691 0.4792737 -1.50551325  1.2108896
-## 3 1.3572362  0.68361018 1.6380112  1.45638097 -1.2704873
-## 4 0.2944648 -0.60327679 0.4464911 -1.66830682  1.2602444
-## 5 0.3693042 -0.15612318 0.6267169 -0.83751758  0.8026636
-## 6 0.5580941 -0.53989282 0.8091663 -0.35965401  0.5450324&lt;/code&gt;&lt;/pre&gt;
+## 1 0.5429718  0.02890866 0.9234628 -0.06855284  0.3245494
+## 2 0.3222275 -0.81981695 0.4792737 -1.50551326  1.2108896
+## 3 1.3572362  0.68361016 1.6380112  1.45638093 -1.2704872
+## 4 0.2944648 -0.60327684 0.4464912 -1.66830681  1.2602444
+## 5 0.3693042 -0.15612325 0.6267169 -0.83751757  0.8026636
+## 6 0.5580941 -0.53989285 0.8091663 -0.35965405  0.5450324&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;irt-paramters&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;IRT Paramters&lt;/h3&gt;
@@ -253,16 +400,16 @@ uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# IRT parameters from the estimated model. For this example, we are obtaining simplified output without SEs/CIs (simplify = TRUE) for conventional IRT parameters (IRTpar = TRUE).
 coef(uniDich.result1,simplify = TRUE, IRTpar = TRUE)$items&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      a          b g u
-## S1.2 1 -3.0033640 0 1
+## S1.2 1 -3.0033639 0 1
 ## S1.3 1 -0.9388653 0 1
 ## S1.4 1  0.5864289 0 1
 ## S1.5 1  2.4373369 0 1
-## S2.2 1 -2.6395716 0 1
+## S2.2 1 -2.6395715 0 1
 ## S2.3 1 -1.4247025 0 1
 ## S2.4 1  0.5864289 0 1
 ## S2.5 1  2.3201998 0 1
-## S3.2 1 -2.3398445 0 1
-## S3.3 1 -0.9845155 0 1
+## S3.2 1 -2.3398444 0 1
+## S3.3 1 -0.9845154 0 1
 ## S3.4 1  0.3420016 0 1
 ## S3.5 1  2.3201998 0 1&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -272,17 +419,17 @@ coef(uniDich.result1,simplify = TRUE, IRTpar = TRUE)$items&lt;/code&gt;&lt;/pre&
 We can start with the item trace plots for the 12 items. The item trace plots visualize the probability of responding “1” to an item as a function of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. According to the item trace plot of this example, the 3 items with item size 2 (S1.2,S2.2,S3.2) are relatively easy items, in which subjects with average ability (&lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; = 0) are estimated to have about 80% to 90% of chance to answer correctly. On the other hand, the 3 items with size 5 are relatively hard items, in which subjects with average ability are estimated to have about only 10% to 20% of chance to answer correctly.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# In the function we cam specify the range of theta we&amp;#39;d like to visualize on the x axis of the plots. In this example we set it to -4 to 4 (4 SDs below and above average).
 plot(uniDich.result1, type = &amp;quot;trace&amp;quot;, theta_lim = c(-4,4))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%20Rasch%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;
 Other than the item trace plots, we can also look at the item information plots. Item information plots visualize how much “information” about the latent trait ability an item can provide. Conceptually, higher information implies less error of measure, and the peak of an item information curve is at the point of its b parameter. Thus, for easy items (such as the 3 items in the most left column below), little information are provided on subjects with high ability levels (because they will almost always answer correctly).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We can specify the exact set of items we want to plot in the ploting function of mirt. Here we can also only visualize the 1st, 5th, and 9th item from the dataset by addin an argument &amp;quot;which.items = c(1,5,9)&amp;quot; in the function. This will make the function to only plot the 3 items with set size 2 in the task. Please feel free to give a try.
 plot(uniDich.result1, type = &amp;quot;infotrace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%20Rasch%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;
 The “itemplot” function can provides more details regarding an item. This is an example that visualize the item trace plot of item 1 with confidence envelope.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemplot(uniDich.result1, item = 1, type = &amp;quot;trace&amp;quot;, CE = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%20Rasch%20ploting3-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting3-1.png&#34; width=&#34;672&#34; /&gt;
 Lastly, we can plot the information curve for the entire test. This is based on the sum of all item information curves and indicate how much information a test can provide at different latent trait levels based on the model. As aforementioned, high information indicate less error (low SE) of measurement. An ideal (but impossible) test would have high test information at all levels of latent trait levels.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result1, type = &amp;quot;infoSE&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%20Rasch%20ploting4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;pl-model&#34; class=&#34;section level2&#34;&gt;
@@ -336,10 +483,10 @@ uniDich.result2 &amp;lt;- mirt::mirt(dat1, uniDich.model2, itemtype = &amp;quot;
 &lt;h3&gt;Visualizing the Item and Scale Plots&lt;/h3&gt;
 &lt;p&gt;Comparing to the Rasch model, the estimated &lt;em&gt;a&lt;/em&gt; parameters in a 2PL model are also reflected in item trace plots, such that the differences in &lt;em&gt;a&lt;/em&gt;s are reflected by the changes in the steepness of the item trace curves. Higher &lt;em&gt;a&lt;/em&gt;s would be reflected as steeper item trace curves.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result2, type = &amp;quot;trace&amp;quot;, theta_lim = c(-4,4))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%202PL%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%202PL%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The freely estimated discrimination parameters are also reflected in the item information plots. As we can see, comparing to the Rasch model, the peaks of information curves are varying across items in the 2PL model.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result2, type = &amp;quot;infotrace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%202PL%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%202PL%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;model-specifications&#34; class=&#34;section level2&#34;&gt;
@@ -367,14 +514,9 @@ uniDich.result3 &amp;lt;- mirt::mirt(dat1, uniDich.model3, itemtype = &amp;quot;
 ## S3.5 1.036344  2.1036240 0 1&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can also do model comparisons for nested models with different constraints. For example, we can test the difference between this constrained model and the previous 2PL model without any constraints on discrimination. This is similar to a model comparison based on chi-squared statistics for nested SEM models. As we can see, results indicate that the two models are not significantly different from each other, &lt;span class=&#34;math inline&#34;&gt;\(\Delta\chi^2\)&lt;/span&gt;(8) = 8.68, &lt;em&gt;p&lt;/em&gt; = .37.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(uniDich.result2,uniDich.result3)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Model 1: mirt::mirt(data = dat1, model = uniDich.model3, itemtype = &amp;quot;2PL&amp;quot;, 
-##     SE = TRUE)
-## Model 2: mirt::mirt(data = dat1, model = uniDich.model2, itemtype = &amp;quot;2PL&amp;quot;, 
-##     SE = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        AIC     AICc    SABIC       HQ      BIC    logLik    X2  df    p
-## 1 2941.329 2943.549 2947.695 2964.276 2998.422 -1454.664   NaN NaN  NaN
-## 2 2948.644 2953.708 2958.194 2983.065 3034.285 -1450.322 8.684   8 0.37&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                      AIC    SABIC       HQ      BIC    logLik     X2 df   p
+## uniDich.result2 2948.644 2958.194 2983.065 3034.285 -1450.322              
+## uniDich.result3 2941.329 2947.695 2964.276 2998.422 -1454.664 -8.684 -8 NaN&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;unidimensional-polytomous-irt-model&#34; class=&#34;section level1&#34;&gt;
@@ -400,7 +542,7 @@ unipoly.result1 &amp;lt;- mirt::mirt(dat2, uniDich.model2, itemtype = &amp;quot;
 &lt;p&gt;Similarly, we can obtain corresponding statistics of the model such as model fit and item fit statistics. In this example, the overall model fit and all item fits for the GPCM model are good.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;M2(unipoly.result1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##             M2 df         p RMSEA RMSEA_5   RMSEA_95      SRMSR      TLI CFI
-## stats 23.66605 24 0.4808204     0       0 0.04927329 0.04771738 1.005052   1&lt;/code&gt;&lt;/pre&gt;
+## stats 23.66605 24 0.4808204     0       0 0.04927329 0.04771738 1.005053   1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemfit(unipoly.result1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    item   S_X2 df.S_X2 RMSEA.S_X2 p.S_X2
 ## 1  S1.2 15.329      11      0.039  0.168
@@ -439,10 +581,10 @@ unipoly.result1 &amp;lt;- mirt::mirt(dat2, uniDich.model2, itemtype = &amp;quot;
 &lt;h3&gt;Visualizing the Item and Scale Plots&lt;/h3&gt;
 &lt;p&gt;Similar to the dichotomous 2PL model, the estimated &lt;em&gt;a&lt;/em&gt; parameters in a GPCM model are reflected in item trace plots, such that the differences in &lt;em&gt;a&lt;/em&gt;s are reflected by the changes in the steepness of the item trace curves. Higher &lt;em&gt;a&lt;/em&gt;s would be reflected as steeper item trace curves. On the other hand, the estimated &lt;em&gt;b&lt;/em&gt; parameters in a GPCM model are reflected as (x-axis values for) the adjacent points between trace curves for different categories. For example, for Item S3.2, the current GPCM model estimated two threshold parameters: b1 = -1.36 (the adjacent point between curve P1 and P2) and b2 = -3.01 (the adjacent point between curve P2 and P3).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(unipoly.result1, type = &amp;quot;trace&amp;quot;, theta_lim = c(-4,4))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unipoly%202PL%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Similar to the dichotomous 2PL model, the freely estimated discrimination parameters are also reflected in the item information plots.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(unipoly.result1, type = &amp;quot;infotrace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unipoly%202PL%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;individual-scoring&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Individual Scoring&lt;/h3&gt;
@@ -462,154 +604,15 @@ head(est.theta)&lt;/code&gt;&lt;/pre&gt;
                    binwidth=.1,
                    colour=&amp;quot;black&amp;quot;, fill=&amp;quot;white&amp;quot;) +
     geom_density(alpha=.2, fill=&amp;quot;aquamarine2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unipoly%202PL%20scoring-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
+## ℹ Please use `after_stat(density)` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20scoring-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Academic: the website builder for Hugo</title>
-      <link>https://hanhao23.github.io/post/getting-started/</link>
-      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/post/getting-started/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Create a free website with Academic using Markdown, Jupyter, or RStudio. Choose a beautiful color theme and build anything with the Page Builder - over 40 &lt;em&gt;widgets&lt;/em&gt;, &lt;em&gt;themes&lt;/em&gt;, and &lt;em&gt;language packs&lt;/em&gt; included!&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Check out the latest &lt;strong&gt;demo&lt;/strong&gt;&lt;/a&gt; of what you&amp;rsquo;ll get in less than 10 minutes, or 
-&lt;a href=&#34;https://sourcethemes.com/academic/#expo&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;view the &lt;strong&gt;showcase&lt;/strong&gt;&lt;/a&gt; of personal, project, and business sites.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;👉 
-&lt;a href=&#34;#install&#34;&gt;&lt;strong&gt;Get Started&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;📚 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View the &lt;strong&gt;documentation&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;💬 
-&lt;a href=&#34;https://discourse.gohugo.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Ask a question&lt;/strong&gt; on the forum&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;👥 
-&lt;a href=&#34;https://spectrum.chat/academic&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chat with the &lt;strong&gt;community&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;🐦 Twitter: 
-&lt;a href=&#34;https://twitter.com/source_themes&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@source_themes&lt;/a&gt; 
-&lt;a href=&#34;https://twitter.com/GeorgeCushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;@GeorgeCushen&lt;/a&gt; 
-&lt;a href=&#34;https://twitter.com/search?q=%23MadeWithAcademic&amp;amp;src=typd&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;#MadeWithAcademic&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;💡 
-&lt;a href=&#34;https://github.com/gcushen/hugo-academic/issues&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Request a &lt;strong&gt;feature&lt;/strong&gt; or report a &lt;strong&gt;bug&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;⬆️ &lt;strong&gt;Updating?&lt;/strong&gt; View the 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/update/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Update Guide&lt;/a&gt; and 
-&lt;a href=&#34;https://sourcethemes.com/academic/updates/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Release Notes&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;❤️ &lt;strong&gt;Support development&lt;/strong&gt; of Academic:
-&lt;ul&gt;
-&lt;li&gt;☕️ 
-&lt;a href=&#34;https://paypal.me/cushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Donate a coffee&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;💵 
-&lt;a href=&#34;https://www.patreon.com/cushen&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Become a backer on &lt;strong&gt;Patreon&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;🖼️ 
-&lt;a href=&#34;https://www.redbubble.com/people/neutreno/works/34387919-academic&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Decorate your laptop or journal with an Academic &lt;strong&gt;sticker&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;👕 
-&lt;a href=&#34;https://academic.threadless.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wear the &lt;strong&gt;T-shirt&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;👩‍💻 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/contribute/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Contribute&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-academic-is-mobile-first-with-a-responsive-design-to-ensure-that-your-site-looks-stunning-on-every-device&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png&#34; data-caption=&#34;Academic is mobile first with a responsive design to ensure that your site looks stunning on every device.&#34;&gt;
-
-
-  &lt;img src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png&#34; alt=&#34;&#34;  &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Academic is mobile first with a responsive design to ensure that your site looks stunning on every device.
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Key features:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Page builder&lt;/strong&gt; - Create &lt;em&gt;anything&lt;/em&gt; with 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/page-builder/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;widgets&lt;/strong&gt;&lt;/a&gt; and 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;elements&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Edit any type of content&lt;/strong&gt; - Blog posts, publications, talks, slides, projects, and more!&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Create content&lt;/strong&gt; in 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Markdown&lt;/strong&gt;&lt;/a&gt;, 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/jupyter/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;Jupyter&lt;/strong&gt;&lt;/a&gt;, or 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-rstudio&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;RStudio&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Plugin System&lt;/strong&gt; - Fully customizable 
-&lt;a href=&#34;https://sourcethemes.com/academic/themes/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;color&lt;/strong&gt; and &lt;strong&gt;font themes&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Display Code and Math&lt;/strong&gt; - Code highlighting and 
-&lt;a href=&#34;https://en.wikibooks.org/wiki/LaTeX/Mathematics&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LaTeX math&lt;/a&gt; supported&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Integrations&lt;/strong&gt; - 
-&lt;a href=&#34;https://analytics.google.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Google Analytics&lt;/a&gt;, 
-&lt;a href=&#34;https://disqus.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Disqus commenting&lt;/a&gt;, Maps, Contact Forms, and more!&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Beautiful Site&lt;/strong&gt; - Simple and refreshing one page design&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Industry-Leading SEO&lt;/strong&gt; - Help get your website found on search engines and social media&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Media Galleries&lt;/strong&gt; - Display your images and videos with captions in a customizable gallery&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Mobile Friendly&lt;/strong&gt; - Look amazing on every screen with a mobile friendly version of your site&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Multi-language&lt;/strong&gt; - 15+ language packs including English, 中文, and Português&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Multi-user&lt;/strong&gt; - Each author gets their own profile page&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Privacy Pack&lt;/strong&gt; - Assists with GDPR&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Stand Out&lt;/strong&gt; - Bring your site to life with animation, parallax backgrounds, and scroll effects&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;One-Click Deployment&lt;/strong&gt; - No servers. No databases. Only files.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
-&lt;p&gt;Academic comes with &lt;strong&gt;automatic day (light) and night (dark) mode&lt;/strong&gt; built-in. Alternatively, visitors can  choose their preferred mode - click the sun/moon icon in the top right of the 
-&lt;a href=&#34;https://academic-demo.netlify.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Demo&lt;/a&gt; to see it in action! Day/night mode can also be disabled by the site admin in &lt;code&gt;params.toml&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://sourcethemes.com/academic/themes/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Choose a stunning &lt;strong&gt;theme&lt;/strong&gt; and &lt;strong&gt;font&lt;/strong&gt;&lt;/a&gt; for your site. Themes are fully 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/customization/#custom-theme&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;customizable&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;ecosystem&#34;&gt;Ecosystem&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;
-&lt;a href=&#34;https://github.com/sourcethemes/academic-admin&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Academic Admin&lt;/a&gt;:&lt;/strong&gt; An admin tool to import publications from BibTeX or import assets for an offline site&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;
-&lt;a href=&#34;https://github.com/sourcethemes/academic-scripts&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Academic Scripts&lt;/a&gt;:&lt;/strong&gt; Scripts to help migrate content to new versions of Academic&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
-&lt;p&gt;You can choose from one of the following four methods to install:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-web-browser&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;strong&gt;one-click install using your web browser (recommended)&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-git&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;install on your computer using &lt;strong&gt;Git&lt;/strong&gt; with the Command Prompt/Terminal app&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-zip&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;install on your computer by downloading the &lt;strong&gt;ZIP files&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-rstudio&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;install on your computer with &lt;strong&gt;RStudio&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Then 
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/get-started/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;personalize and deploy your new site&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;updating&#34;&gt;Updating&lt;/h2&gt;
-&lt;p&gt;
-&lt;a href=&#34;https://sourcethemes.com/academic/docs/update/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View the Update Guide&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Feel free to &lt;em&gt;star&lt;/em&gt; the project on 
-&lt;a href=&#34;https://github.com/gcushen/hugo-academic/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Github&lt;/a&gt; to help keep track of 
-&lt;a href=&#34;https://sourcethemes.com/academic/updates&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;updates&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;license&#34;&gt;License&lt;/h2&gt;
-&lt;p&gt;Copyright 2016-present 
-&lt;a href=&#34;https://georgecushen.com&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;George Cushen&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Released under the 
-&lt;a href=&#34;https://github.com/gcushen/hugo-academic/blob/master/LICENSE.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MIT&lt;/a&gt; license.&lt;/p&gt;
 </description>
     </item>
     

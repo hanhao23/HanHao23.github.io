@@ -5,7 +5,7 @@
     <link>https://hanhao23.github.io/tag/r-markdown/</link>
       <atom:link href="https://hanhao23.github.io/tag/r-markdown/index.xml" rel="self" type="application/rss+xml" />
     <description>R Markdown</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2024</copyright><lastBuildDate>Wed, 09 Mar 2022 17:58:47 -0800</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2024</copyright><lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>R Markdown</title>
@@ -13,12 +13,61 @@
     </image>
     
     <item>
-      <title>Intro to Item Response Modeling in R</title>
-      <link>https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/</link>
-      <pubDate>Wed, 09 Mar 2022 17:58:47 -0800</pubDate>
-      <guid>https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/</guid>
+      <title>Hello R Markdown</title>
+      <link>https://hanhao23.github.io/post/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <guid>https://hanhao23.github.io/post/2015-07-23-r-rmarkdown/</guid>
       <description>
-&lt;script src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;R Markdown&lt;/h1&gt;
+&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(cars)
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+fit &amp;lt;- lm(dist ~ speed, data = cars)
+fit
+## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Coefficients:
+## (Intercept)        speed  
+##     -17.579        3.932&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Including Plots&lt;/h1&gt;
+&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;par(mar = c(0, 1, 0, 1))
+pie(
+  c(280, 60, 20),
+  c(&amp;#39;Sky&amp;#39;, &amp;#39;Sunny side of pyramid&amp;#39;, &amp;#39;Shady side of pyramid&amp;#39;),
+  col = c(&amp;#39;#0292D8&amp;#39;, &amp;#39;#F7EA39&amp;#39;, &amp;#39;#C4B632&amp;#39;),
+  init.angle = -50, border = NA
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;https://hanhao23.github.io/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: A fancy pie chart.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Intro to Item Response Modeling in R</title>
+      <link>https://hanhao23.github.io/project/irttutorial/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/project/irttutorial/</guid>
+      <description>
 
 
 &lt;div id=&#34;overview&#34; class=&#34;section level1&#34;&gt;
@@ -166,7 +215,7 @@ uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;
 &lt;p&gt;we can now investigate model fit statistics using the “M2” function, which provides the M2 index, the M2-based root mean square error of approximation (RMSEA), the standardized root mean square residual (SRMSR), and comparative fit index (CFI &amp;amp; TLI) to assess adequacy of model fit. A set of arbitrary cutoff values for the fit indices are provided here: RMSEA &amp;lt; .06; SRMSR &amp;lt; .08; CFI &amp;gt; .95; TLI &amp;gt; .95. Models with fit indices that saturate these cutoff values are commonly considered to have good fit. In this example, the non-significant M2 and all fit indices indicated great fit.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;M2(uniDich.result1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##             M2 df         p RMSEA RMSEA_5   RMSEA_95      SRMSR      TLI CFI
-## stats 57.35425 65 0.7388255     0       0 0.02786493 0.05863013 1.016119   1&lt;/code&gt;&lt;/pre&gt;
+## stats 57.35425 65 0.7388256     0       0 0.02786492 0.05863013 1.016119   1&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In IRT analyses, we can also assess how well each item fits the model. This is especially useful for item inspection and scale revision. The “itemfit” function provides S-X2 index as well as RMSEA values to assess the degree of item fit for each item. Non-significant S-X2 values and RMSEA &amp;lt; .06 are usually considered evidence of adequate fit for an item. In the current example, all items seem to fit the model well based on the indices.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemfit(uniDich.result1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    item   S_X2 df.S_X2 RMSEA.S_X2 p.S_X2
@@ -200,7 +249,11 @@ uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;
 ## S3.4    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000    NA 0.156
 ## S3.5    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000    NA
 ## 
-## LD matrix (lower triangle) and standardized values:
+## LD matrix (lower triangle) and standardized values.
+## 
+## Upper triangle summary:
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  -0.128  -0.043  -0.014   0.000   0.060   0.109 
 ## 
 ##       S1.2   S1.3   S1.4   S1.5   S2.2   S2.3   S2.4   S2.5   S3.2   S3.3
 ## S1.2    NA -0.015 -0.035  0.062 -0.021 -0.038 -0.035 -0.128  0.074 -0.091
@@ -231,12 +284,12 @@ uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;
 &lt;p&gt;Other than the model fits and item fits, the “mirt” package also provides methods for calculating person fit statistics such as Zh statistics using the “personfit” function. In general, person fit statistics indicate how much a person’s responses on this test deviates from the the model prediction. See the “mirt” documentation and &lt;a href=&#34;https://doi.org/10.1111/j.2044-8317.1985.tb00817.x&#34;&gt;Drasgow, Levine, and Williams (1985)&lt;/a&gt; for further details.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(personfit(uniDich.result1))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      outfit    z.outfit     infit     z.infit         Zh
-## 1 0.5429718  0.02890873 0.9234628 -0.06855285  0.3245494
-## 2 0.3222275 -0.81981691 0.4792737 -1.50551325  1.2108896
-## 3 1.3572362  0.68361018 1.6380112  1.45638097 -1.2704873
-## 4 0.2944648 -0.60327679 0.4464911 -1.66830682  1.2602444
-## 5 0.3693042 -0.15612318 0.6267169 -0.83751758  0.8026636
-## 6 0.5580941 -0.53989282 0.8091663 -0.35965401  0.5450324&lt;/code&gt;&lt;/pre&gt;
+## 1 0.5429718  0.02890866 0.9234628 -0.06855284  0.3245494
+## 2 0.3222275 -0.81981695 0.4792737 -1.50551326  1.2108896
+## 3 1.3572362  0.68361016 1.6380112  1.45638093 -1.2704872
+## 4 0.2944648 -0.60327684 0.4464912 -1.66830681  1.2602444
+## 5 0.3693042 -0.15612325 0.6267169 -0.83751757  0.8026636
+## 6 0.5580941 -0.53989285 0.8091663 -0.35965405  0.5450324&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;irt-paramters&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;IRT Paramters&lt;/h3&gt;
@@ -245,16 +298,16 @@ uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# IRT parameters from the estimated model. For this example, we are obtaining simplified output without SEs/CIs (simplify = TRUE) for conventional IRT parameters (IRTpar = TRUE).
 coef(uniDich.result1,simplify = TRUE, IRTpar = TRUE)$items&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      a          b g u
-## S1.2 1 -3.0033640 0 1
+## S1.2 1 -3.0033639 0 1
 ## S1.3 1 -0.9388653 0 1
 ## S1.4 1  0.5864289 0 1
 ## S1.5 1  2.4373369 0 1
-## S2.2 1 -2.6395716 0 1
+## S2.2 1 -2.6395715 0 1
 ## S2.3 1 -1.4247025 0 1
 ## S2.4 1  0.5864289 0 1
 ## S2.5 1  2.3201998 0 1
-## S3.2 1 -2.3398445 0 1
-## S3.3 1 -0.9845155 0 1
+## S3.2 1 -2.3398444 0 1
+## S3.3 1 -0.9845154 0 1
 ## S3.4 1  0.3420016 0 1
 ## S3.5 1  2.3201998 0 1&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -264,17 +317,17 @@ coef(uniDich.result1,simplify = TRUE, IRTpar = TRUE)$items&lt;/code&gt;&lt;/pre&
 We can start with the item trace plots for the 12 items. The item trace plots visualize the probability of responding “1” to an item as a function of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. According to the item trace plot of this example, the 3 items with item size 2 (S1.2,S2.2,S3.2) are relatively easy items, in which subjects with average ability (&lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; = 0) are estimated to have about 80% to 90% of chance to answer correctly. On the other hand, the 3 items with size 5 are relatively hard items, in which subjects with average ability are estimated to have about only 10% to 20% of chance to answer correctly.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# In the function we cam specify the range of theta we&amp;#39;d like to visualize on the x axis of the plots. In this example we set it to -4 to 4 (4 SDs below and above average).
 plot(uniDich.result1, type = &amp;quot;trace&amp;quot;, theta_lim = c(-4,4))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%20Rasch%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;
 Other than the item trace plots, we can also look at the item information plots. Item information plots visualize how much “information” about the latent trait ability an item can provide. Conceptually, higher information implies less error of measure, and the peak of an item information curve is at the point of its b parameter. Thus, for easy items (such as the 3 items in the most left column below), little information are provided on subjects with high ability levels (because they will almost always answer correctly).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We can specify the exact set of items we want to plot in the ploting function of mirt. Here we can also only visualize the 1st, 5th, and 9th item from the dataset by addin an argument &amp;quot;which.items = c(1,5,9)&amp;quot; in the function. This will make the function to only plot the 3 items with set size 2 in the task. Please feel free to give a try.
 plot(uniDich.result1, type = &amp;quot;infotrace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%20Rasch%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;
 The “itemplot” function can provides more details regarding an item. This is an example that visualize the item trace plot of item 1 with confidence envelope.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemplot(uniDich.result1, item = 1, type = &amp;quot;trace&amp;quot;, CE = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%20Rasch%20ploting3-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting3-1.png&#34; width=&#34;672&#34; /&gt;
 Lastly, we can plot the information curve for the entire test. This is based on the sum of all item information curves and indicate how much information a test can provide at different latent trait levels based on the model. As aforementioned, high information indicate less error (low SE) of measurement. An ideal (but impossible) test would have high test information at all levels of latent trait levels.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result1, type = &amp;quot;infoSE&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%20Rasch%20ploting4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;pl-model&#34; class=&#34;section level2&#34;&gt;
@@ -328,10 +381,10 @@ uniDich.result2 &amp;lt;- mirt::mirt(dat1, uniDich.model2, itemtype = &amp;quot;
 &lt;h3&gt;Visualizing the Item and Scale Plots&lt;/h3&gt;
 &lt;p&gt;Comparing to the Rasch model, the estimated &lt;em&gt;a&lt;/em&gt; parameters in a 2PL model are also reflected in item trace plots, such that the differences in &lt;em&gt;a&lt;/em&gt;s are reflected by the changes in the steepness of the item trace curves. Higher &lt;em&gt;a&lt;/em&gt;s would be reflected as steeper item trace curves.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result2, type = &amp;quot;trace&amp;quot;, theta_lim = c(-4,4))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%202PL%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%202PL%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The freely estimated discrimination parameters are also reflected in the item information plots. As we can see, comparing to the Rasch model, the peaks of information curves are varying across items in the 2PL model.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result2, type = &amp;quot;infotrace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unidich%202PL%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%202PL%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;model-specifications&#34; class=&#34;section level2&#34;&gt;
@@ -359,14 +412,9 @@ uniDich.result3 &amp;lt;- mirt::mirt(dat1, uniDich.model3, itemtype = &amp;quot;
 ## S3.5 1.036344  2.1036240 0 1&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We can also do model comparisons for nested models with different constraints. For example, we can test the difference between this constrained model and the previous 2PL model without any constraints on discrimination. This is similar to a model comparison based on chi-squared statistics for nested SEM models. As we can see, results indicate that the two models are not significantly different from each other, &lt;span class=&#34;math inline&#34;&gt;\(\Delta\chi^2\)&lt;/span&gt;(8) = 8.68, &lt;em&gt;p&lt;/em&gt; = .37.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(uniDich.result2,uniDich.result3)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Model 1: mirt::mirt(data = dat1, model = uniDich.model3, itemtype = &amp;quot;2PL&amp;quot;, 
-##     SE = TRUE)
-## Model 2: mirt::mirt(data = dat1, model = uniDich.model2, itemtype = &amp;quot;2PL&amp;quot;, 
-##     SE = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##        AIC     AICc    SABIC       HQ      BIC    logLik    X2  df    p
-## 1 2941.329 2943.549 2947.695 2964.276 2998.422 -1454.664   NaN NaN  NaN
-## 2 2948.644 2953.708 2958.194 2983.065 3034.285 -1450.322 8.684   8 0.37&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                      AIC    SABIC       HQ      BIC    logLik     X2 df   p
+## uniDich.result2 2948.644 2958.194 2983.065 3034.285 -1450.322              
+## uniDich.result3 2941.329 2947.695 2964.276 2998.422 -1454.664 -8.684 -8 NaN&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;unidimensional-polytomous-irt-model&#34; class=&#34;section level1&#34;&gt;
@@ -392,7 +440,7 @@ unipoly.result1 &amp;lt;- mirt::mirt(dat2, uniDich.model2, itemtype = &amp;quot;
 &lt;p&gt;Similarly, we can obtain corresponding statistics of the model such as model fit and item fit statistics. In this example, the overall model fit and all item fits for the GPCM model are good.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;M2(unipoly.result1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##             M2 df         p RMSEA RMSEA_5   RMSEA_95      SRMSR      TLI CFI
-## stats 23.66605 24 0.4808204     0       0 0.04927329 0.04771738 1.005052   1&lt;/code&gt;&lt;/pre&gt;
+## stats 23.66605 24 0.4808204     0       0 0.04927329 0.04771738 1.005053   1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemfit(unipoly.result1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##    item   S_X2 df.S_X2 RMSEA.S_X2 p.S_X2
 ## 1  S1.2 15.329      11      0.039  0.168
@@ -431,10 +479,10 @@ unipoly.result1 &amp;lt;- mirt::mirt(dat2, uniDich.model2, itemtype = &amp;quot;
 &lt;h3&gt;Visualizing the Item and Scale Plots&lt;/h3&gt;
 &lt;p&gt;Similar to the dichotomous 2PL model, the estimated &lt;em&gt;a&lt;/em&gt; parameters in a GPCM model are reflected in item trace plots, such that the differences in &lt;em&gt;a&lt;/em&gt;s are reflected by the changes in the steepness of the item trace curves. Higher &lt;em&gt;a&lt;/em&gt;s would be reflected as steeper item trace curves. On the other hand, the estimated &lt;em&gt;b&lt;/em&gt; parameters in a GPCM model are reflected as (x-axis values for) the adjacent points between trace curves for different categories. For example, for Item S3.2, the current GPCM model estimated two threshold parameters: b1 = -1.36 (the adjacent point between curve P1 and P2) and b2 = -3.01 (the adjacent point between curve P2 and P3).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(unipoly.result1, type = &amp;quot;trace&amp;quot;, theta_lim = c(-4,4))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unipoly%202PL%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Similar to the dichotomous 2PL model, the freely estimated discrimination parameters are also reflected in the item information plots.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(unipoly.result1, type = &amp;quot;infotrace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unipoly%202PL%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;individual-scoring&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Individual Scoring&lt;/h3&gt;
@@ -454,58 +502,13 @@ head(est.theta)&lt;/code&gt;&lt;/pre&gt;
                    binwidth=.1,
                    colour=&amp;quot;black&amp;quot;, fill=&amp;quot;white&amp;quot;) +
     geom_density(alpha=.2, fill=&amp;quot;aquamarine2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/irt-tutorial-in-r-with-mirt-package/index_files/figure-html/unipoly%202PL%20scoring-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
+## ℹ Please use `after_stat(density)` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20scoring-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>https://hanhao23.github.io/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      <guid>https://hanhao23.github.io/post/2015-07-23-r-rmarkdown/</guid>
-      <description>
-
-
-&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;R Markdown&lt;/h1&gt;
-&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(cars)
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-fit &amp;lt;- lm(dist ~ speed, data = cars)
-fit
-## 
-## Call:
-## lm(formula = dist ~ speed, data = cars)
-## 
-## Coefficients:
-## (Intercept)        speed  
-##     -17.579        3.932&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Including Plots&lt;/h1&gt;
-&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c(&amp;#39;Sky&amp;#39;, &amp;#39;Sunny side of pyramid&amp;#39;, &amp;#39;Shady side of pyramid&amp;#39;),
-  col = c(&amp;#39;#0292D8&amp;#39;, &amp;#39;#F7EA39&amp;#39;, &amp;#39;#C4B632&amp;#39;),
-  init.angle = -50, border = NA
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;https://hanhao23.github.io/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-Figure 1: A fancy pie chart.
-&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
