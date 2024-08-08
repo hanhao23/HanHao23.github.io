@@ -1,5 +1,6 @@
+
 ---
-date: "1916-04-27T00:00:00Z"
+date: 'Updated at: `r Sys.Date()`'
 external_link: ""
 image:
   focal_point: Smart
@@ -11,22 +12,28 @@ links:
 slides: 
 summary: An example of generalized mixed effects model (GLMM) in with lmer package.
 tags:
+- Repeated Measures
+- Mixed Effects Model
 - R Stuff
 - Stats
-title: Data Analysis with Repeat Measures in Generalized Mixed Effects Model
+- Psychometrics
+- Academic
+title: Intro to Generalized Mixed Effects Model in R
 url_code: ""
 url_pdf: ""
 url_slides: ""
 url_video: ""
 ---
 
+# Overview
+
+The goal of this document is to introduce applications of R for Generalized Mixed Effects Modeling.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE)
 ```
 
-### Package and Data Preparation
-
+## Package and Data Preparation
 
 ```{r cars}
 library(psych) # For descriptives and ANOVA, and else
@@ -50,7 +57,7 @@ library(r2glmm)
 dat <- read.csv("Demo Data Das.csv") # Read in the csv data
 ```
 
-### Data forging
+## Data forging
 
 
 ```{r forging}
@@ -75,7 +82,8 @@ head(dat3)
 
 ```
 
-### ANOVA with "ezANOVA" Package
+## ANOVA with "ezANOVA" Package
+
 This package gives 3 options for us to calculate Sums of Squares, and the following note is copied directly from their documentation:  
 
 >Numeric value (either 1, 2 or 3) specifying the Sums of Squares “type” to employ when data are unbalanced (eg. when group sizes differ). type = 2 is the default because this will yield identical ANOVA results as type = 1 when data are balanced but type = 2 will additionally yield various assumption tests where appropriate. When data are unbalanced, users are warned that they should give special consideration to the value of type. type=3 will emulate the approach taken by popular commercial statistics packages like SAS and SPSS, but users are warned that this approach is not without criticism.
@@ -90,7 +98,9 @@ ezANOVA(dat3Final, dv = .(Score), wid = .(X), within = .(Factor1, Factor2), type
 
 
 ```
-### ANOVA with "aov" Function
+
+## ANOVA with "aov" Function
+
 ```{r anova}
 AnovaModel <- aov(Score ~ Factor1*Factor2 + Error(X/(Factor1*Factor2)), data = dat3)
 summary(AnovaModel)
@@ -99,8 +109,10 @@ EtaSq(AnovaModel, type = 1)
 
 ```
 
-### ANOVA Plot
+## ANOVA Plot
+
 This is just a quick visualization of the condition differences.
+
 ```{r ANOVAViz}
 DescribeSummary <- summarySE(dat3Final, measurevar = "Score", groupvars = c("Factor1","Factor2"))
 
@@ -122,11 +134,13 @@ ggplot(DescribeSummary, aes(x=Factor1, y=Score, fill=Factor2)) +
 ```
 
 
-### Generalized Linear Mixed Effect Model
+## Generalized Linear Mixed Effect Model
+
 I just attached the scripts that I used in my own project, but I also just started to use GLMM so there is still a huge lot I am not 100% clear about the analysis.  
-Here I dummy-coded the two factors, and specify the random intercept without considering any indivdiual level effect of the fectors (nothing except (1|X) in the "random term" in the formula).  
+Here I dummy-coded the two factors, and specify the random intercept without considering any individual level effect of the fectors (nothing except (1|X) in the "random term" in the formula).  
 
 This is some data I fictioned so here it seems the fitted model "lmmodel1" is singular: there might be too few variance in at least one effect, or it could also be a miss specification of the model.
+
 ```{r GLMM}
 # Dummy coding
 dat3Final$F1Dummy <- dummy(dat3Final$Factor1,"D2")
@@ -144,8 +158,10 @@ r2beta(model = lmmodel1, partial = T)
 
 ```
 
-### GLMM Visualization
+## GLMM Visualization
+
 I use these codes to visualize my GLMM data. It should be of help to break the conditions down and visualize the correlations beween the continous predictor and the outcome (performance) by unique conditions.
+
 ```{r GLMMViz}
 split_plot <- ggplot(aes(WMC, Score), data = dat3Final) + 
   geom_point() + 
