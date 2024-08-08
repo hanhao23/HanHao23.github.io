@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recent &amp; Upcoming Talks | Han Hao Cog Psych</title>
+    <link>https://hanhao23.github.io/talk/</link>
+      <atom:link href="https://hanhao23.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent &amp; Upcoming Talks</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2024</copyright><lastBuildDate>Wed, 08 May 2024 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>https://hanhao23.github.io/talk/</link>
+    </image>
+    
+    <item>
+      <title>Bridging cognitive and psychometric Models of Cognitive Abilities</title>
+      <link>https://hanhao23.github.io/talk/tarletonjobtalk/</link>
+      <pubDate>Wed, 08 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/tarletonjobtalk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Simulating the Process Overlap Theory of Intelligence - A Unified Framework Bridging Psychometric and Cognitive Perspectives</title>
+      <link>https://hanhao23.github.io/talk/2023isir/</link>
+      <pubDate>Thu, 20 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/2023isir/</guid>
+      <description>&lt;!---
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+Slides can be added in a few ways:
+
+- **Create** slides using Academic&#39;s [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
+- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
+- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+
+Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
+--&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rethinking the Relationship of Working Memory and Intelligence - A Perspective based on Process Overlap Theory</title>
+      <link>https://hanhao23.github.io/talk/2021isir/</link>
+      <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/2021isir/</guid>
+      <description>&lt;!---
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+Slides can be added in a few ways:
+
+- **Create** slides using Academic&#39;s [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
+- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
+- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+
+Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
+--&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>An Examination of Domain-Specificity Differences in Complex Span Tasks through Item Response Theory</title>
+      <link>https://hanhao23.github.io/talk/2020psychonomics/</link>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/2020psychonomics/</guid>
+      <description>&lt;!---
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+Slides can be added in a few ways:
+
+- **Create** slides using Academic&#39;s [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
+- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
+- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+
+Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
+--&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Impact of Auditory Distraction on Reading Comprehension</title>
+      <link>https://hanhao23.github.io/talk/2019psychonomics/</link>
+      <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/2019psychonomics/</guid>
+      <description>&lt;!---
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+Slides can be added in a few ways:
+
+- **Create** slides using Academic&#39;s [*Slides*](https://sourcethemes.com/academic/docs/managing-content/#create-slides) feature and link using `slides` parameter in the front matter of the talk file
+- **Upload** an existing slide deck to `static/` and link using `url_slides` parameter in the front matter of the talk file
+- **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+
+Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
+--&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
