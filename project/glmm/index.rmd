@@ -1,15 +1,14 @@
 
 ---
+title: "Intro to Generalized Mixed Effects Model in R"
+external_link: ''
 date: 'Updated at: `r Sys.Date()`'
-external_link: ""
-image:
-  focal_point: Smart
 links:
 - icon: twitter
   icon_pack: fab
   name: Follow
   url: https://twitter.com/hanhao23
-slides: 
+slides: null
 summary: An example of generalized mixed effects model (GLMM) in with lmer package.
 tags:
 - Repeated Measures
@@ -18,11 +17,12 @@ tags:
 - Stats
 - Psychometrics
 - Academic
-title: Intro to Generalized Mixed Effects Model in R
-url_code: ""
-url_pdf: ""
-url_slides: ""
-url_video: ""
+image:
+  focal_point: Smart
+url_code: ''
+url_pdf: ''
+url_slides: ''
+url_video: ''
 ---
 
 # Overview

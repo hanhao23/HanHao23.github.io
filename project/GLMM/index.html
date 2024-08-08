@@ -240,14 +240,12 @@
   
   <meta property="og:site_name" content="Han Hao Cog Psych">
   <meta property="og:url" content="https://hanhao23.github.io/project/glmm/">
-  <meta property="og:title" content="Data Analysis with Repeat Measures in Generalized Mixed Effects Model | Han Hao Cog Psych">
+  <meta property="og:title" content="Intro to Generalized Mixed Effects Model in R | Han Hao Cog Psych">
   <meta property="og:description" content="An example of generalized mixed effects model (GLMM) in with lmer package."><meta property="og:image" content="https://hanhao23.github.io/project/glmm/featured.jpg">
   <meta property="twitter:image" content="https://hanhao23.github.io/project/glmm/featured.jpg"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="1916-04-27T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="1916-04-27T00:00:00&#43;00:00">
   
 
   
@@ -271,14 +269,14 @@
     "@type": "WebPage",
     "@id": "https://hanhao23.github.io/project/glmm/"
   },
-  "headline": "Data Analysis with Repeat Measures in Generalized Mixed Effects Model",
+  "headline": "Intro to Generalized Mixed Effects Model in R",
   
   "image": [
     "https://hanhao23.github.io/project/glmm/featured.jpg"
   ],
   
-  "datePublished": "1916-04-27T00:00:00Z",
-  "dateModified": "1916-04-27T00:00:00Z",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -311,7 +309,7 @@
 
 
 
-  <title>Data Analysis with Repeat Measures in Generalized Mixed Effects Model | Han Hao Cog Psych</title>
+  <title>Intro to Generalized Mixed Effects Model in R | Han Hao Cog Psych</title>
 
 </head>
 <body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
@@ -625,7 +623,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>Data Analysis with Repeat Measures in Generalized Mixed Effects Model</h1>
+  <h1>Intro to Generalized Mixed Effects Model in R</h1>
 
   
 
@@ -643,7 +641,7 @@
     
       
     
-    Apr 27, 1916
+    Jan 1, 0001
   </span>
   
 
@@ -742,8 +740,11 @@
       
 
 
-<div id="package-and-data-preparation" class="section level3">
-<h3>Package and Data Preparation</h3>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>The goal of this document is to introduce applications of R for Generalized Mixed Effects Modeling.</p>
+<div id="package-and-data-preparation" class="section level2">
+<h2>Package and Data Preparation</h2>
 <pre class="r"><code>library(psych) # For descriptives and ANOVA, and else
 library(ez) # For ANOVA
 library(tidyverse) # This is a collection of packages for data wrangling and visualizing
@@ -764,8 +765,8 @@ library(r2glmm)
 
 dat &lt;- read.csv(&quot;Demo Data Das.csv&quot;) # Read in the csv data</code></pre>
 </div>
-<div id="data-forging" class="section level3">
-<h3>Data forging</h3>
+<div id="data-forging" class="section level2">
+<h2>Data forging</h2>
 <pre class="r"><code># A quick look at the first several rows of the data. This is the wide format in which each row contains all information from one individual.
 head(dat)</code></pre>
 <pre><code>##   X D1S D2S D3S D1D D2D D3D     Speed         WMC
@@ -796,8 +797,8 @@ head(dat3)</code></pre>
 ## 5 5  89.83073  1.50946304      D1       S     7
 ## 6 6 161.63888  0.75637916      D1       S     7</code></pre>
 </div>
-<div id="anova-with-ezanova-package" class="section level3">
-<h3>ANOVA with “ezANOVA” Package</h3>
+<div id="anova-with-ezanova-package" class="section level2">
+<h2>ANOVA with “ezANOVA” Package</h2>
 <p>This package gives 3 options for us to calculate Sums of Squares, and the following note is copied directly from their documentation:</p>
 <blockquote>
 <p>Numeric value (either 1, 2 or 3) specifying the Sums of Squares “type” to employ when data are unbalanced (eg. when group sizes differ). type = 2 is the default because this will yield identical ANOVA results as type = 1 when data are balanced but type = 2 will additionally yield various assumption tests where appropriate. When data are unbalanced, users are warned that they should give special consideration to the value of type. type=3 will emulate the approach taken by popular commercial statistics packages like SAS and SPSS, but users are warned that this approach is not without criticism.</p>
@@ -923,8 +924,8 @@ ezANOVA(dat3Final, dv = .(Score), wid = .(X), within = .(Factor1, Factor2), type
 ## Residual standard error: 1.226833
 ## Estimated effects are balanced</code></pre>
 </div>
-<div id="anova-with-aov-function" class="section level3">
-<h3>ANOVA with “aov” Function</h3>
+<div id="anova-with-aov-function" class="section level2">
+<h2>ANOVA with “aov” Function</h2>
 <pre class="r"><code>AnovaModel &lt;- aov(Score ~ Factor1*Factor2 + Error(X/(Factor1*Factor2)), data = dat3)
 summary(AnovaModel)</code></pre>
 <pre><code>## 
@@ -959,8 +960,8 @@ EtaSq(AnovaModel, type = 1)</code></pre>
 ## Factor2         0.52062030   0.7180224 0.54684319
 ## Factor1:Factor2 0.03432802   0.2916487 0.07370411</code></pre>
 </div>
-<div id="anova-plot" class="section level3">
-<h3>ANOVA Plot</h3>
+<div id="anova-plot" class="section level2">
+<h2>ANOVA Plot</h2>
 <p>This is just a quick visualization of the condition differences.</p>
 <pre class="r"><code>DescribeSummary &lt;- summarySE(dat3Final, measurevar = &quot;Score&quot;, groupvars = c(&quot;Factor1&quot;,&quot;Factor2&quot;))
 
@@ -980,10 +981,10 @@ ggplot(DescribeSummary, aes(x=Factor1, y=Score, fill=Factor2)) +
     axis.title = element_text(face = &quot;bold&quot;))</code></pre>
 <p><img src="https://hanhao23.github.io/project/glmm/index_files/figure-html/ANOVAViz-1.png" width="672" /></p>
 </div>
-<div id="generalized-linear-mixed-effect-model" class="section level3">
-<h3>Generalized Linear Mixed Effect Model</h3>
+<div id="generalized-linear-mixed-effect-model" class="section level2">
+<h2>Generalized Linear Mixed Effect Model</h2>
 <p>I just attached the scripts that I used in my own project, but I also just started to use GLMM so there is still a huge lot I am not 100% clear about the analysis.<br />
-Here I dummy-coded the two factors, and specify the random intercept without considering any indivdiual level effect of the fectors (nothing except (1|X) in the “random term” in the formula).</p>
+Here I dummy-coded the two factors, and specify the random intercept without considering any individual level effect of the fectors (nothing except (1|X) in the “random term” in the formula).</p>
 <p>This is some data I fictioned so here it seems the fitted model “lmmodel1” is singular: there might be too few variance in at least one effect, or it could also be a miss specification of the model.</p>
 <pre class="r"><code># Dummy coding
 dat3Final$F1Dummy &lt;- dummy(dat3Final$Factor1,&quot;D2&quot;)
@@ -1059,8 +1060,8 @@ r2beta(model = lmmodel1, partial = T)</code></pre>
 ## 2                 WMC 0.000    0.016    0.000
 ## 8 WMC:F1Dummy:F2Dummy 0.000    0.015    0.000</code></pre>
 </div>
-<div id="glmm-visualization" class="section level3">
-<h3>GLMM Visualization</h3>
+<div id="glmm-visualization" class="section level2">
+<h2>GLMM Visualization</h2>
 <p>I use these codes to visualize my GLMM data. It should be of help to break the conditions down and visualize the correlations beween the continous predictor and the outcome (performance) by unique conditions.</p>
 <pre class="r"><code>split_plot &lt;- ggplot(aes(WMC, Score), data = dat3Final) + 
   geom_point() + 
@@ -1071,6 +1072,7 @@ r2beta(model = lmmodel1, partial = T)</code></pre>
   ylab(&quot;Test score&quot;)
 split_plot</code></pre>
 <p><img src="https://hanhao23.github.io/project/glmm/index_files/figure-html/GLMMViz-1.png" width="672" /></p>
+</div>
 </div>
 
     </div>
@@ -1084,9 +1086,17 @@ split_plot</code></pre>
 
 <div class="article-tags">
   
+  <a class="badge badge-light" href="/tag/repeated-measures/">Repeated Measures</a>
+  
+  <a class="badge badge-light" href="/tag/mixed-effects-model/">Mixed Effects Model</a>
+  
   <a class="badge badge-light" href="/tag/r-stuff/">R Stuff</a>
   
   <a class="badge badge-light" href="/tag/stats/">Stats</a>
+  
+  <a class="badge badge-light" href="/tag/psychometrics/">Psychometrics</a>
+  
+  <a class="badge badge-light" href="/tag/academic/">Academic</a>
   
 </div>
 
@@ -1103,7 +1113,7 @@ split_plot</code></pre>
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://hanhao23.github.io/project/glmm/&amp;text=Data%20Analysis%20with%20Repeat%20Measures%20in%20Generalized%20Mixed%20Effects%20Model" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://hanhao23.github.io/project/glmm/&amp;text=Intro%20to%20Generalized%20Mixed%20Effects%20Model%20in%20R" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -1116,7 +1126,7 @@ split_plot</code></pre>
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://hanhao23.github.io/project/glmm/&amp;t=Data%20Analysis%20with%20Repeat%20Measures%20in%20Generalized%20Mixed%20Effects%20Model" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://hanhao23.github.io/project/glmm/&amp;t=Intro%20to%20Generalized%20Mixed%20Effects%20Model%20in%20R" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1129,7 +1139,7 @@ split_plot</code></pre>
       
       
       <li>
-        <a href="mailto:?subject=Data%20Analysis%20with%20Repeat%20Measures%20in%20Generalized%20Mixed%20Effects%20Model&amp;body=https://hanhao23.github.io/project/glmm/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Intro%20to%20Generalized%20Mixed%20Effects%20Model%20in%20R&amp;body=https://hanhao23.github.io/project/glmm/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1142,7 +1152,7 @@ split_plot</code></pre>
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://hanhao23.github.io/project/glmm/&amp;title=Data%20Analysis%20with%20Repeat%20Measures%20in%20Generalized%20Mixed%20Effects%20Model" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://hanhao23.github.io/project/glmm/&amp;title=Intro%20to%20Generalized%20Mixed%20Effects%20Model%20in%20R" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1155,7 +1165,7 @@ split_plot</code></pre>
       
       
       <li>
-        <a href="whatsapp://send?text=Data%20Analysis%20with%20Repeat%20Measures%20in%20Generalized%20Mixed%20Effects%20Model%20https://hanhao23.github.io/project/glmm/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=Intro%20to%20Generalized%20Mixed%20Effects%20Model%20in%20R%20https://hanhao23.github.io/project/glmm/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1168,7 +1178,7 @@ split_plot</code></pre>
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://hanhao23.github.io/project/glmm/&amp;title=Data%20Analysis%20with%20Repeat%20Measures%20in%20Generalized%20Mixed%20Effects%20Model" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://hanhao23.github.io/project/glmm/&amp;title=Intro%20to%20Generalized%20Mixed%20Effects%20Model%20in%20R" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1305,9 +1315,15 @@ split_plot</code></pre>
     <h3>Related</h3>
     <ul>
       
+      <li><a href="/project/irttutorial/">Intro to Item Response Modeling in R</a></li>
+      
       <li><a href="/project/formfactor/">Formative Model in Lavaan</a></li>
       
-      <li><a href="/project/irttutorial/">Intro to Item Response Modeling in R</a></li>
+      <li><a href="/talk/tarletonjobtalk/">Bridging cognitive and psychometric Models of Cognitive Abilities</a></li>
+      
+      <li><a href="/publication/the-struggle-is-real/">The Struggle Is Real</a></li>
+      
+      <li><a href="/publication/retrospective/">Response or recall bias? Choosing between the traditional and retrospective pretest using measurement invariance techniques</a></li>
       
     </ul>
   </div>

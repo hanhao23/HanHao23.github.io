@@ -937,15 +937,18 @@ Figure 1: A fancy pie chart.
     </item>
     
     <item>
-      <title>Data Analysis with Repeat Measures in Generalized Mixed Effects Model</title>
+      <title>Intro to Generalized Mixed Effects Model in R</title>
       <link>https://hanhao23.github.io/project/glmm/</link>
-      <pubDate>Thu, 27 Apr 1916 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://hanhao23.github.io/project/glmm/</guid>
       <description>
 
 
-&lt;div id=&#34;package-and-data-preparation&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Package and Data Preparation&lt;/h3&gt;
+&lt;div id=&#34;overview&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Overview&lt;/h1&gt;
+&lt;p&gt;The goal of this document is to introduce applications of R for Generalized Mixed Effects Modeling.&lt;/p&gt;
+&lt;div id=&#34;package-and-data-preparation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Package and Data Preparation&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(psych) # For descriptives and ANOVA, and else
 library(ez) # For ANOVA
 library(tidyverse) # This is a collection of packages for data wrangling and visualizing
@@ -966,8 +969,8 @@ library(r2glmm)
 
 dat &amp;lt;- read.csv(&amp;quot;Demo Data Das.csv&amp;quot;) # Read in the csv data&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id=&#34;data-forging&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Data forging&lt;/h3&gt;
+&lt;div id=&#34;data-forging&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data forging&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# A quick look at the first several rows of the data. This is the wide format in which each row contains all information from one individual.
 head(dat)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   X D1S D2S D3S D1D D2D D3D     Speed         WMC
@@ -998,8 +1001,8 @@ head(dat3)&lt;/code&gt;&lt;/pre&gt;
 ## 5 5  89.83073  1.50946304      D1       S     7
 ## 6 6 161.63888  0.75637916      D1       S     7&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id=&#34;anova-with-ezanova-package&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;ANOVA with “ezANOVA” Package&lt;/h3&gt;
+&lt;div id=&#34;anova-with-ezanova-package&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;ANOVA with “ezANOVA” Package&lt;/h2&gt;
 &lt;p&gt;This package gives 3 options for us to calculate Sums of Squares, and the following note is copied directly from their documentation:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Numeric value (either 1, 2 or 3) specifying the Sums of Squares “type” to employ when data are unbalanced (eg. when group sizes differ). type = 2 is the default because this will yield identical ANOVA results as type = 1 when data are balanced but type = 2 will additionally yield various assumption tests where appropriate. When data are unbalanced, users are warned that they should give special consideration to the value of type. type=3 will emulate the approach taken by popular commercial statistics packages like SAS and SPSS, but users are warned that this approach is not without criticism.&lt;/p&gt;
@@ -1125,8 +1128,8 @@ ezANOVA(dat3Final, dv = .(Score), wid = .(X), within = .(Factor1, Factor2), type
 ## Residual standard error: 1.226833
 ## Estimated effects are balanced&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id=&#34;anova-with-aov-function&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;ANOVA with “aov” Function&lt;/h3&gt;
+&lt;div id=&#34;anova-with-aov-function&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;ANOVA with “aov” Function&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;AnovaModel &amp;lt;- aov(Score ~ Factor1*Factor2 + Error(X/(Factor1*Factor2)), data = dat3)
 summary(AnovaModel)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## 
@@ -1161,8 +1164,8 @@ EtaSq(AnovaModel, type = 1)&lt;/code&gt;&lt;/pre&gt;
 ## Factor2         0.52062030   0.7180224 0.54684319
 ## Factor1:Factor2 0.03432802   0.2916487 0.07370411&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id=&#34;anova-plot&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;ANOVA Plot&lt;/h3&gt;
+&lt;div id=&#34;anova-plot&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;ANOVA Plot&lt;/h2&gt;
 &lt;p&gt;This is just a quick visualization of the condition differences.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;DescribeSummary &amp;lt;- summarySE(dat3Final, measurevar = &amp;quot;Score&amp;quot;, groupvars = c(&amp;quot;Factor1&amp;quot;,&amp;quot;Factor2&amp;quot;))
 
@@ -1182,10 +1185,10 @@ ggplot(DescribeSummary, aes(x=Factor1, y=Score, fill=Factor2)) +
     axis.title = element_text(face = &amp;quot;bold&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/glmm/index_files/figure-html/ANOVAViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;generalized-linear-mixed-effect-model&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Generalized Linear Mixed Effect Model&lt;/h3&gt;
+&lt;div id=&#34;generalized-linear-mixed-effect-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Generalized Linear Mixed Effect Model&lt;/h2&gt;
 &lt;p&gt;I just attached the scripts that I used in my own project, but I also just started to use GLMM so there is still a huge lot I am not 100% clear about the analysis.&lt;br /&gt;
-Here I dummy-coded the two factors, and specify the random intercept without considering any indivdiual level effect of the fectors (nothing except (1|X) in the “random term” in the formula).&lt;/p&gt;
+Here I dummy-coded the two factors, and specify the random intercept without considering any individual level effect of the fectors (nothing except (1|X) in the “random term” in the formula).&lt;/p&gt;
 &lt;p&gt;This is some data I fictioned so here it seems the fitted model “lmmodel1” is singular: there might be too few variance in at least one effect, or it could also be a miss specification of the model.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Dummy coding
 dat3Final$F1Dummy &amp;lt;- dummy(dat3Final$Factor1,&amp;quot;D2&amp;quot;)
@@ -1261,8 +1264,8 @@ r2beta(model = lmmodel1, partial = T)&lt;/code&gt;&lt;/pre&gt;
 ## 2                 WMC 0.000    0.016    0.000
 ## 8 WMC:F1Dummy:F2Dummy 0.000    0.015    0.000&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id=&#34;glmm-visualization&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;GLMM Visualization&lt;/h3&gt;
+&lt;div id=&#34;glmm-visualization&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;GLMM Visualization&lt;/h2&gt;
 &lt;p&gt;I use these codes to visualize my GLMM data. It should be of help to break the conditions down and visualize the correlations beween the continous predictor and the outcome (performance) by unique conditions.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;split_plot &amp;lt;- ggplot(aes(WMC, Score), data = dat3Final) + 
   geom_point() + 
@@ -1273,6 +1276,7 @@ r2beta(model = lmmodel1, partial = T)&lt;/code&gt;&lt;/pre&gt;
   ylab(&amp;quot;Test score&amp;quot;)
 split_plot&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/glmm/index_files/figure-html/GLMMViz-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 </description>
     </item>
