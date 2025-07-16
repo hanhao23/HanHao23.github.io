@@ -1,0 +1,379 @@
+
+---
+date: 'Updated at: `r Sys.Date()`'
+external_link: ""
+image:
+  focal_point: Smart
+links:
+- icon: twitter
+  icon_pack: fab
+  name: Follow
+  url: https://twitter.com/hanhao23
+slides: 
+summary: An example of item response modeling with the mirt package.
+tags:
+- Item Response Theory
+- Working Memory
+- R Stuff
+- Psychometrics
+- Academic
+- Stats
+title: Intro to Item Response Modeling in R
+subtitle: An Tutorial on MIRT Package
+url_code: ""
+url_pdf: ""
+url_slides: ""
+url_video: ""
+---
+
+# Overview
+
+The goal of this document is to introduce applications of R for item response theory (IRT) modeling. Specifically, this document is focused on introducing basic IRT analyses for beginners using the ["mirt" package](https://cran.r-project.org/web/packages/mirt/mirt.pdf) (Chalmers, 2012). It is not intended to be a full introduction to data analysis in R, nor to basic mathematics of item response theory. Instead, this tutorial will introduce the key concepts of IRT and important features of corresponding R packages/functions that facilitate IRT modeling for beginners. For a quick reference on the basics of IRT, please see the last section of recommended readings.  
+
+In this tutorial, we will focus on unidimensional IRT models by presenting brief R examples using "mirt". Specifically, we will talk about:  
+1. Key concepts in IRT;  
+2. Dichotomous, 1PL Model (Rasch Model);  
+3. Dichotomous, 2PL Model;  
+4. Polytomous, Generalized Partial Credit Model.  
+
+## Install and Load Packages
+
+The first step is to make sure you have the R packages needed in this tutorial. We can obtain the "mirt" package from CRAN (using "install.packages('mirt')"), or install the development version of the package from Github using the following codes:
+
+```{r install, eval=FALSE, include=TRUE}
+
+install.packages('devtools')
+library('devtools')
+install_github('philchalmers/mirt')
+
+```
+
+We need the following packages in this tutorial:
+
+```{r setup, warning = FALSE, results = 'hide', message = FALSE}
+
+library(tidyverse) # For data wrangling and basic visualizations
+library(psych) # For descriptive stats and assumption checks
+library(mirt) # IRT modeling
+
+```
+
+## Prepare the Data
+
+The next step is to read in and prepare corresponding data files for the tutorial. The two data files we are using in this tutorial are available at here: [ReadingSpan](https://hanhao23.github.io/files/WMI_Read_Han_Wide.csv) and [RotationSpan](https://hanhao23.github.io/files/WMI_Rot_Han_Wide.csv).  
+
+These two datasets consist of item-level responses from 261 subjects on 2 complex span tasks: reading span and rotation span. In a complex span task, each item has a varying number of elements to process and memorize (item size). The responses in the two datasets are integer numbers that reflect the numbers of correctly recalled elements for each item. For the reading span task, there are 15 items presented across 3 blocks, with item sizes varied from 3 to 7. For the rotation span task, there are 12 items presented across 3 blocks, with item sizes varied from 2 to 5.  
+
+```{r datapre}
+# Conway et al. (2019) Data
+wmir <- read.csv("WMI_Read_Han_wide.csv")[,-1]
+wmirot <- read.csv("WMI_Rot_Han_wide.csv")[,-1]
+
+colnames(wmir) <- c("Subject", 
+                   "V1.3", "V1.4","V1.5", "V1.6", "V1.7",
+                   "V2.3", "V2.4","V2.5", "V2.6", "V2.7",
+                   "V3.3", "V3.4","V3.5", "V3.6", "V3.7")
+
+colnames(wmirot) <- c("Subject", 
+                   "S1.2","S1.3", "S1.4","S1.5", 
+                   "S2.2","S2.3", "S2.4","S2.5", 
+                   "S3.2","S3.3", "S3.4","S3.5")
+
+
+# Wmi is the full dataset (N = 261)
+wmi <- merge(wmir, wmirot, by = "Subject")
+
+head(wmir)
+
+head(wmirot)
+
+```
+
+Labels of the variables in the datasets indicate the corresponding block and item size of a specific item. For example, in the reading span dataset (wmir), the 5th column ("V1.6") presents subjects' responses on the item with 6 elements in the 1st block. Subject 1 recalled 2 of the 6 elements correctly.  
+
+For a detail summary of the two complex span tasks, see [Conway et al. (2005)](https://doi.org/10.3758/BF03196772) and [Hao & Conway (2021)](https://doi.org/10.3758/s13421-021-01242-6).  
+
+# Key Concepts in Item Response Theory
+
+In this section we will briefly go over some key concepts and terms we will be using in this IRT tutorial.  
+
+**Scale**: In this tutorial, a scale refers to any quantitative system that is designed to reflect an individual's standing or level of ability on a latent construct or latent trait. A scale consists of multiple manifest items. These items can be questions in a survey, problems in a test, or trials in an experiment.  
+- **Dichotomous IRT models** are applied to the items with two possible response categories (yes/no, correct/incorrect, etc.)  
+- **Polytomous IRT models** are applicable if the items have more than two possible response categories (Likert-type response scale, questions with partial credits, etc.)  
+
+**Dimensionality**: The number of distinguishable attributes that a scale reflect.  
+- For **unidimensional IRT models**, it is assumed that the scale only reflect one dimension, such that all items in the scale are assumed to reflect a unitary latent trait.  
+- For **multidimensional IRT models**, multiple dimensions can be reflected and estimated, such that the responses to the items in the scales are assumed to reflect properties of multiple latent traits.  
+
+**Theta** ($\Theta$): the latent construct or trait that is measured by the scale. It represents individual differences on the latent construct being measured.  
+
+**Information**: an index to characterize the precision of measurement of the item or the test on the underlying latent construct, with high information denoting more precision. In IRT, this index is represented as a function of persons at different levels, such that the information function reflects the range of trait level over which this item or this test is most useful for distinguishing among individuals.  
+
+**Item Characteristic Curve** (ICC): AKA item trace curve. ICC represents an item response function that models the relationship between a person's probability for endorsing an item category (*p*) and the level on the construct measured by the scale ($\Theta$). For this purpose, the slope of the item characteristic curve is used to assess whether a specific item mean score has either a steeper curve (i.e., high value) or whether the item has a wider curve (i.e., low value) and, therefore, cannot adequately differentiate based on ability level.  
+
+**Item Difficulty Parameter** (*b*): the trait level on the latent scale where a person has a 50% chance of responding positively to the item. This definition of item difficulty applies to dichotomous models. For polytomous models, multiple threshold parameters (*d*s) are estimated for an item so that the latent trait difference between and beyond the response categories are accounted for.  
+- Conceptually, the role of item difficulty parameters in an IRT model is equivalent to the intercepts of manifests in a latent factor model.  
+
+**Item Discrimination Parameter** (*a*): how accurately a given item can differentiate individuals based on ability level. describes the strength of an item's discrimination between people with trait levels below and above the threshold *b*. This parameter is also interpreted as describing how an item is related to the latent trait measured by the scale. In other words, the *a* parameter for an item reflects the magnitude of item reliability (how much the item is contributing to total score variance).  
+- Conceptually, the role of item discrimination parameters in an IRT model is equivalent to the factor loadings of manifests in a latent factor model.  
+
+The "mirt" package includes an interactive graphical interface (shiny app) to allow the parameters to be modified in an IRT exemplar item in real time. To facilitate understanding of these key concepts, you can run the line of code below in your R console to activate an interactive shiny app with examplar item trace plots for different types of IRT models.  
+
+```{r MIRT Shiny Itemplot, eval=FALSE, include=TRUE}
+
+itemplot(shiny = TRUE)
+
+```
+
+# Unidimensional Dichotomous IRT Models
+
+In this section we will start with the basic unidimensional dichotomous model, in which all items are assumed to measure one latent trait, and the responses to items are all binary (0 = incorrect/no, 1 = correct/yes). We will use the rotation span dataset (wmirot) in this section. As aforementioned, the raw data present numbers of correctly recalled elements for each item, which are not binary responses. Thus, we need to re-score these items using a all-or-nothing unit scoring approach (Conway et al., 2005; p.775), such that only a response with all elements in the item correctly recalled is scored as "correct" (1), while all other responses are scored as "incorrect" (0). The "mirt" package has a built-in function,"key2binary", to assign binary scores to items in a dataset based on a given answer key. Thus, we can transfer all the initial rotation span responses to a binary response scale.   
+
+```{r unidich data}
+dat1 <- key2binary(wmirot[,-1],
+    key = c(2,3,4,5,2,3,4,5,2,3,4,5))
+head(dat1)
+```
+
+## Assumption Checks
+
+Unidimensional IRT models assume that all items are measuring a single continuous latent variable. There are different ways to test the unidimensionality assumption. For example, we can estimate McDonald's hierarchical Omega ($\omega_h$), which conceptually reflects percentage of variance in the scale scores accounted for by a general factor. An arbitrary cutoff of $\omega_h$ > .70 is usually used as the rule of thumb. Unfortunately, the current data violated this assumption using this rule of thumb ($\omega_h$ = .56), but for demonstration purpose, we went along with further analyses.  
+
+For further details on unidimensionality, see [Berge & Socan (2004)](https://doi.org/10.1007/BF02289858) and [Zinbarg, Yovel, Revelle, & McDonald (2006)](https://doi.org/10.1177/0146621605278814).  
+
+Another assumption of IRT is local independence, such that item responses are independent of one another. This assumption can be checked during the modeling fitting process by investigating the residuals and compute local dependence indices using the "residuals" function.
+
+```{r}
+summary(omega(dat1, plot = F))
+```
+
+## 1PL (Rasch) Model
+
+We can start with a 1PL (Rasch) model, in which the discrimination parameters for all items are fixed to 1, while difficulty paramters are freely estimated in the model.
+
+```{r unidich Rasch, results = "hide"}
+
+# Model specification. Here we indicate that all columns in the dataset (1 to 12) measure the same latent factor ("rotation")
+uniDich.model1 <- mirt.model("rotation = 1 - 12")
+
+# Model estimation. Here we indicate that we are estimating a Rasch model, and standard errors for parameters are estimated.
+uniDich.result1 <- mirt::mirt(dat1, uniDich.model1, itemtype = "Rasch", SE = TRUE)
+
+```
+
+### Model and Item Fits
+
+we can now investigate model fit statistics using the "M2" function, which provides the M2 index, the M2-based root mean square error of approximation (RMSEA), the standardized root mean square residual (SRMSR), and comparative fit index (CFI & TLI) to assess adequacy of model fit. A set of arbitrary cutoff values for the fit indices are provided here: RMSEA < .06; SRMSR < .08; CFI > .95; TLI > .95. Models with fit indices that saturate these cutoff values are commonly considered to have good fit. In this example, the non-significant M2 and all fit indices indicated great fit.
+
+```{r unidich Rasch modelfit}
+M2(uniDich.result1)
+```
+
+In IRT analyses, we can also assess how well each item fits the model. This is especially useful for item inspection and scale revision. The "itemfit" function provides S-X2 index as well as RMSEA values to assess the degree of item fit for each item. Non-significant S-X2 values and RMSEA < .06 are usually considered evidence of adequate fit for an item. In the current example, all items seem to fit the model well based on the indices.
+
+```{r unidich Rasch itemfit}
+itemfit(uniDich.result1)
+```
+
+Along with the model and item fits we can also check the local independence assumption using the "residuals" function. The following scripts provide the LD matrix as well as dfs and p-values for all LD indices. Large and significant LD indices are indicators of potential issues of local dependence and may require further attention.
+
+```{r unidich Rasch LD}
+residuals(uniDich.result1, df.p = T)
+```
+
+Other than the model fits and item fits, the "mirt" package also provides methods for calculating person fit statistics such as Zh statistics using the "personfit" function. In general, person fit statistics indicate how much a person's responses on this test deviates from the the model prediction. See the "mirt" documentation and [Drasgow, Levine, and Williams (1985)](https://doi.org/10.1111/j.2044-8317.1985.tb00817.x) for further details.
+
+```{r unidich Rasch personfit}
+head(personfit(uniDich.result1))
+```
+
+### IRT Paramters
+
+We can obtain the item parameters from the model. As aforementioned, for a Rasch model, all discrimination parameters are fixed to 1, while difficulty parameters are freely estimated. In the output, the second column ("a") contains the discrimination parameters and the third column (b) contains the difficulty parameters.  
+
+In this example, we presented the IRT parameters using the conventional approach, such that a larger *b* parameter indicates higher difficulty of an item. For example, the second item, S1.3 (item size 3 in the 1st block), has a b = -0.94. This indicates that, according to the model estimation, a person with ability level that is 0.94 standard deviation below the average has 50% of chance to answer this item (S1.3) correctly.  
+
+```{r unidich Rasch irtparameters}
+# IRT parameters from the estimated model. For this example, we are obtaining simplified output without SEs/CIs (simplify = TRUE) for conventional IRT parameters (IRTpar = TRUE).
+coef(uniDich.result1,simplify = TRUE, IRTpar = TRUE)$items
+```
+
+### Visualizing the Item and Scale Characteristics
+
+We can visualize corresponding item and scale characteristics from the model by a variety of plot methods in "mirt". The plots presents how items and the entire scale relate to the latent trait across the scale.  
+We can start with the item trace plots for the 12 items. The item trace plots visualize the probability of responding "1" to an item as a function of $\theta$. According to the item trace plot of this example, the 3 items with item size 2 (S1.2,S2.2,S3.2) are relatively easy items, in which subjects with average ability ($\theta$ = 0) are estimated to have about 80% to 90% of chance to answer correctly. On the other hand, the 3 items with size 5 are relatively hard items, in which subjects with average ability are estimated to have about only 10% to 20% of chance to answer correctly.  
+
+```{r unidich Rasch ploting1}
+# In the function we cam specify the range of theta we'd like to visualize on the x axis of the plots. In this example we set it to -4 to 4 (4 SDs below and above average).
+plot(uniDich.result1, type = "trace", theta_lim = c(-4,4))
+```
+
+Other than the item trace plots, we can also look at the item information plots. Item information plots visualize how much “information” about the latent trait ability an item can  provide. Conceptually, higher information implies less error of measure, and the peak of an item information curve is at the point of its b parameter. Thus, for easy items (such as the 3 items in the most left column below), little information are provided on subjects with high ability levels (because they will almost always answer correctly).  
+
+```{r unidich Rasch ploting2}
+# We can specify the exact set of items we want to plot in the ploting function of mirt. Here we can also only visualize the 1st, 5th, and 9th item from the dataset by addin an argument "which.items = c(1,5,9)" in the function. This will make the function to only plot the 3 items with set size 2 in the task. Please feel free to give a try.
+plot(uniDich.result1, type = "infotrace")
+```
+
+The "itemplot" function can provides more details regarding an item. This is an example that visualize the item trace plot of item 1 with confidence envelope.  
+
+```{r unidich Rasch ploting3}
+itemplot(uniDich.result1, item = 1, type = "trace", CE = TRUE)
+```
+
+Lastly, we can plot the information curve for the entire test. This is based on the sum of all item information curves and indicate how much information a test can provide at different latent trait levels based on the model. As aforementioned, high information indicate less error (low SE) of measurement. An ideal (but impossible) test would have high test information at all levels of latent trait levels.  
+
+```{r unidich Rasch ploting4}
+plot(uniDich.result1, type = "SE")
+```
+
+## 2PL Model
+
+We can also estimate a 2PL model on the same binary data of rotation span task. In a 2PL model, not only the item difficulty parameters (*b*s) but also the item discrimination parameters (*a*s) are estimated. Thus, a 2PL model assumes that different items vary in the ability to discriminate between persons with different latent trait levels.  
+
+```{r unidich 2PL, results = 'hide'}
+
+uniDich.model2 <- mirt.model("rotation = 1 - 12")
+
+uniDich.result2 <- mirt::mirt(dat1, uniDich.model2, itemtype = "2PL", SE = TRUE)
+
+```
+
+### Model and Item Fits
+
+Similarly, we can obtain corresponding statistics of the model such as model fit and item fit statistics. In this example, the overall model fit for the 2PL model is good.  
+
+```{r unidich 2PL modelfit}
+M2(uniDich.result2)
+```
+
+Item fit statistics for this 2PL model indicate that the 2nd item (S1.3) may need further attention (significant S-X2 and large RMSEA).  
+
+```{r unidich 2PL itemfit}
+itemfit(uniDich.result2)
+```
+
+### IRT Parameters
+
+We can obtain the item parameters from the model. For a 2PL model, both the item discrimination parameters and the item difficulty parameters are freely estimated. Similar to the output of the Rasch model, the second column ("a") contains the discrimination parameters and the third column (b) contains the difficulty parameters. We can see that, unlike the Rasch model, now every item has a unique discrimination parameter.  
+
+For a dichotomous 2PL model, the item discrimination parameters reflect how well an item could discriminate between persons with low and high ability/trait levels. Furthermore, the *a* parameter also reflects the magnitude to which an item is related to the latent trait measured by the scale. Thus, a low discrimination parameter usually indicates potential issues for an item comparing to the general scale.
+
+```{r unidich 2PL irtparameters}
+coef(uniDich.result2,simplify = TRUE, IRTpar = TRUE)$items
+```
+
+### Visualizing the Item and Scale Plots
+
+Comparing to the Rasch model, the estimated *a* parameters in a 2PL model are also reflected in item trace plots, such that the differences in *a*s are reflected by the changes in the steepness of the item trace curves. Higher *a*s would be reflected as steeper item trace curves.
+
+```{r unidich 2PL ploting1}
+plot(uniDich.result2, type = "trace", theta_lim = c(-4,4))
+```
+
+The freely estimated discrimination parameters are also reflected in the item information plots. As we can see, comparing to the Rasch model, the peaks of information curves are varying across items in the 2PL model.
+
+```{r unidich 2PL ploting2}
+plot(uniDich.result2, type = "infotrace")
+```
+
+## Model Specifications
+
+The model specification function of "mirt" provides arguments for further constraints in an IRT model and can be used for testing specific assumptions regarding the item characteristics.  
+For example, in the rotation span task, items with the exact same set size are designed in the exact same way. Thus, we consider the items with the same set size equivalent in their ability to discriminate persons with different ability levels. To estimate this model, we can specify the constraints in the model specification function. As is presented, in the function we specify an equal *a* parameter for items 1, 5, & 9, which are labeled "S1.2", "S2.2", and "S3.2" in the dataset (these are the 3 items with set size 2); another equal *a* for items 2, 6, & 1; another for items 3, 7, and 11; and another for items 4, 8, and 12.
+
+```{r unidich 2PL constrain, results = "hide"}
+uniDich.model3 <- mirt.model("rotation = 1 - 12
+                             CONSTRAIN = (1,5,9,a1), (2,6,10,a1),(3,7,11,a1),(4,8,12,a1)")
+
+uniDich.result3 <- mirt::mirt(dat1, uniDich.model3, itemtype = "2PL", SE = TRUE)
+```
+
+The specification in constraints is reflected in the IRT parameters from this model. As we can observe, in the IRT parameters output, items with the same set sizes are estimated to have the exact same *a* parameters. For all items with size 2, *a* = 1.31, and for all items with size 3, *a* = 1.55, etc. On the other hand, the *b* parameters are still freely estimated regardless of the item size.
+
+```{r 2PL constrainirtparamters}
+coef(uniDich.result3,simplify = TRUE, IRTpar = TRUE)$items
+```
+
+We can also do model comparisons for nested models with different constraints. For example, we can test the difference between this constrained model and the previous 2PL model without any constraints on discrimination. This is similar to a model comparison based on chi-squared statistics for nested SEM models. As we can see, results indicate that the two models are not significantly different from each other, $\Delta\chi^2$(8) = 8.68, *p* = .37.
+
+```{r 2PL constraincomparison}
+anova(uniDich.result2,uniDich.result3)
+```
+
+# Unidimensional Polytomous IRT Model
+
+In the previous section we have conducted dichotomous IRT analyses on the rotation span task dataset with binary responses. However, the initial rotation span dataset consist of numbers of correctly recalled elements for each item. In other words, each item actually has more than two possible response categories that are at least ordinal. For example, for an item with set size 2 (2 elements in the item), there are 3 possible response outcomes: 0, 1, and 2. Thus, we could fit and assess a polytomous IRT model to this type of measures, such as partial-scored tests and Likert-type surveys.
+
+```{r unipoly data}
+dat2 <- as.matrix(wmirot[,-1])
+head(dat2)
+```
+## Generalized Partial Credit Model
+
+In this section, we will apply the generalized partial credit model (GPCM; [Muraki, 1992](https://doi.org/10.1002/j.2333-8504.1992.tb01436.x)) to the rotation span data. As a polytomous model, GPCM estimates one item threshold parameter for **each response category** in an item instead of one difficulty parameter for an item. Further more, GPCM assumes an unique item discrimination parameter for each item instead of assuming a unitary reliability across items (like the Rasch model). 
+
+```{r unipoly 2PL, results = 'hide'}
+
+unipoly.model1 <- mirt.model("rotation = 1 - 12")
+
+unipoly.result1 <- mirt::mirt(dat2, uniDich.model2, itemtype = "gpcm", SE = TRUE)
+
+```
+
+### Model and Item Fits
+
+Similarly, we can obtain corresponding statistics of the model such as model fit and item fit statistics. In this example, the overall model fit and all item fits for the GPCM model are good.
+
+```{r unipoly 2PL modelfit}
+M2(unipoly.result1)
+```
+
+```{r unipoly 2PL itemfit}
+itemfit(unipoly.result1)
+```
+
+### IRT Parameters
+
+For a GPCM model, the item discrimination parameters and the item threshold parameters are freely estimated. In a GPCM model, the item threshold parameter is defined as the trait level in which one has an equal probability of choosing the *k*th response category over the *k-1*th category in an item. When choosing between the *k*th and the *k-1*th category, subjects with trait levels higher than that threshold are more likely to approach the *k*th, while subjects with trait levels lower than that threshold are more likely to approach the *k-1*th. 
+
+```{r unipoly 2PL irtparameters}
+coef(unipoly.result1,simplify = TRUE, IRTpars = TRUE)$items
+```
+
+In this example, the function utilizes the conventional IRT parameterization. In the conventional parameterization, for an item of size *p*, GPCM estimates *p* item threshold parameters for each of the categories (from "*b_1*" for partial scores of 0 and 1 to "*b_p*" for partial scores p-1 and p), and 1 item discrimination parameter for the item. The second column ("*a_1*") contains the discrimination parameters and the later columns ("*b_1*" to "*b_5*") contain all the threshold parameters.  
+
+### Visualizing the Item and Scale Plots
+
+Similar to the dichotomous 2PL model, the estimated *a* parameters in a GPCM model are reflected in item trace plots, such that the differences in *a*s are reflected by the changes in the steepness of the item trace curves. Higher *a*s would be reflected as steeper item trace curves. On the other hand, the estimated *b* parameters in a GPCM model are reflected as (x-axis values for) the adjacent points between trace curves for different categories. For example, for Item S3.2, the current GPCM model estimated two threshold parameters: b1 = -1.36 (the adjacent point between curve P1 and P2) and b2 = -3.01 (the adjacent point between curve P2 and P3).
+
+```{r unipoly 2PL ploting1}
+plot(unipoly.result1, type = "trace", theta_lim = c(-4,4))
+```
+
+Similar to the dichotomous 2PL model, the freely estimated discrimination parameters are also reflected in the item information plots.  
+
+```{r unipoly 2PL ploting2}
+plot(unipoly.result1, type = "infotrace")
+```
+
+### Individual Scoring
+
+Based on an estimated model, we can also estimate the individual latent trait scores. Conceptually, the estimated latent trait scores are similar to factor scores estimated in CFAs.
+
+```{r unipoly 2PL scoring}
+est.theta <- as.data.frame(fscores(unipoly.result1))
+head(est.theta)
+
+est.theta %>% 
+  ggplot(aes(x=rotation)) +
+    geom_histogram(aes(y=..density..),
+                   binwidth=.1,
+                   colour="black", fill="white") +
+    geom_density(alpha=.2, fill="aquamarine2")
+```
+
+
+```{r include=FALSE}
+knitr::knit_exit()
+```
