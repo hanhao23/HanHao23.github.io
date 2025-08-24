@@ -5,7 +5,7 @@
     <link>https://hanhao23.github.io/</link>
       <atom:link href="https://hanhao23.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Han Hao Cog Psych</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Sat, 01 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Wed, 23 Jul 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Han Hao Cog Psych</title>
@@ -55,6 +55,30 @@
     </item>
     
     <item>
+      <title>Adolescent Cognitive Development and Connectivity</title>
+      <link>https://hanhao23.github.io/talk/2025isir/</link>
+      <pubDate>Wed, 23 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/2025isir/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Examining Computer Science Educators’ Professional Identity</title>
+      <link>https://hanhao23.github.io/publication/examining-computer-science-educators-professional-identity/</link>
+      <pubDate>Tue, 22 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/examining-computer-science-educators-professional-identity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The latent structure of working memory</title>
+      <link>https://hanhao23.github.io/publication/the-latent-structure-of-working-memory/</link>
+      <pubDate>Mon, 02 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/the-latent-structure-of-working-memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>认知的统一模型或许是一个复杂模型</title>
       <link>https://hanhao23.github.io/post/%E8%AE%A4%E7%9F%A5%E7%9A%84%E7%BB%9F%E4%B8%80%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Sat, 01 Mar 2025 00:00:00 +0000</pubDate>
@@ -68,6 +92,18 @@
       <pubDate>Wed, 06 Nov 2024 00:00:00 +0000</pubDate>
       <guid>https://hanhao23.github.io/talk/2024psychonomics/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Simulating the Process Overlap Theory of Intelligence</title>
+      <link>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</link>
+      <pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</guid>
+      <description>&lt;!---
+Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+files/HanHaoCGU_Psychonomics_2019.png
+--&gt;
+</description>
     </item>
     
     <item>
@@ -106,18 +142,6 @@ Slides can be added in a few ways:
 - **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
 
 Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
---&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Simulating the Process Overlap Theory of Intelligence</title>
-      <link>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</link>
-      <pubDate>Mon, 17 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</guid>
-      <description>&lt;!---
-Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
-files/HanHaoCGU_Psychonomics_2019.png
 --&gt;
 </description>
     </item>

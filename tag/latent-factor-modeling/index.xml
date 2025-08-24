@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Latent Factor Modeling | Han Hao Cog Psych</title>
+    <link>https://hanhao23.github.io/tag/latent-factor-modeling/</link>
+      <atom:link href="https://hanhao23.github.io/tag/latent-factor-modeling/index.xml" rel="self" type="application/rss+xml" />
+    <description>Latent Factor Modeling</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Tue, 22 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
+      <title>Latent Factor Modeling</title>
+      <link>https://hanhao23.github.io/tag/latent-factor-modeling/</link>
+    </image>
+    
+    <item>
+      <title>Examining Computer Science Educators’ Professional Identity</title>
+      <link>https://hanhao23.github.io/publication/examining-computer-science-educators-professional-identity/</link>
+      <pubDate>Tue, 22 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/examining-computer-science-educators-professional-identity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The latent structure of working memory</title>
+      <link>https://hanhao23.github.io/publication/the-latent-structure-of-working-memory/</link>
+      <pubDate>Mon, 02 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/the-latent-structure-of-working-memory/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

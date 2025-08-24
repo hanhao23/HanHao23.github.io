@@ -5,7 +5,7 @@
     <link>https://hanhao23.github.io/publication/</link>
       <atom:link href="https://hanhao23.github.io/publication/index.xml" rel="self" type="application/rss+xml" />
     <description>Publications</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Thu, 04 Apr 2024 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Tue, 22 Jul 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Publications</title>
@@ -13,23 +13,39 @@
     </image>
     
     <item>
-      <title>Revealing the structure of language model capabilities</title>
-      <link>https://hanhao23.github.io/publication/revealing-the-structure-of-language-model-capabilities/</link>
-      <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/publication/revealing-the-structure-of-language-model-capabilities/</guid>
+      <title>Examining Computer Science Educators’ Professional Identity</title>
+      <link>https://hanhao23.github.io/publication/examining-computer-science-educators-professional-identity/</link>
+      <pubDate>Tue, 22 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/examining-computer-science-educators-professional-identity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The latent structure of working memory</title>
+      <link>https://hanhao23.github.io/publication/the-latent-structure-of-working-memory/</link>
+      <pubDate>Mon, 02 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/the-latent-structure-of-working-memory/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Simulating the Process Overlap Theory of Intelligence</title>
       <link>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</link>
-      <pubDate>Mon, 17 Jul 2023 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate>
       <guid>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</guid>
       <description>&lt;!---
 Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
 files/HanHaoCGU_Psychonomics_2019.png
 --&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Revealing the structure of language model capabilities</title>
+      <link>https://hanhao23.github.io/publication/revealing-the-structure-of-language-model-capabilities/</link>
+      <pubDate>Thu, 04 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/revealing-the-structure-of-language-model-capabilities/</guid>
+      <description></description>
     </item>
     
     <item>

@@ -5,7 +5,7 @@
     <link>https://hanhao23.github.io/author/andrew-r.-a.-conway/</link>
       <atom:link href="https://hanhao23.github.io/author/andrew-r.-a.-conway/index.xml" rel="self" type="application/rss+xml" />
     <description>Andrew R. A. Conway</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Wed, 06 Nov 2024 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Mon, 02 Jun 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Andrew R. A. Conway</title>
@@ -13,11 +13,31 @@
     </image>
     
     <item>
+      <title>The latent structure of working memory</title>
+      <link>https://hanhao23.github.io/publication/the-latent-structure-of-working-memory/</link>
+      <pubDate>Mon, 02 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/the-latent-structure-of-working-memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>The Domain-Generality of Working Memory and Fluid Intelligence</title>
       <link>https://hanhao23.github.io/talk/2024psychonomics/</link>
       <pubDate>Wed, 06 Nov 2024 00:00:00 +0000</pubDate>
       <guid>https://hanhao23.github.io/talk/2024psychonomics/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Simulating the Process Overlap Theory of Intelligence</title>
+      <link>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</link>
+      <pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</guid>
+      <description>&lt;!---
+Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+files/HanHaoCGU_Psychonomics_2019.png
+--&gt;
+</description>
     </item>
     
     <item>
@@ -40,18 +60,6 @@ Slides can be added in a few ways:
 - **Embed** your slides (e.g. Google Slides) or presentation video on this page using [shortcodes](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
 
 Further talk details can easily be added to this page using *Markdown* and $\rm \LaTeX$ math code.
---&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Simulating the Process Overlap Theory of Intelligence</title>
-      <link>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</link>
-      <pubDate>Mon, 17 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</guid>
-      <description>&lt;!---
-Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
-files/HanHaoCGU_Psychonomics_2019.png
 --&gt;
 </description>
     </item>

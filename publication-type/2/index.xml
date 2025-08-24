@@ -5,12 +5,40 @@
     <link>https://hanhao23.github.io/publication-type/2/</link>
       <atom:link href="https://hanhao23.github.io/publication-type/2/index.xml" rel="self" type="application/rss+xml" />
     <description>2</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Fri, 08 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Tue, 22 Jul 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>2</title>
       <link>https://hanhao23.github.io/publication-type/2/</link>
     </image>
+    
+    <item>
+      <title>Examining Computer Science Educators’ Professional Identity</title>
+      <link>https://hanhao23.github.io/publication/examining-computer-science-educators-professional-identity/</link>
+      <pubDate>Tue, 22 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/examining-computer-science-educators-professional-identity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The latent structure of working memory</title>
+      <link>https://hanhao23.github.io/publication/the-latent-structure-of-working-memory/</link>
+      <pubDate>Mon, 02 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/the-latent-structure-of-working-memory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Simulating the Process Overlap Theory of Intelligence</title>
+      <link>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</link>
+      <pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/simulating-the-process-overlap-theory-of-intelligence/</guid>
+      <description>&lt;!---
+Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+files/HanHaoCGU_Psychonomics_2019.png
+--&gt;
+</description>
+    </item>
     
     <item>
       <title>The Impact of Auditory Distraction on Reading Comprehension</title>
