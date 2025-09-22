@@ -11,13 +11,40 @@
     <loc>https://hanhao23.github.io/courses/example/example2/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url><url>
+    <loc>https://hanhao23.github.io/tag/academic/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hanhao23.github.io/categories/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hanhao23.github.io/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hanhao23.github.io/tag/plot/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hanhao23.github.io/project/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hanhao23.github.io/project/psyc5316/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hanhao23.github.io/category/r/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hanhao23.github.io/tag/regression/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hanhao23.github.io/tag/stats/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hanhao23.github.io/tags/</loc>
+    <lastmod>2025-09-21T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://hanhao23.github.io/talk/2025isir/</loc>
     <lastmod>2025-07-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hanhao23.github.io/tag/cognitive-ability/</loc>
-    <lastmod>2025-07-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hanhao23.github.io/</loc>
     <lastmod>2025-07-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hanhao23.github.io/tag/process-overlap-theory/</loc>
@@ -27,9 +54,6 @@
     <lastmod>2025-07-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hanhao23.github.io/talk/</loc>
-    <lastmod>2025-07-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hanhao23.github.io/tags/</loc>
     <lastmod>2025-07-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hanhao23.github.io/publication-type/2/</loc>
@@ -118,12 +142,6 @@
   </url><url>
     <loc>https://hanhao23.github.io/author/zu-jie-zheng/</loc>
     <lastmod>2025-06-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hanhao23.github.io/tag/academic/</loc>
-    <lastmod>2025-03-01T21:27:22-06:00</lastmod>
-  </url><url>
-    <loc>https://hanhao23.github.io/categories/</loc>
-    <lastmod>2025-03-01T21:27:22-06:00</lastmod>
   </url><url>
     <loc>https://hanhao23.github.io/tag/individual-differences/</loc>
     <lastmod>2025-03-01T21:27:22-06:00</lastmod>
@@ -260,18 +278,6 @@
     <loc>https://hanhao23.github.io/slides/example/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hanhao23.github.io/project/formfactor/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hanhao23.github.io/project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hanhao23.github.io/tag/r-stuff/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hanhao23.github.io/tag/stats/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://hanhao23.github.io/post/getting-started/</loc>
     <lastmod>2019-04-17T00:00:00+00:00</lastmod>
   </url><url>
@@ -281,16 +287,7 @@
     <loc>https://hanhao23.github.io/post/2015-07-23-r-rmarkdown/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
   </url><url>
-    <loc>https://hanhao23.github.io/tag/plot/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>https://hanhao23.github.io/category/r/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url><url>
     <loc>https://hanhao23.github.io/tag/r-markdown/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>https://hanhao23.github.io/tag/regression/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
   </url><url>
     <loc>https://hanhao23.github.io/project/glmm/</loc>
@@ -298,6 +295,8 @@
     <loc>https://hanhao23.github.io/project/irttutorial/</loc>
   </url><url>
     <loc>https://hanhao23.github.io/tag/mixed-effects-model/</loc>
+  </url><url>
+    <loc>https://hanhao23.github.io/tag/r/python/</loc>
   </url><url>
     <loc>https://hanhao23.github.io/tag/repeated-measures/</loc>
   </url>

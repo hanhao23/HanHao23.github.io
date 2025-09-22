@@ -278,8 +278,8 @@ summary(lmmodel1)&lt;/code&gt;&lt;/pre&gt;
 ## Formula: Score ~ WMC * F1Dummy * F2Dummy + (1 | X)
 ##    Data: dat3Final
 ## 
-##      AIC      BIC   logLik deviance df.resid 
-##   1395.6   1434.5   -687.8   1375.6      350 
+##       AIC       BIC    logLik -2*log(L)  df.resid 
+##    1395.6    1434.5    -687.8    1375.6       350 
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 

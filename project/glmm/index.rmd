@@ -14,7 +14,7 @@ summary: An example of generalized mixed effects model (GLMM) in with lmer packa
 tags:
 - Repeated Measures
 - Mixed Effects Model
-- R Stuff
+- R/Python
 - Stats
 - Psychometrics
 - Academic

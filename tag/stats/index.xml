@@ -5,7 +5,7 @@
     <link>https://hanhao23.github.io/tag/stats/</link>
       <atom:link href="https://hanhao23.github.io/tag/stats/index.xml" rel="self" type="application/rss+xml" />
     <description>Stats</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Sun, 21 Sep 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Stats</title>
@@ -13,11 +13,14 @@
     </image>
     
     <item>
-      <title>Formative Model in Lavaan</title>
-      <link>https://hanhao23.github.io/project/formfactor/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/project/formfactor/</guid>
-      <description></description>
+      <title>PSYC 5316 Advanced Quant Methods Materials</title>
+      <link>https://hanhao23.github.io/project/psyc5316/</link>
+      <pubDate>Sun, 21 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/project/psyc5316/</guid>
+      <description>&lt;p&gt;This project hosts all different kinds of materials used in PSYC5316 as supplements to Canvas.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Multiple Regression: the interactive 3-D plot&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/PSYC5316/MR3DExample.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MR3DExample&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -286,8 +289,8 @@ summary(lmmodel1)&lt;/code&gt;&lt;/pre&gt;
 ## Formula: Score ~ WMC * F1Dummy * F2Dummy + (1 | X)
 ##    Data: dat3Final
 ## 
-##      AIC      BIC   logLik deviance df.resid 
-##   1395.6   1434.5   -687.8   1375.6      350 
+##       AIC       BIC    logLik -2*log(L)  df.resid 
+##    1395.6    1434.5    -687.8    1375.6       350 
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
@@ -488,8 +491,8 @@ head(dat1)&lt;/code&gt;&lt;/pre&gt;
 ## Omega Total            0.73 
 ## 
 ## With eigenvalues of:
-##    g  F1*  F2*  F3* 
-## 1.72 0.23 0.60 0.43 
+##    g  F1*  F2*  F3*   h2 
+## 1.72 0.23 0.60 0.43 1.03 
 ## The degrees of freedom for the model is 33  and the fit was  0.07 
 ## The number of observations was  262  with Chi Square =  17.75  with prob &amp;lt;  0.99 
 ## 
@@ -539,36 +542,36 @@ uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;
 &lt;pre&gt;&lt;code&gt;## Degrees of freedom (lower triangle) and p-values:
 ## 
 ##      S1.2  S1.3  S1.4  S1.5  S2.2  S2.3  S2.4  S2.5  S3.2  S3.3  S3.4  S3.5
-## S1.2   NA 0.812 0.572 0.317 0.736 0.537 0.572 0.038 0.228 0.142 0.224 0.302
-## S1.3    1    NA 0.441 0.326 0.221 0.176 0.827 0.232 0.553 0.508 0.160 0.778
-## S1.4    1 1.000    NA 0.833 0.077 0.643 0.414 0.248 0.694 0.237 0.412 0.482
-## S1.5    1 1.000 1.000    NA 0.486 0.734 0.575 0.144 0.600 0.677 0.879 0.553
-## S2.2    1 1.000 1.000 1.000    NA 0.741 0.758 0.214 0.233 0.084 0.770 0.214
-## S2.3    1 1.000 1.000 1.000 1.000    NA 0.265 0.505 0.261 0.126 0.194 0.222
-## S2.4    1 1.000 1.000 1.000 1.000 1.000    NA 0.429 0.694 0.534 0.063 0.248
-## S2.5    1 1.000 1.000 1.000 1.000 1.000 1.000    NA 0.523 0.187 0.866 0.086
-## S3.2    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000    NA 0.151 0.774 0.872
-## S3.3    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000    NA 0.352 0.717
-## S3.4    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000    NA 0.156
-## S3.5    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000    NA
+## S1.2      0.812 0.572 0.317 0.736 0.537 0.572 0.038 0.228 0.142 0.224 0.302
+## S1.3    1       0.441 0.326 0.221 0.176 0.827 0.232 0.553 0.508 0.160 0.778
+## S1.4    1 1.000       0.833 0.077 0.643 0.414 0.248 0.694 0.237 0.412 0.482
+## S1.5    1 1.000 1.000       0.486 0.734 0.575 0.144 0.600 0.677 0.879 0.553
+## S2.2    1 1.000 1.000 1.000       0.741 0.758 0.214 0.233 0.084 0.770 0.214
+## S2.3    1 1.000 1.000 1.000 1.000       0.265 0.505 0.261 0.126 0.194 0.222
+## S2.4    1 1.000 1.000 1.000 1.000 1.000       0.429 0.694 0.534 0.063 0.248
+## S2.5    1 1.000 1.000 1.000 1.000 1.000 1.000       0.523 0.187 0.866 0.086
+## S3.2    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000       0.151 0.774 0.872
+## S3.3    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000       0.352 0.717
+## S3.4    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000       0.156
+## S3.5    1 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000 1.000      
 ## 
-## LD matrix (lower triangle) and standardized values.
+## LD matrix (lower triangle) and standardized residual correlations (upper triangle)
 ## 
 ## Upper triangle summary:
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  -0.128  -0.043  -0.014   0.000   0.060   0.109 
 ## 
 ##       S1.2   S1.3   S1.4   S1.5   S2.2   S2.3   S2.4   S2.5   S3.2   S3.3
-## S1.2    NA -0.015 -0.035  0.062 -0.021 -0.038 -0.035 -0.128  0.074 -0.091
-## S1.3 0.057     NA  0.048  0.061  0.076  0.084  0.013  0.074  0.037  0.041
-## S1.4 0.319  0.595     NA -0.013  0.109 -0.029 -0.051 -0.071 -0.024  0.073
-## S1.5 1.002  0.966  0.045     NA -0.043 -0.021 -0.035 -0.090  0.032  0.026
-## S2.2 0.114  1.498  3.120  0.486     NA  0.020  0.019  0.077  0.074  0.107
-## S2.3 0.382  1.827  0.215  0.115  0.109     NA -0.069 -0.041  0.069  0.094
-## S2.4 0.319  0.048  0.669  0.314  0.095  1.242     NA -0.049 -0.024 -0.038
-## S2.5 4.286  1.428  1.335  2.136  1.547  0.444  0.626     NA  0.039 -0.082
-## S3.2 1.453  0.351  0.155  0.274  1.425  1.265  0.155  0.408     NA  0.089
-## S3.3 2.158  0.439  1.401  0.174  2.979  2.336  0.387  1.744  2.059     NA
+## S1.2       -0.015 -0.035  0.062 -0.021 -0.038 -0.035 -0.128  0.074 -0.091
+## S1.3 0.057         0.048  0.061  0.076  0.084  0.013  0.074  0.037  0.041
+## S1.4 0.319  0.595        -0.013  0.109 -0.029 -0.051 -0.071 -0.024  0.073
+## S1.5 1.002  0.966  0.045        -0.043 -0.021 -0.035 -0.090  0.032  0.026
+## S2.2 0.114  1.498  3.120  0.486         0.020  0.019  0.077  0.074  0.107
+## S2.3 0.382  1.827  0.215  0.115  0.109        -0.069 -0.041  0.069  0.094
+## S2.4 0.319  0.048  0.669  0.314  0.095  1.242        -0.049 -0.024 -0.038
+## S2.5 4.286  1.428  1.335  2.136  1.547  0.444  0.626         0.039 -0.082
+## S3.2 1.453  0.351  0.155  0.274  1.425  1.265  0.155  0.408         0.089
+## S3.3 2.158  0.439  1.401  0.174  2.979  2.336  0.387  1.744  2.059       
 ## S3.4 1.479  1.976  0.673  0.023  0.085  1.684  3.445  0.029  0.082  0.866
 ## S3.5 1.067  0.080  0.495  0.352  1.547  1.491  1.335  2.953  0.026  0.132
 ##        S3.4   S3.5
@@ -582,8 +585,8 @@ uniDich.result1 &amp;lt;- mirt::mirt(dat1, uniDich.model1, itemtype = &amp;quot;
 ## S2.5  0.010 -0.106
 ## S3.2 -0.018 -0.010
 ## S3.3  0.057 -0.022
-## S3.4     NA -0.088
-## S3.5  2.012     NA&lt;/code&gt;&lt;/pre&gt;
+## S3.4        -0.088
+## S3.5  2.012&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Other than the model fits and item fits, the “mirt” package also provides methods for calculating person fit statistics such as Zh statistics using the “personfit” function. In general, person fit statistics indicate how much a person’s responses on this test deviates from the the model prediction. See the “mirt” documentation and &lt;a href=&#34;https://doi.org/10.1111/j.2044-8317.1985.tb00817.x&#34;&gt;Drasgow, Levine, and Williams (1985)&lt;/a&gt; for further details.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(personfit(uniDich.result1))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##      outfit    z.outfit     infit     z.infit         Zh

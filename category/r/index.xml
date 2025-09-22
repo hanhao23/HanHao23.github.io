@@ -5,12 +5,23 @@
     <link>https://hanhao23.github.io/category/r/</link>
       <atom:link href="https://hanhao23.github.io/category/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Sun, 21 Sep 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>R</title>
       <link>https://hanhao23.github.io/category/r/</link>
     </image>
+    
+    <item>
+      <title>PSYC 5316 Advanced Quant Methods Materials</title>
+      <link>https://hanhao23.github.io/project/psyc5316/</link>
+      <pubDate>Sun, 21 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/project/psyc5316/</guid>
+      <description>&lt;p&gt;This project hosts all different kinds of materials used in PSYC5316 as supplements to Canvas.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Multiple Regression: the interactive 3-D plot&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/PSYC5316/MR3DExample.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MR3DExample&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Hello R Markdown</title>
