@@ -1,14 +1,9 @@
 
 ---
-date: 'Updated at: `r Sys.Date()`'
+date: '2021-4-07'
 external_link: ""
 image:
   focal_point: Smart
-links:
-- icon: twitter
-  icon_pack: fab
-  name: Follow
-  url: https://twitter.com/hanhao23
 slides: 
 summary: An example of generalized mixed effects model (GLMM) in with lmer package.
 tags:

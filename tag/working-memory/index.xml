@@ -29,48 +29,9 @@
     </item>
     
     <item>
-      <title>The Impact of Auditory Distraction on Reading Comprehension</title>
-      <link>https://hanhao23.github.io/publication/the-impact-of-auditory-distraction-on-reading-comprehension/</link>
-      <pubDate>Fri, 08 Oct 2021 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/publication/the-impact-of-auditory-distraction-on-reading-comprehension/</guid>
-      <description>&lt;!---
-Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
-files/HanHaoCGU_Psychonomics_2019.png
---&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Individual Differences in Attention and Intelligence</title>
-      <link>https://hanhao23.github.io/publication/individual-differences-in-attention-and-intelligence/</link>
-      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/publication/individual-differences-in-attention-and-intelligence/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>An item response theory approach to the measurement of working memory capacit Theory</title>
-      <link>https://hanhao23.github.io/publication/uniirt/</link>
-      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>https://hanhao23.github.io/publication/uniirt/</guid>
-      <description>&lt;!---
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-
-Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
---&gt;&lt;blockquote&gt;
-&lt;/blockquote&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Intro to Item Response Modeling in R</title>
       <link>https://hanhao23.github.io/project/irttutorial/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 12 May 2022 00:00:00 +0000</pubDate>
       <guid>https://hanhao23.github.io/project/irttutorial/</guid>
       <description>
 
@@ -516,6 +477,45 @@ head(est.theta)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Impact of Auditory Distraction on Reading Comprehension</title>
+      <link>https://hanhao23.github.io/publication/the-impact-of-auditory-distraction-on-reading-comprehension/</link>
+      <pubDate>Fri, 08 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/the-impact-of-auditory-distraction-on-reading-comprehension/</guid>
+      <description>&lt;!---
+Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+files/HanHaoCGU_Psychonomics_2019.png
+--&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Individual Differences in Attention and Intelligence</title>
+      <link>https://hanhao23.github.io/publication/individual-differences-in-attention-and-intelligence/</link>
+      <pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/individual-differences-in-attention-and-intelligence/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>An item response theory approach to the measurement of working memory capacit Theory</title>
+      <link>https://hanhao23.github.io/publication/uniirt/</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/publication/uniirt/</guid>
+      <description>&lt;!---
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
+--&gt;&lt;blockquote&gt;
+&lt;/blockquote&gt;
 </description>
     </item>
     
