@@ -5,12 +5,20 @@
     <link>https://hanhao23.github.io/tag/item-response-theory/</link>
       <atom:link href="https://hanhao23.github.io/tag/item-response-theory/index.xml" rel="self" type="application/rss+xml" />
     <description>Item Response Theory</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Thu, 12 May 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Sat, 15 Nov 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Item Response Theory</title>
       <link>https://hanhao23.github.io/tag/item-response-theory/</link>
     </image>
+    
+    <item>
+      <title>Trial by &#34;Trial&#34;</title>
+      <link>https://hanhao23.github.io/talk/2025psychonomics/</link>
+      <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/2025psychonomics/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Intro to Item Response Modeling in R</title>

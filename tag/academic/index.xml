@@ -5,12 +5,20 @@
     <link>https://hanhao23.github.io/tag/academic/</link>
       <atom:link href="https://hanhao23.github.io/tag/academic/index.xml" rel="self" type="application/rss+xml" />
     <description>Academic</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Sun, 21 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2025</copyright><lastBuildDate>Sat, 15 Nov 2025 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Academic</title>
       <link>https://hanhao23.github.io/tag/academic/</link>
     </image>
+    
+    <item>
+      <title>Trial by &#34;Trial&#34;</title>
+      <link>https://hanhao23.github.io/talk/2025psychonomics/</link>
+      <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/2025psychonomics/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>PSYC 5316 Advanced Quant Methods Materials</title>
