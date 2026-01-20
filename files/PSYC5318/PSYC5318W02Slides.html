@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Exploratory Factor Analysis: Concepts and Executive Workflow</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Han Hao" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding-0.34.0/datatables.js"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="hh.css" type="text/css" />
+    <link rel="stylesheet" href="scrollable.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+class: inverse, center, middle
+
+# Exploratory Factor Analysis (EFA)
+## Concepts, Light Math, and the Executive Workflow
+
+???
+Goals for today:
+- Explain common vs unique variance (what EFA is modeling)
+- Translate a correlation matrix into a one-factor model (light math)
+- Learn the end-to-end EFA workflow (decisions, meanings, consequences)
+- Practice interpretation with real psych::fa output (from your CSV dataset)
+
+
+---
+
+# Today’s roadmap
+
+### 1) EFA mindset: what it claims and what it doesn't (re-iteration of Week 01)    
+
+### 2) Manual translation (a simple example with a 3-variables correlation matrix)  
+
+***
+
+### 3) EFA executive workflow: stages and decisions  
+
+### 4) Reading psych::fa output .purplet[using a simulated dataset]  
+
+### 5) Bridge to next week’s in-class demo
+
+???
+PCA is only used as supporting intuition when discussing eigenvalues and variance accounted for by dimensions.
+
+
+---
+
+# EFA as an explanation of correlations
+
+### We observe a pattern of correlations (.purplet[or covariances]) among measured variables
+
+### EFA proposes an initial .purplet[data-driven] explanation to the patterns
+- ### It (.purplet[imperfectly]) estimates a small number of latent variables and their corresponding **factor loading solution** (loading matrix) that approximately reproduces the original cor/cov  
+
+### A EFA factor loading solution provides a initial .purplet[measurement structure] of the manifest variables to the latent variables (as a "codebook" to the latent variables)
+- ### It also decomposes shared variance and unique variance
+
+???
+Prompt:
+- Two reasons variables can correlate:
+  (1) shared latent cause
+  (2) method/content overlap + specifics + random error
+
+---
+
+# The one-factor model (conceptual, back-engineered)
+
+For all (standardized) manifest variables in an estimated on-factor model, we have:
+
+$$
+x_i = \lambda_i f + \varepsilon_i
+$$
+- \\(x_i\\): the *i* th manifest variable
+- \\(f\\): latent variable (common cause)
+- \\(\lambda_i\\): factor loading for \\(x_i\\)
+- \\(\varepsilon_i\\): residuals term for \\(x_i\\)
+
+Assumptions for this case (one-factor, standardized):
+- \\(Var(f)=1\\): The "Standardized" latent factor
+- \\(Cov(f,\varepsilon_i)=0\\): residual terms should be uncorrelated with the latent factor
+- \\(Cov(\varepsilon_i, \varepsilon_j)=0\\): residual terms should be uncorrelated across manifest variables
+
+---
+
+# Model-implied correlations for an one-factor case
+
+Off-diagonal correlations (standardized covariances) can be reproduced:
+
+$$
+r_{ij} \approx \lambda_i \lambda_j
+$$
+
+Variance can be decomposed for each standardized manifest variable:
+
+$$
+1 = \lambda_i^2 + Var(\varepsilon_i)
+$$
+
+Definitions:
+- Communality: \\(h_i^2 = \lambda_i^2\\) (only valid in the one-factor case)
+- Uniqueness: \\(u_i^2 = Var(\varepsilon_i) = 1 - h_i^2\\)
+
+???
+Prompt:
+- What does it mean if a variable has low communality?
+This variable is not well captured by the factor(s).
+
+---
+
+# Extending to multi-factor models
+
+A similar equation to illustrate .purplet[after the model is estimated]:
+
+$$
+x_i = {\lambda_i}_1 f_1 + {\lambda_i}_2 f_2 + \cdots + \varepsilon_i
+$$
+
+
+- \\(x_i\\): the *i* th manifest variable
+- \\(f_k\\): the *k* th latent factor
+- \\(\lambda i_k\\): factor loading for \\(x_i\\) on \\(f_k\\)
+- \\(\varepsilon_i\\): residuals term for \\(x_i\\)
+
+Assumptions:
+- \\(Var(f_k)=1\\): "Standardized" latent factors
+- \\(Cov(f_k,\varepsilon_i)=0\\): residuals terms are uncorrelated with the latent factors
+- \\(Cov(\varepsilon_i, \varepsilon_k)=0\\): residuals terms are uncorrelated with each other
+- The factors can be either uncorrelated (\\(Cov(f_k, f_l) = 0\\)) or correlated (\\(Cov(f_k, f_l) \neq 0\\))
+  - .purplet[It depends on the prior specification before the model estimation]
+- If factors are not correlated, \\(h_i^2 = \sum{\lambda_i}_k^2\\) 
+
+---
+
+# From variable equations to matrices
+
+.pull-left[
+**At the data-frame level (.redt[Not required])**
+
+Multi-factor model for variable \(i\):
+
+$$
+x_i = {\lambda_i}_1 f_1 + {\lambda_i}_2 f_2 + \cdots + \varepsilon_i
+$$
+
+
+Stack all .redt[p] observed variables (vectors with a length of .redt[N], why?) into a matrix \\(X\\), and all .redt[m] latent variables (vectors of the same length) into a matrix \\(F\\):
+
+$$
+X = F \Lambda^\top + E
+$$
+
+Where:
+- \\(X\\) is \\(N \times p\\) (observed variables, the data matrix)
+- \\(\Lambda^\top\\) is \\(m \times p\\) (transpose of the loadings matrix, why \\(m \times p\\)?)
+- \\(F\\) is \\(N \times m\\) (latent factor matrix, the estimated factor)
+- \\(E\\) is \\(N \times p\\) (residuals matrix)
+]
+
+.pull-right[
+
+&lt;table&gt;
+&lt;caption&gt;A Typical Factor Loading Matrix&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Vs.Fs &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; h2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; u2 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.8123 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0043 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.12 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.7740 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.45 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.6123 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.40 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.5984 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.77 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4322 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.6203 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.5125 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.6506 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+---
+
+# EFA as a "codebook" to the latent variables
+
+.pull-left[
+### A EFA factor loading solution provides a initial .purplet[measurement structure] of the manifest variables to the latent variables (as a "codebook" to the lantent variables)
+
+$$
+V_1 \approx 0.15F_1 + 0.35F_2 + 0.00F_3
+$$
+
+$$
+V_2 \approx 0.00F_1 + 0.99F_2 + 0.00F_3
+$$
+
+$$
+V_3 \approx 0.46F_1 - 0.12F_2 + 0.09F_3
+$$
+
+
+]
+
+.pull-right[
+
+&lt;table&gt;
+&lt;caption&gt;A Typical Factor Loading Matrix&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Vs.Fs &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; h2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; u2 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.8123 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0043 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.12 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.7740 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.45 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.6123 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.09 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.40 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.5984 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.77 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4322 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.6203 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.5125 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.46 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.14 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.35 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.6506 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+---
+
+## From variable equations to matrices
+
+### At the covariances/correlations level (.redt[Not required])
+
+In real-world EFA practices, factor scores \\(F\\) are not observed. EFA therefore estimates the model using the **observed correlation matrix** \\(R\\) (or covariance matrix).
+
+The common-factor model implies a reproduced correlation structure:
+
+$$
+R \approx \Lambda \Phi \Lambda^\top + \Psi
+$$
+
+- \\(\Lambda\\): loadings (\\(p \times m\\))  
+- \\(\Phi\\): factor correlation matrix (\\(m \times m\\); \\(\Phi = I\\) if orthogonal)  
+- \\(\Psi\\): uniqueness matrix (\\(p \times p\\); typically diagonal with \\(\psi_i = Var(\varepsilon_i)\\))  
+
+Interpretation:
+- \\(\Lambda \Phi \Lambda^\top\\) explains the **shared** correlations (the explained standardized covariances)
+- \\(\Psi\\) accounts for the **residual** variance and covariances (if any)
+
+
+???
+- Connect “one equation per variable” to “one equation for the whole system.”
+- Λ as a map: rows = variables, columns = factors.
+- Emphasize: EFA’s job is to find Λ (and Φ if oblique) so that Σ-hat resembles Σ.
+
+---
+
+class: center, middle
+
+
+# \\(R \approx \Lambda \Phi \Lambda^\top + \Psi\\)
+
+### EFA (.purplet[imperfectly]) estimates a small number of latent variables and their corresponding factor loading solution (loading matrix) that approximately reproduces the original corrlations/covariances matrix  
+
+
+---
+
+class: inverse, middle
+
+# Manual illustration example
+## 3-variable correlation matrix → one-factor model
+
+---
+
+# The example
+
+Assume there are three standardized variables (V1, V2, and V3) with equal pairwise correlations (covariances):
+
+$$
+R=
+`\begin{bmatrix}
+1 &amp; .64 &amp; .64\\
+.64 &amp; 1 &amp; .64\\
+.64 &amp; .64 &amp; 1
+\end{bmatrix}`
+$$
+
+Given the observed correlation matrix we can assume a 1-factor model with a standardized factor \\(Var(f)=1\\):
+
+$$
+x_i = \lambda_i f + \varepsilon_i,\quad i=1,2,3
+$$
+
+At the correlation level, the general model-implied equation is written as:
+
+$$
+R = \Lambda \Phi \Lambda^\top + \Psi
+$$
+
+For the 1-factor case, there is only one factor and the variance is standardized, so `\(\Phi = [\,1\,]\)`, and:
+
+$$
+\Lambda=
+`\begin{bmatrix}
+\lambda_1\\
+\lambda_2\\
+\lambda_3
+\end{bmatrix}`
+$$
+
+---
+# Full illustration of the implied matrix
+
+Compute the common-factor part explicitly:
+
+$$
+\Lambda \Phi \Lambda^\top
+=
+`\begin{bmatrix}
+\lambda_1\\
+\lambda_2\\
+\lambda_3
+\end{bmatrix}`
+[\,1\,]
+`\begin{bmatrix}
+\lambda_1 &amp; \lambda_2 &amp; \lambda_3
+\end{bmatrix}`
+=
+`\begin{bmatrix}
+\lambda_1^2 &amp; \lambda_1\lambda_2 &amp; \lambda_1\lambda_3\\
+\lambda_2\lambda_1 &amp; \lambda_2^2 &amp; \lambda_2\lambda_3\\
+\lambda_3\lambda_1 &amp; \lambda_3\lambda_2 &amp; \lambda_3^2
+\end{bmatrix}`
+$$
+
+Since
+\\(
+\Psi=
+`\begin{bmatrix}
+\psi_1 &amp; 0 &amp; 0\\
+0 &amp; \psi_2 &amp; 0\\
+0 &amp; 0 &amp; \psi_3
+\end{bmatrix}`
+\\):
+
+The full decomposition should be: 
+
+$$
+R=
+`\begin{bmatrix}
+\lambda_1^2+\psi_1 &amp; \lambda_1\lambda_2 &amp; \lambda_1\lambda_3\\
+\lambda_2\lambda_1 &amp; \lambda_2^2+\psi_2 &amp; \lambda_2\lambda_3\\
+\lambda_3\lambda_1 &amp; \lambda_3\lambda_2 &amp; \lambda_3^2+\psi_3
+\end{bmatrix}`
+=
+`\begin{bmatrix}
+1 &amp; .64 &amp; .64\\
+.64 &amp; 1 &amp; .64\\
+.64 &amp; .64 &amp; 1
+\end{bmatrix}`
+$$
+
+---
+
+# Match the observed R by solving for \\(\Lambda\\) and \\(\Psi\\)
+
+
+Match off-diagonal entries of \(R\) with the model-implied form:
+
+$$
+\lambda_1\lambda_2=.64,\quad \lambda_1\lambda_3=.64,\quad \lambda_2\lambda_3=.64
+$$
+
+So we can easily get:
+
+$$
+\lambda_1=\lambda_2=\lambda_3= .80
+$$
+
+Thus:
+
+$$
+\Lambda=
+`\begin{bmatrix}
+.80\\
+.80\\
+.80
+\end{bmatrix}`
+$$
+
+Now we can get \\(\psi_i = 1 - \lambda_i^2 =1-.64 = .36\\) and thus:
+
+$$
+\Psi=
+`\begin{bmatrix}
+.36 &amp; 0 &amp; 0\\
+0 &amp; .36 &amp; 0\\
+0 &amp; 0 &amp; .36
+\end{bmatrix}`
+$$
+
+---
+
+# The full decomposition
+
+$$
+R = \Lambda[\,1\,]\Lambda^\top + \Psi
+=
+`\begin{bmatrix}
+.64 &amp; .64 &amp; .64\\
+.64 &amp; .64 &amp; .64\\
+.64 &amp; .64 &amp; .64
+\end{bmatrix}`
++
+`\begin{bmatrix}
+.36 &amp; 0 &amp; 0\\
+0 &amp; .36 &amp; 0\\
+0 &amp; 0 &amp; .36
+\end{bmatrix}`
+=
+`\begin{bmatrix}
+1 &amp; .64 &amp; .64\\
+.64 &amp; 1 &amp; .64\\
+.64 &amp; .64 &amp; 1
+\end{bmatrix}`
+$$
+
+### Clarifications:
+- Sign indeterminacy: Technically \\(\lambda\\) could all be \\(-.80\\) too, but we conventionally choose the sign so most (if not all) loadings are positive.
+
+- This exact recovery works because the matrix has perfect “equal-correlation” structure; real data will only approximate this.
+
+### In this example (.purplet[Interpretations?])：
+
+$$
+Communality： h^2 = \lambda^2 = .80^2 = .64
+$$
+
+$$
+Uniqueness: u^2 = 1 - h^2 = 1 - .64 = .36
+$$
+
+---
+# EFA in practice
+
+### In real-world practice .purplet[we cannot "guess" the best factor structure] (number of factors, correlations among factors, etc.) by only eyeballing the data
+
+### Real datasets also .purplet[don't have this "balanced-correlation" structure with an easy solution] of \\(\Lambda\\) and \\(\Psi\\), so we need certain techiniques to find optimized solutions for us
+
+### Real datasets are complex, imperfect, and with noises, so we need to evaluate residuals and fit and compare multiple solutions
+
+---
+
+# Lastly but probably most importantly...
+
+### In most psychological research, the purpose of EFA is .purplet[not limited to] finding a data-driven solution
+
+### We also need a reliable and valid measurement structure that .purplet["makes most sense"] out of the observed correlations/covariances
+
+### We want to interpret the latent factors as the estimated attribute of the corresponding unobservable constructs, defined by the manifest variables .purplet[and the corresponding factor loadings]
+
+---
+
+class: inverse, middle
+
+# EFA workflow and executive steps
+## Important decisions in each EFA stage using an example
+
+---
+# The simulated dataset
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-f55ebf7dae2d0d4a3928" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-f55ebf7dae2d0d4a3928">{"x":{"filter":"none","vertical":false,"fillContainer":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250"],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250],[82,106,67,90,108,137,100,101,56,73,126,94,114,121,107,88,94,104,125,63,81,79,127,114,89,127,99,89,111,64,95,120,81,126,92,127,110,105,116,91,133,93,91,83,115,106,112,56,100,102,109,100,107,124,76,102,93,76,124,72,99,64,101,87,100,101,116,102,130,111,85,90,77,62,106,125,86,118,83,110,104,124,90,98,112,78,94,100,111,110,120,102,114,67,91,105,92,106,95,101,117,113,69,62,105,107,90,40,107,105,90,104,79,122,84,92,114,70,84,128,100,105,165,85,88,135,127,88,108,120,98,118,131,120,70,98,108,92,113,98,109,125,111,125,125,102,99,43,90,79,94,59,112,94,114,87,89,119,111,107,95,64,119,87,112,76,122,110,114,74,104,112,107,134,113,113,109,81,93,119,97,121,106,105,100,92,93,55,124,120,116,79,114,114,99,85,123,89,112,107,90,124,94,101,104,101,90,102,85,79,97,91,101,119,97,65,96,129,115,81,107,83,87,98,77,127,91,114,103,113,95,81,91,94,89,100,115,98,109,134,116,67,97,102,85,88,85,107,101,80],[102,95,82,67,100,131,125,122,82,72,98,91,119,120,84,83,107,130,122,59,85,104,93,105,85,119,79,95,114,74,76,137,65,136,88,120,107,109,82,102,112,81,87,99,98,104,109,88,117,123,94,90,107,127,77,99,81,55,129,82,72,74,94,106,110,104,103,94,94,100,96,87,71,93,105,104,78,117,82,100,91,140,99,92,126,101,88,108,84,116,78,97,120,84,99,100,91,95,85,102,140,106,61,48,96,95,94,47,100,100,97,122,102,135,54,104,103,97,65,105,90,88,159,80,95,134,108,78,110,119,97,141,148,137,80,90,111,97,107,121,121,132,125,128,138,121,93,90,106,94,92,67,101,123,94,104,97,123,142,100,93,73,96,113,89,94,84,123,102,117,105,114,116,150,113,103,116,85,71,100,90,106,79,93,133,83,87,45,106,111,129,80,95,114,105,60,119,86,121,81,109,122,100,91,124,100,104,120,90,122,85,122,82,120,96,88,87,134,116,89,87,104,104,111,70,136,101,97,98,95,92,71,121,101,97,88,81,113,95,119,96,77,77,117,71,100,79,135,101,85],[80,69,81,53,72,134,130,96,75,81,98,94,113,118,93,113,100,121,119,62,93,105,112,100,95,124,88,100,88,48,124,127,84,129,111,101,100,119,89,97,108,79,90,102,80,97,94,70,106,123,97,104,118,129,61,116,86,78,150,71,85,75,81,102,94,95,91,97,124,108,106,109,96,98,89,126,80,96,81,110,103,120,106,84,97,78,82,121,83,119,108,107,124,97,99,83,110,89,97,91,138,98,71,76,114,94,97,57,109,126,102,124,82,123,64,97,128,83,84,101,77,99,158,75,99,130,107,65,105,141,101,107,128,130,84,97,137,75,133,113,117,129,119,118,130,106,84,75,88,102,113,72,101,82,105,101,101,98,89,115,67,64,126,112,109,86,117,125,109,92,83,110,106,135,107,103,104,84,75,115,101,110,87,95,106,84,76,56,120,107,110,65,119,123,107,80,115,107,109,87,81,114,96,80,93,88,99,121,77,96,98,105,94,120,98,72,81,139,82,101,87,74,110,101,65,129,87,116,120,94,76,63,114,91,103,111,98,95,104,108,106,65,86,100,65,103,89,127,88,92],[102,152,136,113,129,138,124,135,92,87,94,96,106,122,100,57,100,87,93,72,88,105,148,104,133,128,76,108,126,98,99,117,100,110,108,109,96,118,118,105,149,69,87,90,118,101,103,108,112,138,118,93,102,99,70,97,113,73,79,69,82,76,89,86,111,98,108,111,142,65,79,114,92,83,85,117,88,82,70,101,126,118,108,96,103,78,46,104,100,97,128,95,88,90,67,85,95,129,94,76,129,107,59,75,114,89,106,104,105,79,115,103,95,125,56,115,112,87,84,133,79,106,157,97,125,85,145,139,124,104,104,73,151,135,86,110,97,70,72,90,121,107,104,86,136,133,89,63,95,66,140,71,91,125,58,86,70,122,99,116,109,64,142,91,81,105,112,106,78,95,107,105,102,131,114,127,101,77,78,109,113,75,133,70,103,81,119,100,93,68,64,97,94,103,94,90,129,105,104,71,78,126,95,127,150,85,87,99,59,90,98,110,75,97,86,84,78,124,105,99,142,80,130,101,107,121,62,107,118,72,85,83,96,110,89,94,80,100,90,115,133,95,81,114,117,75,96,126,77,100],[73,99,69,129,97,134,125,123,86,85,95,76,120,101,103,50,116,99,98,88,130,116,129,139,120,122,138,124,105,91,102,110,110,115,76,130,106,130,112,111,127,93,85,96,114,81,97,87,110,126,110,89,91,111,66,117,98,73,114,80,88,89,89,92,114,92,86,109,134,65,92,63,118,92,83,121,110,66,80,91,121,92,83,86,100,130,49,64,92,107,127,87,107,50,105,67,70,113,91,135,119,74,75,72,112,97,105,106,86,69,154,108,119,110,49,106,104,84,87,137,87,99,115,80,111,94,109,108,96,94,92,92,123,141,87,129,113,70,66,148,114,108,69,99,109,126,74,66,82,107,131,56,102,87,130,113,68,128,116,125,105,65,102,74,68,87,109,124,90,123,113,99,92,127,110,125,134,77,73,89,100,100,91,120,88,98,107,62,141,88,73,86,73,112,87,79,120,108,91,82,110,111,129,98,131,105,69,115,60,133,76,81,96,116,105,73,88,91,61,103,128,90,127,115,114,141,79,73,122,73,108,87,107,125,110,100,104,90,113,115,98,87,71,98,126,100,97,128,99,97],[83,105,110,108,119,111,146,101,77,89,78,97,125,125,89,84,38,60,99,57,100,113,123,115,109,135,107,111,110,68,71,102,107,88,119,127,95,120,98,73,133,89,87,113,139,79,88,109,116,110,134,69,87,111,101,87,96,106,110,106,96,94,102,115,86,92,97,130,128,83,75,134,112,106,98,147,100,94,91,107,102,106,89,98,81,95,56,103,119,127,117,90,140,100,87,67,75,102,95,119,105,97,79,82,137,97,104,108,118,100,113,104,102,111,79,79,103,65,95,131,109,102,147,83,145,120,108,106,101,93,84,150,140,116,99,74,121,98,98,121,109,127,79,125,99,100,101,64,99,68,115,56,115,102,121,95,105,108,117,109,107,66,148,98,73,110,86,109,100,109,97,109,113,141,107,116,119,94,92,91,117,70,109,89,83,121,123,92,107,78,89,66,93,110,96,88,131,102,109,94,73,120,130,127,126,106,76,93,69,98,109,118,85,88,123,74,85,112,116,106,131,98,107,118,116,133,89,79,134,93,82,86,111,132,98,104,84,88,49,119,129,82,75,106,109,89,115,101,85,77],[74,84,83,117,83,109,92,120,78,59,92,96,124,93,98,78,120,142,70,116,105,95,128,90,93,97,76,114,83,103,101,92,81,117,108,99,111,106,95,85,143,93,107,104,94,90,96,45,112,106,104,118,95,86,67,118,108,79,131,87,82,88,61,85,86,96,93,97,149,106,86,77,67,99,69,90,92,50,91,138,106,103,117,91,103,92,102,103,134,110,129,109,109,118,100,113,91,71,93,110,104,116,76,88,70,95,91,62,105,145,123,136,119,114,100,98,98,76,77,107,94,127,134,121,107,126,94,98,121,136,154,102,124,142,94,96,148,128,92,99,140,116,103,84,137,86,104,56,102,89,97,91,107,132,79,102,92,126,84,85,102,106,117,82,126,66,79,86,107,96,106,112,79,120,114,84,103,84,77,107,134,108,88,114,110,94,112,97,137,127,68,93,61,124,108,103,92,102,106,113,70,117,107,85,98,85,65,86,99,114,76,109,110,106,130,69,81,167,117,103,116,94,115,125,107,139,98,102,98,132,102,85,115,155,114,111,80,99,107,133,85,47,90,103,80,87,86,110,107,86],[94,91,83,85,74,85,113,98,62,63,119,104,89,104,91,95,113,143,78,117,99,74,96,69,110,103,125,112,94,122,91,125,92,131,113,117,101,97,97,68,135,106,111,115,84,101,98,57,116,118,90,114,109,75,63,95,86,127,132,88,101,96,88,100,96,76,86,118,131,97,69,57,82,82,79,110,99,99,91,104,113,126,138,112,87,59,92,133,115,120,133,109,115,104,99,108,99,68,127,106,87,123,117,73,105,75,84,71,115,142,124,111,98,103,112,131,87,86,106,118,63,85,127,132,112,130,124,78,98,105,128,93,85,132,96,123,141,109,146,106,111,141,53,93,141,84,128,78,108,97,102,73,117,123,96,83,110,119,145,74,111,80,103,58,77,71,105,127,109,72,93,108,128,134,113,94,93,105,84,127,106,125,86,133,96,99,127,77,112,89,117,51,112,141,90,112,93,93,129,94,104,114,127,78,124,72,105,100,124,79,92,121,118,93,115,73,107,116,130,104,91,112,76,110,85,130,79,71,126,109,114,96,89,141,109,122,101,99,125,121,113,46,134,112,88,117,83,120,88,77],[56,76,84,70,83,92,98,103,63,66,92,96,130,90,74,90,76,83,96,90,113,107,124,93,107,105,118,83,56,117,83,139,57,119,124,119,112,123,111,92,135,119,125,118,91,73,105,49,110,118,122,124,99,95,80,88,84,87,149,68,95,90,61,74,115,78,103,136,117,98,99,90,95,104,73,104,62,81,104,117,108,118,109,126,92,107,107,105,95,134,127,109,131,117,127,93,89,97,100,95,73,110,73,94,88,96,106,88,111,125,108,124,99,118,97,100,96,98,87,96,94,84,141,117,110,114,132,83,99,73,126,116,100,129,78,70,128,137,124,99,82,137,116,95,91,107,102,80,106,117,94,80,96,129,104,92,108,107,107,97,115,83,98,72,129,99,117,100,104,101,108,116,97,114,120,72,96,74,86,112,132,118,90,108,114,121,95,109,123,112,108,81,84,116,77,118,108,93,120,118,93,113,102,96,115,60,79,74,108,102,83,136,104,92,73,81,108,138,108,88,122,158,62,104,79,128,79,68,105,100,84,77,112,144,110,98,99,86,120,137,102,87,92,87,86,117,107,105,135,107]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>F1<\/th>\n      <th>F2<\/th>\n      <th>F3<\/th>\n      <th>V1<\/th>\n      <th>V2<\/th>\n      <th>V3<\/th>\n      <th>S1<\/th>\n      <th>S2<\/th>\n      <th>S3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9,10]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"F1","targets":2},{"name":"F2","targets":3},{"name":"F3","targets":4},{"name":"V1","targets":5},{"name":"V2","targets":6},{"name":"V3","targets":7},{"name":"S1","targets":8},{"name":"S2","targets":9},{"name":"S3","targets":10}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+.pull-left[
+# The Story
+### “Files - Week 02 - EFASimData.csv”
+### N = 250, Test-level scores on 9 cognitive tests
+- ### Fluid reasoning: F1, F2, F3
+- ### Verbal reasoning: V1, V2, V3
+- ### Spatial reasoning: S1, S2, S3
+
+
+]
+
+
+.pull-right[
+
+
+``` r
+SimDat &lt;- read.csv("EFASimData.csv")
+library(psych)
+describe(SimDat[,-1], range = FALSE)
+```
+
+&lt;table style = 'width: 75%;'&gt;
+&lt;caption&gt;Descriptive statistics for EFASimData (N = 250)&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mean &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sd &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; skew &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; kurtosis &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; F1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 99.95 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.30 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.42 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; F2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100.23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.93 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.07 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; F3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 99.22 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.36 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.23 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100.50 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.57 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; V3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 101.84 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.95 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.02 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; S1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 101.16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.58 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.25 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; S2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 102.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.85 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; S3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 101.31 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.63 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.27 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+---
+
+.pull-left[
+
+## Step 1: Eyeball your data!
+
+
+``` r
+# This is good enough!
+*cortable &lt;- cor(na.omit(SimDat[,-1]))
+# Some visualization ideas
+library(psych)
+cor.plot(cortable, numbers = TRUE, 
+         upper = FALSE, main = "")
+```
+
+![](PSYC5318W02Slides_files/figure-html/unnamed-chunk-6-1.svg)&lt;!-- --&gt;
+]
+
+.pull-right[
+
+``` r
+# Give this function a try and find more
+# settings in the R documentation page
+
+library(corrplot)
+corrplot.mixed(cortable, 
+               tl.col = "black", title = "")
+```
+
+![](PSYC5318W02Slides_files/figure-html/unnamed-chunk-7-1.svg)&lt;!-- --&gt;
+]
+
+---
+## Step 2: Assumption (Factorability) Checks
+
+### Bartlett's test of sphericity
+
+.purplet[In intuitive terms, it tests whether there are enough correlations among the items to “factor analyze” with]
+
+In mathematical terms, it tests whether the correlation matrix  is significantly different from an identity matrix
+
+
+``` r
+cortest.bartlett(cortable, n = nrow(SimDat))
+```
+
+```
+## $chisq
+## [1] 858.1438
+## 
+## $p.value
+## [1] 7.514478e-157
+## 
+## $df
+## [1] 36
+```
+
+It is a \\(\chi^2\\) test: \\(\chi^2(36) = 858.14, p &lt; .001\\). What does the significance mean?  
+--
+.purplet[There are some correlations to “extract” factors from.]
+
+
+---
+## Step 2: Assumption (Factorability) Checks
+
+### The Kaiser-Meyer-Olkin (KMO) sampling adequacy test
+
+.purplet[In intuitive terms, it tests whether the sample of manifest variables (not the sample of observations) share common patterns with each other]
+
+In mathematical terms, it estimates the amount of variances in each of the manifest variables that might be common (with all other variables), as well as the overall amount of variances that might be common.
+
+The test gives a measure of sampling adequacy (MSA) for each variable as well as for the entire dataset, ranged from 0 to 1.
+.pull-left[
+
+``` r
+KMO(cortable)
+```
+
+```
+## Kaiser-Meyer-Olkin factor adequacy
+## Call: KMO(r = cortable)
+## Overall MSA =  0.83
+## MSA for each item = 
+##   F1   F2   F3   V1   V2   V3   S1   S2   S3 
+## 0.87 0.84 0.83 0.79 0.85 0.81 0.82 0.83 0.81
+```
+]
+
+.pull-right[
+Kaiser (1970)'s rule:
+- KMO &gt; 0.9, "Marvelous"
+- KMO &gt; 0.8, "Meritorious"
+- KMO &gt; 0.7, "Middling"
+- KMO &gt; 0.6, "Mediocre"
+- KMO &gt; 0.5, "Miserable"
+
+MSAs &lt; .70 usually indicate inappropriate sampling of variables and MSAs &gt; .90 are preferred.
+
+
+]
+
+---
+## Step 2: Other Assumptions
+
+### Determinant of the correlation matrix
+Avoid singularity or extremely high multicollinearity
+
+### Sample size
+Not necessarily always valid but a rule of thumb is 5 to 20 subjects per variable with total &gt; 150 preferable
+
+### Measurement scales and distributions of the observed variables
+Binary, Ordinal or continuous (Interval or Ratio)? 
+Normal? Slightly skewed? Or something "weird"?
+
+---
+## Step 3: Decisions before fitting
+
+### .purplet[Factor extraction methods] Determines how the factor solution is estimated.
+
+- ### Unweighted least square (.purplet[minres]): minimizes the entire residuals matrix (default by "psych")
+- ### Maximum likelihood (.purplet[ml]): Works well with normal data
+- ### Principal axis (.purplet[pa]): Classical default choice in SPSS
+- ### Weighted least squares (.purplet[wls]): suggested for ordinal data (Poly-cor)
+- ### .redt[PCA is not considered here.]
+
+???
+Extraction is about estimation target and assumptions.
+Rotation is about interpretability constraints and whether factors can correlate.
+
+---
+## Step 3: Decisions before fitting
+
+### .purplet[Rotation methods] improves the interpretability of the factor structure provided by the solution (while not changing the reproduced correlation matrix)
+
+### Orthogonal rotations assumes that the extracted factors are not correlated with each other
+
+- ### .purplet["varimax"] is the most common orthogonal rotation approach
+
+### Oblique rotations assumes that the extracted factors are correlated with each other
+
+- ### .purplet["oblimin"] is the most common oblique rotation approach (default by "psych")
+
+---
+
+## Step 3: Decisions before fitting
+
+.pull-left[
+### .purplet[Number of factors] needs to be choosed before running the current solution (does not need to be determined as a final decision)
+
+1. Eigenvalues (a set of numbers, each approximately indicates the amount of variances attributes to an extra potential factor)
+
+ - The total number of Eigenvalues = the total number of observed variables
+ 
+ - Kaiser’s rule: Eigenvalues &gt; 1 indicate meaningful factor
+ 
+2. "Elbow" approach on Scree plot (plotting the eigen values)
+
+3. Parallel analysis (concurrent and recommended)
+
+]
+
+.pull-right[
+
+
+``` r
+# Parallel analysis for factor analysis (FA)
+fa.parallel(SimDat[,-1], fm = "ml", fa = "fa",
+            n.iter = 1000, error.bars = T)
+```
+
+![](PSYC5318W02Slides_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+]
+
+???
+Interpretation:
+- Eigenvalues summarize how much variance is associated with each dimension of the correlation structure.
+
+
+
+---
+
+class: inverse, middle
+
+# The current decisions
+- ### Extration method: Maximum Likelihood (ml)
+- ### Rotation method: Oblique rotation (oblimin)
+- ### Number of factors: 3
+
+### Given the exploratory nature, we may need to conduct and compare different solutions before making a "best" choice.
+
+---
+class: scrollable-slide
+
+## Step 4: Fit the EFA solutions
+
+
+``` r
+options(width = 150)
+efa.fit &lt;- fa(SimDat[,-1], nfactors = 3, fm = "ml", rotate = "oblimin")
+efa.fit
+```
+
+```
+## Factor Analysis using method =  ml
+## Call: fa(r = SimDat[, -1], nfactors = 3, rotate = "oblimin", fm = "ml")
+## Standardized loadings (pattern matrix) based upon correlation matrix
+##      ML1   ML2   ML3   h2   u2 com
+## F1  0.68  0.12  0.10 0.67 0.33 1.1
+## F2  0.85  0.02 -0.06 0.68 0.32 1.0
+## F3  0.88 -0.06  0.02 0.74 0.26 1.0
+## V1  0.00  0.81 -0.05 0.64 0.36 1.0
+## V2  0.02  0.64  0.05 0.44 0.56 1.0
+## V3  0.02  0.64  0.06 0.45 0.55 1.0
+## S1  0.00  0.10  0.67 0.51 0.49 1.0
+## S2  0.03 -0.07  0.70 0.49 0.51 1.0
+## S3 -0.01 -0.01  0.70 0.48 0.52 1.0
+## 
+##                        ML1  ML2  ML3
+## SS loadings           2.04 1.56 1.51
+## Proportion Var        0.23 0.17 0.17
+## Cumulative Var        0.23 0.40 0.57
+## Proportion Explained  0.40 0.31 0.30
+## Cumulative Proportion 0.40 0.70 1.00
+## 
+##  With factor correlations of 
+##      ML1  ML2  ML3
+## ML1 1.00 0.55 0.58
+## ML2 0.55 1.00 0.31
+## ML3 0.58 0.31 1.00
+## 
+## Mean item complexity =  1
+## Test of the hypothesis that 3 factors are sufficient.
+## 
+## df null model =  36  with the objective function =  3.5 with Chi Square =  858.14
+## df of  the model are 12  and the objective function was  0.07 
+## 
+## The root mean square of the residuals (RMSR) is  0.02 
+## The df corrected root mean square of the residuals is  0.03 
+## 
+## The harmonic n.obs is  250 with the empirical chi square  7.13  with prob &lt;  0.85 
+## The total n.obs was  250  with Likelihood Chi Square =  15.86  with prob &lt;  0.2 
+## 
+## Tucker Lewis Index of factoring reliability =  0.986
+## RMSEA index =  0.036  and the 90 % confidence intervals are  0 0.078
+## BIC =  -50.4
+## Fit based upon off diagonal values = 1
+## Measures of factor score adequacy             
+##                                                    ML1  ML2  ML3
+## Correlation of (regression) scores with factors   0.94 0.89 0.88
+## Multiple R square of scores with factors          0.88 0.79 0.77
+## Minimum correlation of possible factor scores     0.76 0.58 0.54
+```
+
+---
+## Factor Loadings
+
+.pull-left[
+### The association between a manifest and a factor: how much the observed variable can reflect the factor  
+
+### Common rules of thumb:  
+
+- At least 2 observed variables on each factor (3 or more is preferred)  
+
+- Each observed item should (ideally) has one and only one large loading (common cutoffs: 0.1, 0.3, 0.7)  
+
+- Communality (0 to 1): close to 1 is preferred
+
+- Complexity (1 to +inf): closer to 1 is preferred
+
+]
+
+.pull-right[
+
+``` r
+# Omit the weak loadings (&lt;.30 are not printed)
+print(efa.fit$loadings, cutoff = 0.30, sort = TRUE)
+```
+
+```
+## 
+## Loadings:
+##    ML1    ML2    ML3   
+## F1  0.683              
+## F2  0.847              
+## F3  0.882              
+## V1         0.813       
+## V2         0.638       
+## V3         0.638       
+## S1                0.674
+## S2                0.704
+## S3                0.702
+## 
+##                  ML1   ML2   ML3
+## SS loadings    1.965 1.507 1.465
+## Proportion Var 0.218 0.167 0.163
+## Cumulative Var 0.218 0.386 0.549
+```
+]
+
+???
+Prompts:
+- “Which variables define each factor?”
+- “Any cross-loadings that complicate naming?”
+- “How would you label factors 1–3?”
+
+- “Which variables are well explained (high h2) vs not (low h2)?”
+- “Do factor correlations make substantive sense?”
+
+Explain variance accounted for conceptually as a summary of what the factor space captures (do not treat it as identical to PCA percent variance explained).
+
+---
+## Residuals (optional diagnostic output)
+
+
+``` r
+# Residual correlation matrix: observed R minus reproduced R
+residmat &lt;- efa.fit$residual
+round(residmat, 2)
+```
+
+```
+##       F1    F2    F3    V1    V2    V3    S1    S2    S3
+## F1  0.33  0.00  0.00  0.01 -0.03  0.01 -0.01  0.02 -0.01
+## F2  0.00  0.32  0.00  0.00  0.02 -0.02  0.00 -0.02  0.02
+## F3  0.00  0.00  0.26 -0.01  0.00  0.01  0.01  0.00 -0.01
+## V1  0.01  0.00 -0.01  0.36 -0.01  0.00  0.03  0.00 -0.03
+## V2 -0.03  0.02  0.00 -0.01  0.56  0.02  0.02  0.00 -0.01
+## V3  0.01 -0.02  0.01  0.00  0.02  0.55 -0.07  0.00  0.06
+## S1 -0.01  0.00  0.01  0.03  0.02 -0.07  0.49  0.00  0.01
+## S2  0.02 -0.02  0.00  0.00  0.00  0.00  0.00  0.51 -0.01
+## S3 -0.01  0.02 -0.01 -0.03 -0.01  0.06  0.01 -0.01  0.52
+```
+
+---
+## Step 5: Explore the different solutions
+
+### Compare number of factors (1 vs 3, or other numbers?), same extraction and rotation
+
+### Compare extraction methods (minres vs ml vs pa), same factor num and rotation
+
+### Compare rotation (oblimin vs varimax), same factor num and extraction
+
+### More considerations in real-world practice
+
+---
+
+## Step 6: Finalize and visualize with diagram
+
+.center[
+
+``` r
+fa.diagram(efa.fit, simple = F, digits = 2, cut = .0, adj = 3, main = "3-factor Oblimin ML (Full)")
+```
+
+![](PSYC5318W02Slides_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Step 6: Finalize and visualize with diagram
+
+.center[
+
+``` r
+fa.diagram(efa.fit, digits = 2, cut = .3, adj = 3, main = "3-factor Oblimin ML (Cleaned)")
+```
+
+![](PSYC5318W02Slides_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+]
+
+---
+# Summary
+### Step 1: Eyeballing your data
+### Step 2: Assumption (Factorability) Checks
+### Step 3: Priori decisions (Extraction, Rotation, Num of Factors)
+### Step 4: Fitting the EFA solutions
+### Step 5: Exploring the different solutions
+### Step 6: Finalizing and visualizing with diagram
+
+---
+# Next Week
+
+### PCA vs. EFA and ordinal data solution
+### What and How to Report EFA
+### Real-world Example (Demo for Lab 1)
+### Grouping for Paper Critique Seminars
+
+---
+# Readings
+
+### Fabrigar, L. R., Wegener, D. T., MacCallum, R. C., &amp; Strahan, E. J. (1999). Evaluating the use of exploratory factor analysis in psychological research. *Psychological methods*, 4(3), 272.
+
+### Revelle, W. (2025). How to: Use the psych package for factor analysis and data reduction. Northwestern University, Department of Psychology: Evanston, IL, USA.
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
