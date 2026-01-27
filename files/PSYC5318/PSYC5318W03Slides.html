@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Exploratory Factor Analysis: Practices</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Han Hao" />
+    <script src="PSYC5318W03Slides_files/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="hh.css" type="text/css" />
+    <link rel="stylesheet" href="scrollable.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+class: inverse, middle
+
+# Exploratory Factor Analysis (EFA)
+## PCA vs. EFA, Ordinal Data, and Reporting EFA
+### PSYC 5318 Week 03
+
+???
+- This mini-deck covers (1) PCA vs EFA, (2) what to do with ordinal items, and (3) what and how to report in EFA.
+
+---
+
+## Agenda for today
+
+- ### PCA vs. EFA: Why and how they are different?
+- ### Ordinal data: why Pearson correlations may mislead
+- ### Reporting EFA: what you need to report for EFA workflow
+
+***
+
+- ## In-class R Demos
+
+???
+- The key theme is alignment: align method to goal, and align reporting to transparency.
+
+---
+
+## PCA vs. EFA: similar output, different question
+
+### **Principal Component Analysis**: data reduction  
+
+- Find *components* that capture as much total variance as possible
+
+- Gets the most efficient representation of the original correlation matrix
+
+### **Exploratory Factor Analysis**: latent measurement structure  
+
+- Explain covariation using *common factors* plus *unique variance*
+
+- More compatible with the *Classical Test Theory* in Psychometrics
+
+### **Takeaway:** Similar-looking “loadings” have different meanings. If we want "interpretable" latent factors, EFA should be used.
+
+---
+
+## Model difference in one line
+
+### **PCA:** (construct components as weighted sums)
+
+$$
+\mathbf{R} = \mathbf{V} \mathbf{D} \mathbf{V}^\top 
+$$
+
+- \\(\mathbf{V}\\): Eigenvector matrix (to calculate weighted loadings)  
+
+- \\(\mathbf{D}\\): Diagonal matrix with eigenvalues on diagonal and 0s off-diagonal  
+
+### **EFA:** (common factor model at the correlation/covariance level)
+
+$$
+\mathbf{R} = \mathbf{\Lambda}\mathbf{\Phi}\mathbf{\Lambda}^\top + \mathbf{\Psi}
+$$
+
+- \\(\mathbf{\Lambda}\\): Factor loadings  
+
+- \\(\mathbf{\Phi}\\): factor covariance/correlation 
+
+- \\(\mathbf{\Psi}\\): uniqueness (errors)
+
+
+---
+
+## Total variance vs common variance
+
+### **Observed total variance can be decomposed into** Common variance **and** Unique variance
+
+### PCA **uses *total variance* for compression, good for dimension reduction in ML and data sciences (with large-scale dataset) that do not need strong underlying theory**
+
+### EFA **targets *common variance* to model latent structure and is our (psych sciences researcher) "better friend".**
+
+### **Food for thought**: In general, if applying PCA and EFA to the same correlation/covariance matrix, which one tends to give larger loadings?
+
+---
+
+## When their results converge and diverge
+
+### PCA and EFA results tend to look similar when:
+
+- Communalities are high (items share a LOT of common variance)
+
+- The "true" structure is easy and clean (few cross-loadings, lower factor correlations, balanced item reliabilities, etc.)
+
+### They will differ more when:
+
+- Uniqueness/error is large
+
+- The measurement structure is complex
+
+- Manifest variable distributions are "awkward"
+
+---
+
+## EFA on ordinal data
+
+Likert-type items in common survey/questionnaire data are .purplet[ordinal]: categories have an order, but equal spacing is not likely.
+
+Pearson correlations assume (.purplet[at least]) roughly interval data.
+
+EFA on Pearson's correlations can be biased for Likert-type variables, especially if less categories (e.g., scales with only 3–4 points)
+
+Thus, for ordinal data:
+- Estimate a **polychoric correlation** matrix
+- Try different factor methods (such as weighted least square "wls")
+
+
+``` r
+fa(dataset, nfactors = 5, cor = "poly", fm = "minres", rotate = "oblimin")
+```
+
+Notes:
+- 5–7 categories and mild skew: regular EFA may be acceptable
+- ≤4 categories and/or strong skew: Polychoric method is recommended
+- Keep this as guidance rather than a rigid rule.
+
+---
+
+class: inverse, middle
+
+# What and how to report EFA
+
+???
+
+---
+
+## General guideline of reporting EFA
+
+### **A complete report should be able to help the readers to fully reproduce the results on your data**:
+
+### Inputs: **sample information, item types and distributions, missing-data handling, correlation type**
+
+### Key decisions: **factoring method, rotation method, number of factors and justification (scree plot, parallel analysis, etc.), cutoff criteria, item pruning decisions**
+
+### Outputs: **loadings (pattern) matrix, communalities/uniqueness, issues (cross-loadings, weakly-loaded items, etc.), factor correlations, variance explained**
+
+---
+
+## Methods checklist
+
+- Sample description and N
+
+- Item sets and response scales (ordinal vs continuous)
+
+- Data handling (e.g., listwise, pairwise, imputation for missing data)
+
+- Correlation matrix type: Pearson vs polychoric
+
+- Number of factors: parallel analysis, screeplot, theoretical considerations
+
+- Extraction method (e.g., ML, MINRES, PAF, ...)
+
+- Rotation: orthogonal vs oblique, and which algorithm (e.g., varimax, oblimin, ...)
+
+
+---
+
+## Results checklist
+
+- Pattern matrix (factor loadings) and simple loading cutoff (e.g., .30)
+
+  - Poorly behaved items (e.g., all loadings smaller than .30): Low communalities \\(h^2\\) and high uniqueness \\(u^2\\)
+  
+  - Any cross-loading issues (more than 1 loading larger than .30): High complexity
+  
+- Factors with small numbers of items (e.g., only 2 items) and any other issues in factor patterns (e.g., unbalanced loadings)
+
+- Factor correlations (if oblique)
+
+- Clear notes on any important decisions of item removal and re-fitting
+
+- Total % of variance explained by the solution and variance explained by each factor if appropriate
+
+- (Optional) Solution comparisons and considerations for confirmatory factor analysis
+
+---
+class: center, middle
+
+# Thanks!
+
+Slides created via the R packages:
+
+[**xaringan**](https://github.com/yihui/xaringan)&lt;br&gt;
+[gadenbuie/xaringanthemer](https://github.com/gadenbuie/xaringanthemer)
+
+The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "slideNumberFormat": "%current%",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "ratio": "16:9",
+  "countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
