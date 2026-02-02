@@ -1,9 +1,16 @@
-.redt {
-color: red;
+.rt {
+color: firebrick;
 }
-.bluet {
-color: blue;
+.bt {
+color: steelblue;
 }
-.purplet {
-color: purple;
+.pt {
+color: plum;
+}
+.gt {
+color: seagreen;
+}
+
+.yt {
+color: chocolate;
 }

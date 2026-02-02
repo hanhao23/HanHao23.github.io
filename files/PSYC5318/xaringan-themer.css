@@ -18,24 +18,24 @@
  *  Version: 0.4.4
  *
  * ------------------------------------------------------- */
-@import url(https://fonts.googleapis.com/css?family=Cabin+Condensed:700,700i&display=swap);
-@import url(https://fonts.googleapis.com/css?family=Cabin+Condensed&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,400i&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Roboto&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Fira+Mono&display=swap);
 
 
 :root {
   /* Fonts */
-  --text-font-family: 'Cabin Condensed';
+  --text-font-family: Roboto;
   --text-font-is-google: 1;
   --text-font-family-fallback: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial;
   --text-font-base: sans-serif;
-  --header-font-family: 'Cabin Condensed';
+  --header-font-family: Roboto;
   --header-font-is-google: 1;
   --header-font-family-fallback: Georgia, serif;
   --code-font-family: 'Fira Mono';
   --code-font-is-google: 1;
-  --base-font-size: 20px;
-  --text-font-size: 1rem;
+  --base-font-size: 28px;
+  --text-font-size: 1.0rem;
   --code-font-size: 0.9rem;
   --code-inline-font-size: 1em;
   --header-h1-font-size: 2.75rem;
@@ -44,21 +44,21 @@
 
   /* Colors */
   --text-color: #000000;
-  --header-color: #4F2D7F;
+  --header-color: #9373bf;
   --background-color: #FFFFFF;
-  --link-color: #000000;
-  --text-bold-color: #000000;
+  --link-color: #570680;
+  --text-bold-color: #570680;
   --code-highlight-color: rgba(255,255,0,0.5);
   --inverse-text-color: #FFFFFF;
-  --inverse-background-color: #000000;
+  --inverse-background-color: #570680;
   --inverse-header-color: #FFFFFF;
-  --inverse-link-color: #000000;
-  --title-slide-background-color: #4F2D7F;
-  --title-slide-text-color: #FFFFFF;
-  --header-background-color: #4F2D7F;
+  --inverse-link-color: #570680;
+  --title-slide-background-color: #9373bf;
+  --title-slide-text-color: #000000;
+  --header-background-color: #9373bf;
   --header-background-text-color: #FFFFFF;
-  --primary: #4F2D7F;
-  --secondary: #000000;
+  --primary: #9373bf;
+  --secondary: #570680;
   --white: #FFFFFF;
   --black: #000000;
 }
@@ -69,7 +69,7 @@ html {
 
 body {
   font-family: var(--text-font-family), var(--text-font-family-fallback), var(--text-font-base);
-  font-weight: 700;
+  font-weight: 400;
   color: var(--text-color);
 }
 h1, h2, h3 {
@@ -79,7 +79,7 @@ h1, h2, h3 {
 }
 .remark-slide-content {
   background-color: var(--background-color);
-  font-size: 1rem;
+  font-size: 1.0rem;
   padding: 16px 64px 16px 64px;
   width: 100%;
   height: 100%;
@@ -101,10 +101,10 @@ h1, h2, h3 {
 }
 .remark-inline-code {
   font-size: var(--code-inline-font-size);
-  color: #000000;
+  color: #570680;
 }
 .remark-slide-number {
-  color: #4F2D7F;
+  color: #9373bf;
   opacity: 1;
   font-size: 0.9rem;
 }
@@ -152,10 +152,10 @@ a, a > code {
   float: left;
 }
 .left-column h2, .left-column h3 {
-  color: #4F2D7F99;
+  color: #9373bf99;
 }
 .left-column h2:last-of-type, .left-column h3:last-child {
-  color: #4F2D7F;
+  color: #9373bf;
 }
 .right-column {
   width: 75%;
@@ -177,7 +177,7 @@ img, video, iframe {
   max-width: 100%;
 }
 blockquote {
-  border-left: solid 5px #00000080;
+  border-left: solid 5px #57068080;
   padding-left: 1em;
 }
 .remark-slide table {
@@ -194,7 +194,7 @@ th, td {
 .remark-slide table:not(.table-unshaded) thead,
 .remark-slide table:not(.table-unshaded) tfoot,
 .remark-slide table:not(.table-unshaded) tr:nth-child(even) {
-  background: #CCCCCC;
+  background: #DDCDE5;
 }
 table.dataTable tbody {
   background-color: var(--background-color);
@@ -204,7 +204,7 @@ table.dataTable.display tbody tr.odd {
   background-color: var(--background-color);
 }
 table.dataTable.display tbody tr.even {
-  background-color: #CCCCCC;
+  background-color: #DDCDE5;
 }
 table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.5);
