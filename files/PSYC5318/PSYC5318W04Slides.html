@@ -258,7 +258,7 @@ What you hope to see:
 
 .pull-right[
 
-![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-2-1.svg)&lt;!-- --&gt;
+![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-8-1.svg)&lt;!-- --&gt;
 ]
 
 ???
@@ -389,7 +389,7 @@ The **correlation** matrix here has 36 unique correlations ("standardized covari
 
 .pull-right[
 
-![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-5-1.svg)&lt;!-- --&gt;
+![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-11-1.svg)&lt;!-- --&gt;
 ]
 
 ???
@@ -424,13 +424,13 @@ So, df = 45 − 18 = 27
 
 
 ``` r
-m1_result &lt;- cfa(m1, data = CFAvars,
+m1_result &lt;- cfa(m1, data = CFAvars, std.lv = T,
                  estimator = "ML", orthogonal = F)
 summary(m1_result, standardized = T, fit.measures = T)
 ```
 
 ```
-lavaan 0.6-19 ended normally after 66 iterations
+lavaan 0.6-19 ended normally after 21 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
@@ -485,20 +485,20 @@ Parameter Estimates:
 Latent Variables:
                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
   g =~                                                                  
-    F1                1.000                              15.448    0.832
-    F2                1.013    0.074   13.676    0.000   15.641    0.787
-    F3                1.023    0.071   14.340    0.000   15.797    0.818
-    V1                0.684    0.088    7.745    0.000   10.570    0.491
-    V2                0.639    0.088    7.299    0.000    9.873    0.466
-    V3                0.619    0.082    7.559    0.000    9.569    0.481
-    S1                0.684    0.084    8.159    0.000   10.560    0.514
-    S2                0.612    0.086    7.100    0.000    9.450    0.454
-    S3                0.573    0.081    7.059    0.000    8.850    0.452
+    F1               15.448    1.001   15.439    0.000   15.448    0.832
+    F2               15.641    1.101   14.209    0.000   15.641    0.787
+    F3               15.797    1.051   15.031    0.000   15.797    0.818
+    V1               10.570    1.352    7.821    0.000   10.570    0.491
+    V2                9.873    1.341    7.361    0.000    9.873    0.466
+    V3                9.569    1.254    7.629    0.000    9.569    0.481
+    S1               10.560    1.280    8.247    0.000   10.560    0.514
+    S2                9.450    1.320    7.158    0.000    9.450    0.454
+    S3                8.850    1.244    7.116    0.000    8.850    0.452
 
 Variances:
                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
    .F1              105.726   13.630    7.757    0.000  105.726    0.307
-   .F2              150.826   17.279    8.729    0.000  150.826    0.381
+   .F2              150.825   17.279    8.729    0.000  150.825    0.381
    .F3              123.828   15.251    8.119    0.000  123.828    0.332
    .V1              351.577   32.815   10.714    0.000  351.577    0.759
    .V2              352.110   32.681   10.774    0.000  352.110    0.783
@@ -506,7 +506,7 @@ Variances:
    .S1              310.254   29.126   10.652    0.000  310.254    0.736
    .S2              343.603   31.817   10.799    0.000  343.603    0.794
    .S3              305.396   28.266   10.804    0.000  305.396    0.796
-    g               238.636   30.913    7.720    0.000    1.000    1.000
+    g                 1.000                               1.000    1.000
 ```
 
 ---
@@ -731,6 +731,7 @@ Hypothesis and Implication?
 - Each indicator loads on its domain factor
 - Factors correlate (we use "**~~**" for correlations).
 
+
 ``` r
 m3c &lt;- '
 Fluid  =~ F1 + F2 + F3
@@ -771,12 +772,12 @@ Your constraints mostly come from fixing cross-loadings to 0.
 
 
 ``` r
-m3c_result &lt;- cfa(m3c, data = CFAvars, orthogonal = F) # Try "T"
+m3c_result &lt;- cfa(m3c, data = CFAvars, orthogonal = F, std.lv = T) # Try "T"
 summary(m3c_result, standardized = T, fit.measures = T)
 ```
 
 ```
-lavaan 0.6-19 ended normally after 154 iterations
+lavaan 0.6-19 ended normally after 22 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
@@ -831,40 +832,40 @@ Parameter Estimates:
 Latent Variables:
                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
   Fluid =~                                                              
-    F1                1.000                              15.427    0.831
-    F2                1.045    0.074   14.056    0.000   16.122    0.811
-    F3                1.058    0.072   14.657    0.000   16.328    0.845
+    F1               15.427    1.007   15.317    0.000   15.427    0.831
+    F2               16.122    1.091   14.778    0.000   16.122    0.811
+    F3               16.328    1.041   15.681    0.000   16.328    0.845
   Verbal =~                                                             
-    V1                1.000                              16.245    0.755
-    V2                0.888    0.102    8.740    0.000   14.425    0.680
-    V3                0.854    0.096    8.854    0.000   13.868    0.696
+    V1               16.245    1.358   11.962    0.000   16.245    0.755
+    V2               14.425    1.355   10.647    0.000   14.425    0.680
+    V3               13.868    1.268   10.934    0.000   13.868    0.696
   Spatial =~                                                            
-    S1                1.000                              15.048    0.733
-    S2                0.942    0.112    8.439    0.000   14.175    0.681
-    S3                0.886    0.105    8.433    0.000   13.327    0.680
+    S1               15.047    1.317   11.428    0.000   15.047    0.733
+    S2               14.175    1.344   10.543    0.000   14.175    0.681
+    S3               13.327    1.266   10.527    0.000   13.327    0.680
 
 Covariances:
                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
   Fluid ~~                                                              
-    Verbal          149.646   24.024    6.229    0.000    0.597    0.597
-    Spatial         141.566   22.806    6.207    0.000    0.610    0.610
+    Verbal            0.597    0.057   10.558    0.000    0.597    0.597
+    Spatial           0.610    0.057   10.784    0.000    0.610    0.610
   Verbal ~~                                                             
-    Spatial          86.962   22.510    3.863    0.000    0.356    0.356
+    Spatial           0.356    0.077    4.628    0.000    0.356    0.356
 
 Variances:
                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
-   .F1              106.355   14.074    7.557    0.000  106.355    0.309
+   .F1              106.356   14.074    7.557    0.000  106.356    0.309
    .F2              135.543   16.739    8.097    0.000  135.543    0.343
    .F3              106.775   14.947    7.144    0.000  106.775    0.286
-   .V1              199.393   29.425    6.776    0.000  199.393    0.430
+   .V1              199.392   29.425    6.776    0.000  199.392    0.430
    .V2              241.515   29.053    8.313    0.000  241.515    0.537
-   .V3              204.156   25.435    8.027    0.000  204.156    0.515
+   .V3              204.157   25.435    8.027    0.000  204.157    0.515
    .S1              195.342   27.527    7.096    0.000  195.342    0.463
    .S2              231.984   28.540    8.128    0.000  231.984    0.536
    .S3              206.119   25.307    8.145    0.000  206.119    0.537
-    Fluid           238.006   31.077    7.659    0.000    1.000    1.000
-    Verbal          263.906   44.123    5.981    0.000    1.000    1.000
-    Spatial         226.428   39.627    5.714    0.000    1.000    1.000
+    Fluid             1.000                               1.000    1.000
+    Verbal            1.000                               1.000    1.000
+    Spatial           1.000                               1.000    1.000
 ```
 
 ---
@@ -965,7 +966,7 @@ modindices(m1_result, sort = T)
 ## 36  F3 ~~  V2  5.026 -36.066 -36.066   -0.173   -0.173
 ## 37  F3 ~~  V3  4.831 -33.037 -33.037   -0.170   -0.170
 ## 31  F2 ~~  V3  3.105 -28.064 -28.064   -0.131   -0.131
-## 34  F2 ~~  S3  2.791 -26.462 -26.462   -0.123   -0.123
+## 34  F2 ~~  S3  2.792 -26.462 -26.462   -0.123   -0.123
 ## 23  F1 ~~  V2  2.414 -23.699 -23.699   -0.123   -0.123
 ## 50  V3 ~~  S1  2.209 -30.323 -30.323   -0.099   -0.099
 ## 48  V2 ~~  S2  2.092 -33.051 -33.051   -0.095   -0.095
@@ -1043,7 +1044,7 @@ semPaths(m3c_result,what = "mod",
 
 .pull-right[
 
-![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -1119,6 +1120,89 @@ The “ethical” part is baked into the workflow: you constrain first, then dia
 
 A reader should be able to reconstruct your model and evaluate whether your modifications were principled.
 
+---
+
+### If using lavaan() and the full model specification
+
+
+``` r
+m3c &lt;- '
+# 3 latent factors
+Fluid  =~ F1 + F2 + F3
+Verbal =~ V1 + V2 + V3
+Spatial =~ S1 + S2 + S3
+
+# Factor covariances
+Fluid ~~ Verbal
+Fluid ~~ Spatial
+Verbal ~~ Spatial
+
+# Factor variances (unit variance)
+Fluid ~~ 1*Fluid
+Verbal ~~ 1*Verbal
+Spatial ~~ 1*Spatial
+
+# Residual variances
+F1 ~~ F1
+F2 ~~ F2
+F3 ~~ F3
+V1 ~~ V1
+V2 ~~ V2
+V3 ~~ V3
+S1 ~~ S1
+S2 ~~ S2
+S3 ~~ S3
+
+# Intercepts (will still be specified by default)
+F1 ~ 1
+F2 ~ 1
+F3 ~ 1
+V1 ~ 1
+V2 ~ 1
+V3 ~ 1
+S1 ~ 1
+S2 ~ 1
+S3 ~ 1
+'
+```
+
+---
+### More types of model specifications
+
+#### Higher-order model
+
+
+``` r
+m3h &lt;- '
+Fluid  =~ F1 + F2 + F3
+Verbal =~ V1 + V2 + V3
+Spatial =~ S1 + S2 + S3
+# A higher-order factor
+g =~ Fluid + Verbal + Spatial
+'
+m3h_result &lt;- cfa(m3h, data = CFAvars,
+                  orthogonal = F, std.lv = T)
+summary(m3h_result, standardized = T, fit.measures = T)
+```
+
+---
+### More types of model specifications
+
+#### Bi-factor model
+
+
+``` r
+m3b &lt;- '
+Fluid  =~ F1 + F2 + F3
+Verbal =~ V1 + V2 + V3
+Spatial =~ S1 + S2 + S3
+# A general factor and 3 sub-factors
+g =~ F1 + F2 + F3 + V1 + V2 + V3 + S1 + S2 + S3
+'
+m3b_result &lt;- cfa(m3b, data = CFAvars,
+                  orthogonal = F, std.lv = T)
+summary(m3b_result, standardized = T, fit.measures = T)
+```
 
 ---
 
