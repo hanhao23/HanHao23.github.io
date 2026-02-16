@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Measurement Models in Psychometrics</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Han Hao" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="hh.css" type="text/css" />
+    <link rel="stylesheet" href="scrollable.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+class: inverse, middle
+
+# Measurement Models as Psychometrics
+## Reliability, Validity, and Advanced CFA Structures
+
+---
+
+## Agenda
+
+- Advanced measurement structures: correlated factors vs higher-order vs bi-factor
+
+- Why “measurement model” is the statistical version of psychometrics terms
+
+- Reliability as variance decomposition
+
+- Validity as an argument for constructs
+
+- Interpretation and score-use decision checklist
+
+
+???
+Today’s plan:
+1) Extend to higher-order vs bi-factor as competing theories
+2) Connect latent factor models to core psychometrics language (reliability, validity)
+3) Reliability in the LVM framework
+4) LVM providing “internal structure” evidence for validity
+
+
+I’ll keep the mechanics light unless you want more code.
+Focus is interpretation: what parameters mean, and what conclusions are justified.
+---
+
+class: inverse, middle
+
+## Advanced CFA structures: Higher-Order vs Bi-Factor
+
+---
+
+## Why “general + specific” models
+
+#### Common scenarios:
+- Test has subdomains, but people want, or believe in a total score
+- Subscales correlate moderately to strongly ("there are something in **common**")
+- We want to know whether subscale scores add (theoretical and/or statistical) value beyond general communality
+- Or the other way around, we want to know whether a general factor is needed 
+
+#### A basic psychometric question:
+- What score interpretations are justified (total vs subscale vs both)?
+
+???
+This frames higher-order vs bi-factor as score-use decisions and theory choices.
+---
+
+## Model family (a conceptual menu)
+
+We’ll compare four common models here:
+- **1-factor** (single general construct)
+- **correlated factors** (multiple constructs that relate)
+- **higher-order factor** (general factor explains factor correlations)
+- **bi-factor** (general factor + orthogonal specifics at manifest level)
+
+Emphasis:
+- these are competing theories about how constructs generate covariances
+- I'll keep the model fit talk secondary to structure/theoretical interpretations here
+
+---
+
+## Higher-order model
+
+Structure (draw a diagram by hand?):
+- Items define first-order factors (sub-factors)
+- A higher-order factor explains correlations among all sub-factors
+- General vs specific variance is less directly decomposed at the manifest level
+
+When it makes sense:
+- Theory expects a hierarchy
+  - general ("g") → domains ("broad abilities") → items("narrow abilities/test composites")
+- We think that domains are “**meaningful and real** constructs” with a general umbrella (also "**meaningful and real**")
+
+---
+
+## Bi-factor model
+
+Structure (draw a diagram by hand?):
+- Each item loads on:
+  - A general factor (shared across all items)
+  - And/or one specific factor (domain residual covariance)
+- General and specifics are typically assumed to be orthogonal
+- Complexity of Estimation → Overfitting (or model converging issues)
+
+When it makes sense:
+- We want to quantify how **dominant** the general factor is
+- Estimate unique reliable variance of sub-domains **while the general commmunality is accounted for**
+
+---
+
+## Fit improvement is not **enough** (especially for bi-factor)
+
+Common issues in bi-factor practice:
+- Fit improvement due to flexibility and more parameters estimated
+- Weak/undefined specific factors
+- Heywood-case problems (negative residual variances)
+- The meaning of general factor
+
+Extended readings:
+- [Murray &amp; Johnson (2013)](https://www.sciencedirect.com/science/article/pii/S0160289613000779)
+- [Morgan et al. (2015)](https://www.mdpi.com/2079-3200/3/1/2)
+
+---
+
+## Bi-factor and reliability (why psychometricians care)
+
+With a bi-factor model, we can ask:
+- Is the total score for a test (or a battery) "good enough"?
+- Do subscales have (reliable) unique variance?
+
+Common summaries (conceptual, more in Section 2):
+- `\(\omega_h\)` (general-score **reliability**)
+- Explained Common Variance (g dominance)
+- subscale `\(\omega_t\)` and `\(\omega_g\)` (specific factors usefulness)
+
+---
+
+class: title-slide, middle
+
+## Quick illustration
+
+### Percieved social support: higher-order and bi-factor models
+
+---
+
+## What we’re looking for in LVM of psychological research
+
+&gt; Do not get into a "pure" fit competition on `\(\chi^2\)` or fit indices
+
+When comparing models:
+- Do structures and estimates make theoretical sense?
+- Do specific factors remain meaningful after accounting for general factor?
+- Are correlations among first-order factors consistent with a “general factor” story?
+- What would you do for scoring/reporting (in academic or pratical settings) based on this model?
+
+---
+
+### Higher-order model
+
+
+``` r
+dat &lt;- read.csv("socsupp.csv")
+# Specification
+m3h &lt;- '
+Family =~ PSS_1.1 + PSS_1.2 + PSS_1.3 + PSS_1.4
+Friends =~ PSS_2.1 + PSS_2.2 + PSS_2.3 + PSS_2.4
+Partner =~ PSS_3.1 + PSS_3.2 + PSS_3.3 + PSS_3.4
+# A higher-order factor
+g =~ Family + Friends + Partner
+'
+# Fitting
+m3h_result &lt;- cfa(m3h, data = dat, estimator = "MLM",
+                  orthogonal = T, std.lv = T)
+# Summary
+summary(m3h_result, standardized = T, fit.measures = T)
+```
+
+---
+
+
+```
+lavaan 0.6-19 ended normally after 38 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                        27
+
+  Number of observations                           403
+
+Model Test User Model:
+                                              Standard      Scaled
+  Test Statistic                               311.938     125.267
+  Degrees of freedom                                51          51
+  P-value (Chi-square)                           0.000       0.000
+  Scaling correction factor                                  2.490
+    Satorra-Bentler correction                                    
+
+Model Test Baseline Model:
+
+  Test statistic                              5303.268    2942.226
+  Degrees of freedom                                66          66
+  P-value                                        0.000       0.000
+  Scaling correction factor                                  1.802
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    0.950       0.974
+  Tucker-Lewis Index (TLI)                       0.936       0.967
+                                                                  
+  Robust Comparative Fit Index (CFI)                         0.964
+  Robust Tucker-Lewis Index (TLI)                            0.954
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)              -6697.360   -6697.360
+  Loglikelihood unrestricted model (H1)      -6541.390   -6541.390
+                                                                  
+  Akaike (AIC)                               13448.719   13448.719
+  Bayesian (BIC)                             13556.690   13556.690
+  Sample-size adjusted Bayesian (SABIC)      13471.017   13471.017
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.113       0.060
+  90 Percent confidence interval - lower         0.101       0.052
+  90 Percent confidence interval - upper         0.125       0.069
+  P-value H_0: RMSEA &lt;= 0.050                    0.000       0.024
+  P-value H_0: RMSEA &gt;= 0.080                    1.000       0.000
+                                                                  
+  Robust RMSEA                                               0.095
+  90 Percent confidence interval - lower                     0.074
+  90 Percent confidence interval - upper                     0.116
+  P-value H_0: Robust RMSEA &lt;= 0.050                         0.000
+  P-value H_0: Robust RMSEA &gt;= 0.080                         0.884
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.030       0.030
+
+Parameter Estimates:
+
+  Standard errors                           Robust.sem
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  Family =~                                                             
+    PSS_1.1           0.872    0.106    8.199    0.000    1.453    0.920
+    PSS_1.2           0.910    0.114    7.968    0.000    1.518    0.947
+    PSS_1.3           0.871    0.106    8.236    0.000    1.452    0.930
+    PSS_1.4           0.862    0.112    7.716    0.000    1.437    0.902
+  Friends =~                                                            
+    PSS_2.1           1.059    0.100   10.560    0.000    1.446    0.893
+    PSS_2.2           1.190    0.112   10.651    0.000    1.624    0.927
+    PSS_2.3           1.166    0.112   10.428    0.000    1.592    0.869
+    PSS_2.4           1.052    0.107    9.863    0.000    1.437    0.845
+  Partner =~                                                            
+    PSS_3.1           1.144    0.079   14.518    0.000    1.413    0.929
+    PSS_3.2           1.190    0.082   14.588    0.000    1.470    0.913
+    PSS_3.3           1.124    0.083   13.468    0.000    1.388    0.895
+    PSS_3.4           1.083    0.084   12.934    0.000    1.338    0.869
+  g =~                                                                  
+    Family            1.334    0.256    5.217    0.000    0.800    0.800
+    Friends           0.930    0.158    5.889    0.000    0.681    0.681
+    Partner           0.724    0.118    6.149    0.000    0.586    0.586
+
+Variances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+   .PSS_1.1           0.382    0.074    5.143    0.000    0.382    0.153
+   .PSS_1.2           0.263    0.051    5.174    0.000    0.263    0.103
+   .PSS_1.3           0.327    0.064    5.083    0.000    0.327    0.134
+   .PSS_1.4           0.476    0.093    5.140    0.000    0.476    0.187
+   .PSS_2.1           0.532    0.069    7.760    0.000    0.532    0.203
+   .PSS_2.2           0.431    0.100    4.311    0.000    0.431    0.140
+   .PSS_2.3           0.824    0.114    7.236    0.000    0.824    0.245
+   .PSS_2.4           0.826    0.129    6.399    0.000    0.826    0.286
+   .PSS_3.1           0.317    0.050    6.314    0.000    0.317    0.137
+   .PSS_3.2           0.432    0.064    6.744    0.000    0.432    0.167
+   .PSS_3.3           0.481    0.073    6.632    0.000    0.481    0.200
+   .PSS_3.4           0.580    0.086    6.706    0.000    0.580    0.245
+   .Family            1.000                               0.360    0.360
+   .Friends           1.000                               0.536    0.536
+   .Partner           1.000                               0.656    0.656
+    g                 1.000                               1.000    1.000
+```
+
+---
+
+![](PSYC5318W06Slides_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+### Bi-factor model
+
+
+``` r
+# Specification
+m3b &lt;- '
+Family =~ PSS_1.1 + PSS_1.2 + PSS_1.3 + PSS_1.4
+Friends =~ PSS_2.1 + PSS_2.2 + PSS_2.3 + PSS_2.4
+Partner =~ PSS_3.1 + PSS_3.2 + PSS_3.3 + PSS_3.4
+
+# Bi-factor general factor
+Support =~ PSS_1.1 + PSS_1.2 + PSS_1.3 + PSS_1.4 + PSS_2.1 + PSS_2.2 + PSS_2.3 + PSS_2.4 + PSS_3.1 + PSS_3.2 + PSS_3.3 + PSS_3.4
+*PSS_1.2 ~~ 0*PSS_1.2 # Fixed to 0 for a Heywood-case type issue
+'
+m3b_result &lt;- cfa(m3b, data = dat, estimator = "MLM",
+                  orthogonal = T, # Keep the factors uncorrelated
+                  std.lv = T)
+summary(m3b_result, standardized = T, fit.measures = T)
+```
+
+---
+
+
+```
+lavaan 0.6-19 ended normally after 41 iterations
+
+  Estimator                                         ML
+  Optimization method                           NLMINB
+  Number of model parameters                        35
+
+  Number of observations                           403
+
+Model Test User Model:
+                                              Standard      Scaled
+  Test Statistic                               242.438     102.687
+  Degrees of freedom                                43          43
+  P-value (Chi-square)                           0.000       0.000
+  Scaling correction factor                                  2.361
+    Satorra-Bentler correction                                    
+
+Model Test Baseline Model:
+
+  Test statistic                              5303.268    2942.226
+  Degrees of freedom                                66          66
+  P-value                                        0.000       0.000
+  Scaling correction factor                                  1.802
+
+User Model versus Baseline Model:
+
+  Comparative Fit Index (CFI)                    0.962       0.979
+  Tucker-Lewis Index (TLI)                       0.942       0.968
+                                                                  
+  Robust Comparative Fit Index (CFI)                         0.973
+  Robust Tucker-Lewis Index (TLI)                            0.958
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)              -6662.609   -6662.609
+  Loglikelihood unrestricted model (H1)      -6541.390   -6541.390
+                                                                  
+  Akaike (AIC)                               13395.219   13395.219
+  Bayesian (BIC)                             13535.182   13535.182
+  Sample-size adjusted Bayesian (SABIC)      13424.123   13424.123
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.107       0.059
+  90 Percent confidence interval - lower         0.094       0.049
+  90 Percent confidence interval - upper         0.121       0.068
+  P-value H_0: RMSEA &lt;= 0.050                    0.000       0.065
+  P-value H_0: RMSEA &gt;= 0.080                    1.000       0.000
+                                                                  
+  Robust RMSEA                                               0.090
+  90 Percent confidence interval - lower                     0.068
+  90 Percent confidence interval - upper                     0.113
+  P-value H_0: Robust RMSEA &lt;= 0.050                         0.002
+  P-value H_0: Robust RMSEA &gt;= 0.080                         0.786
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.056       0.056
+
+Parameter Estimates:
+
+  Standard errors                           Robust.sem
+  Information                                 Expected
+  Information saturated (h1) model          Structured
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  Family =~                                                             
+    PSS_1.1           0.435    0.145    3.002    0.003    0.435    0.275
+    PSS_1.2           0.724    0.115    6.311    0.000    0.724    0.452
+    PSS_1.3           0.131    0.100    1.309    0.191    0.131    0.084
+    PSS_1.4           0.001    0.145    0.005    0.996    0.001    0.000
+  Friends =~                                                            
+    PSS_2.1           1.233    0.080   15.479    0.000    1.233    0.761
+    PSS_2.2           1.364    0.079   17.365    0.000    1.364    0.778
+    PSS_2.3           1.274    0.088   14.426    0.000    1.274    0.696
+    PSS_2.4           1.249    0.093   13.471    0.000    1.249    0.735
+  Partner =~                                                            
+    PSS_3.1           1.267    0.068   18.748    0.000    1.267    0.833
+    PSS_3.2           1.292    0.070   18.411    0.000    1.292    0.803
+    PSS_3.3           1.163    0.081   14.302    0.000    1.163    0.750
+    PSS_3.4           1.155    0.079   14.707    0.000    1.155    0.751
+  Support =~                                                            
+    PSS_1.1           1.369    0.084   16.198    0.000    1.369    0.867
+    PSS_1.2           1.429    0.084   17.042    0.000    1.429    0.892
+    PSS_1.3           1.467    0.077   18.956    0.000    1.467    0.940
+    PSS_1.4           1.489    0.077   19.449    0.000    1.489    0.934
+    PSS_2.1           0.760    0.091    8.350    0.000    0.760    0.469
+    PSS_2.2           0.881    0.093    9.427    0.000    0.881    0.503
+    PSS_2.3           0.955    0.086   11.115    0.000    0.955    0.521
+    PSS_2.4           0.720    0.096    7.489    0.000    0.720    0.423
+    PSS_3.1           0.644    0.088    7.297    0.000    0.644    0.423
+    PSS_3.2           0.710    0.088    8.094    0.000    0.710    0.441
+    PSS_3.3           0.749    0.092    8.186    0.000    0.749    0.483
+    PSS_3.4           0.661    0.095    6.984    0.000    0.661    0.429
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+  Family ~~                                                             
+    Friends           0.000                               0.000    0.000
+    Partner           0.000                               0.000    0.000
+    Support           0.000                               0.000    0.000
+  Friends ~~                                                            
+    Partner           0.000                               0.000    0.000
+    Support           0.000                               0.000    0.000
+  Partner ~~                                                            
+    Support           0.000                               0.000    0.000
+
+Variances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+   .PSS_1.2           0.000                               0.000    0.000
+   .PSS_1.1           0.430    0.069    6.281    0.000    0.430    0.173
+   .PSS_1.3           0.266    0.059    4.533    0.000    0.266    0.109
+   .PSS_1.4           0.325    0.091    3.579    0.000    0.325    0.128
+   .PSS_2.1           0.526    0.071    7.389    0.000    0.526    0.201
+   .PSS_2.2           0.434    0.102    4.267    0.000    0.434    0.141
+   .PSS_2.3           0.820    0.110    7.441    0.000    0.820    0.244
+   .PSS_2.4           0.811    0.139    5.842    0.000    0.811    0.281
+   .PSS_3.1           0.294    0.052    5.648    0.000    0.294    0.127
+   .PSS_3.2           0.418    0.064    6.496    0.000    0.418    0.161
+   .PSS_3.3           0.493    0.071    6.906    0.000    0.493    0.205
+   .PSS_3.4           0.598    0.089    6.737    0.000    0.598    0.252
+    Family            1.000                               1.000    1.000
+    Friends           1.000                               1.000    1.000
+    Partner           1.000                               1.000    1.000
+    Support           1.000                               1.000    1.000
+```
+
+---
+
+![](PSYC5318W06Slides_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+---
+
+## Questions to think and dicuss
+
+#### Which model best matches your substantive theory on a construct of interest?
+#### If the bi-factor fits best, what else needs to be considered for it to be a .rt[preferred] model than correlated or higher-order model?
+#### If higher-order fits nearly as well as a correlated-factor model, what are the theoretical differences between them?
+
+---
+
+class: inverse, middle
+
+## Psychometrics and Measurements
+### A brief introduction in the LVM framework
+
+---
+## Where we are at this point
+.pull-left[
+- EFA: data-driven, exploratory insights on the **measurement** structure
+
+- CFA: theory-driven, quantitative investigations on the **measurement** model(s)
+- The psychometrics connection:  
+  - reliability: precision at the manifest variables level 
+  - validity: meaning + interpretations of constructs
+]
+
+.pull-right[
+![:scale 90%](https://live.staticflickr.com/12/92639417_e41aac36f1_b.jpg)
+]
+
+---
+
+## What is a “measurement model”?
+
+A **measurement model** is a quantitative claim about:
+
+- **What the latent attributes are** (construct definitions in quantitative model form)
+- **How selected indicators reflect it** (factor loadings)
+- **How they associate with each other** (factor correlations)
+- **What remains after the construct(s)** (residuals: error, specificity, bias)
+- **Where we can start off** (a "baseline" model for later analyses)
+
+A measurement model involves **variance decomposition** and **covariance explanation**.
+
+???
+Psychometrics is not “stats for its own sake.”
+We’re trying to justify score interpretations about latent attributes.
+---
+
+## Latents and manifests
+
+#### Items/trials as manifests, test/subtest-level latents
+
+#### Test composites as manifests, domain/ability-level latents
+
+#### Mulitple-stratums/layers of manifest-latents structure 
+
+---
+
+## CTT → LVM
+
+The CTT measurment model equation (conceptual):
+$$
+O = T + E
+$$
+Latent variable model (LVM) version:  
+- Observed indicator = (latent factor contribution) + residual
+- Observed covariances = model-implied covariances + leftover (co)variances
+
+&gt; In the LVM view, "T" is represented by the common variance (captured by the latent factors).  
+
+---
+
+class: inverse, middle
+
+## A measurement model is a quantified theoretical "claim".
+### If the model reproduces the observed covariances well, it supports the claim that the measurement structure (*"these manifests are reflections of these latents"*) is plausible (precision and accuracy).
+
+---
+
+## Reliability is about precision
+
+- How much of observed score variance is “signal” vs “noise”
+  -  **Signal of the target latent construct(s)**
+  
+- Reliability can be estimated on items, measures, and batteries
+
+- Across sample/population, versions/splits, time points, etc.
+
+#### Key mental model:
+- Reliability increases when **residual variances are smaller**
+- **Less leftovers, higher precision**
+
+???
+Students often think reliability is a property of the test.
+It’s better to say: reliability is a property of scores in a context.
+---
+
+## Item-level reliability
+
+#### The degree to which items (observable indicators) indicate the underlying construct (higher degree = ?)
+
+- **Item-total correlation**: correlation of an item and the total score (or total - item)
+
+- **Reliability without an item**: test-level reliability estimate if an item is excluded
+
+- **Other variance-based indices**: the % of an item's total variance that is "true" variance.
+
+In a factor model, item reliability `\(\approx\)` the item's communality (h²)/squared std loadings
+
+---
+## Scale/test reliability
+
+#### Cronbach's `\(\alpha\)` as a limited default internal consistency: often used because it is easy, **not because it is always appropriate**.
+
+`$$\alpha = \left( \frac{k}{k-1} \right) \left( 1 - \frac{\sum_{i=1}^{k} \sigma_{i}^2}{\sigma_T^2} \right)$$`
+
+Key limitations of `\(\alpha\)`:
+- Assumes a restrictive structure (items are somewhat parallel and function similarly; *tau-equivalence*)
+- For multi-dimensional constructs, test-level `\(\alpha\)` may not be comprehensive.
+- A high `\(\alpha\)` can occur with a large number of items (long tests benefit)
+
+???
+I’m keeping this conceptual.
+If someone asks about tau-equivalence, we can define it briefly.
+---
+
+## A better way: model-based reliability
+
+If we accept a measurement model:
+
+- Reliability is implied by the model’s decomposition of variance
+
+- We can quantify:
+    - how "different" are these items (manifests)
+    - how much variance in a manifest score is attributable to the factor(s)
+
+We can use CFA results (**loadings + residuals**) to estimate test-level reliabilities that are more **realistic and accurate, flexible** across dimensionality of constructs.
+
+???
+Main point: reliability “lives” in the measurement model parameters.
+---
+
+## From `\(\alpha\)` to `\(\omega\)`
+
+#### McDonald's Omega (ω) is a reliability estimate derived directly from a fitted factor model (usually a special bi-factor EFA or CFA)
+
+
+Total Omega:
+`$$\omega_t = \frac{(\sum \lambda_j)^2}{(\sum \lambda_j)^2 + \sum u_j^2}$$`
+
+Hierarchical Omega (= `\(\omega_t\)` when unidimensional):
+`$$\omega_h = \frac{Var(gen)}{Var(total)}$$`
+
+---
+
+### A quick reliability analysis demo
+
+Perceived social support scale (Demo dataset from Week 05)
+
+
+``` r
+dat_SS &lt;- read.csv("socsupp.csv")
+# Classical Cronbach's alpha (and other things)
+psych::alpha(dat_SS[,1:12])
+```
+
+```
+
+Reliability analysis   
+Call: psych::alpha(x = dat_SS[, 1:12])
+
+  raw_alpha std.alpha G6(smc) average_r S/N   ase mean  sd median_r
+      0.92      0.92    0.97       0.5  12 0.006  5.3 1.2     0.42
+
+    95% confidence boundaries 
+         lower alpha upper
+Feldt     0.91  0.92  0.93
+Duhachek  0.91  0.92  0.94
+
+ Reliability if an item is dropped:
+        raw_alpha std.alpha G6(smc) average_r S/N alpha se var.r med.r
+PSS_1.1      0.92      0.92    0.96      0.50  11   0.0067 0.041  0.42
+PSS_1.2      0.92      0.92    0.96      0.50  11   0.0066 0.040  0.42
+PSS_2.1      0.92      0.92    0.97      0.51  11   0.0065 0.042  0.42
+PSS_2.2      0.92      0.92    0.96      0.51  11   0.0065 0.040  0.42
+PSS_1.3      0.92      0.92    0.96      0.50  11   0.0067 0.040  0.42
+PSS_3.1      0.92      0.92    0.96      0.51  11   0.0064 0.040  0.43
+PSS_3.2      0.92      0.92    0.96      0.51  11   0.0064 0.041  0.43
+PSS_2.3      0.92      0.92    0.97      0.51  11   0.0065 0.042  0.42
+PSS_3.3      0.92      0.92    0.96      0.51  11   0.0064 0.040  0.42
+PSS_1.4      0.92      0.92    0.96      0.50  11   0.0067 0.041  0.41
+PSS_2.4      0.92      0.92    0.97      0.51  12   0.0064 0.041  0.43
+PSS_3.4      0.92      0.92    0.97      0.51  12   0.0062 0.039  0.43
+
+ Item statistics 
+          n raw.r std.r r.cor r.drop mean  sd
+PSS_1.1 403  0.78  0.79  0.78   0.74  5.5 1.6
+PSS_1.2 403  0.77  0.78  0.77   0.72  5.5 1.6
+PSS_2.1 403  0.74  0.73  0.71   0.68  5.4 1.6
+PSS_2.2 403  0.75  0.74  0.72   0.69  5.1 1.8
+PSS_1.3 403  0.79  0.79  0.79   0.74  5.6 1.6
+PSS_3.1 403  0.71  0.72  0.71   0.65  5.1 1.5
+PSS_3.2 403  0.71  0.72  0.71   0.65  5.1 1.6
+PSS_2.3 403  0.75  0.73  0.71   0.68  5.0 1.8
+PSS_3.3 403  0.71  0.72  0.71   0.65  5.3 1.6
+PSS_1.4 403  0.77  0.78  0.77   0.72  5.6 1.6
+PSS_2.4 403  0.71  0.69  0.67   0.64  5.3 1.7
+PSS_3.4 403  0.67  0.68  0.67   0.61  5.3 1.5
+
+Non missing response frequency for each item
+           1    2    3    4    5    6    7 miss
+PSS_1.1 0.05 0.02 0.04 0.08 0.20 0.32 0.30    0
+PSS_1.2 0.04 0.03 0.03 0.08 0.20 0.27 0.34    0
+PSS_2.1 0.03 0.05 0.04 0.10 0.21 0.25 0.31    0
+PSS_2.2 0.06 0.05 0.06 0.09 0.21 0.27 0.25    0
+PSS_1.3 0.03 0.03 0.04 0.09 0.16 0.28 0.36    0
+PSS_3.1 0.04 0.03 0.06 0.14 0.30 0.25 0.18    0
+PSS_3.2 0.04 0.05 0.08 0.14 0.25 0.25 0.21    0
+PSS_2.3 0.07 0.07 0.07 0.12 0.19 0.24 0.25    0
+PSS_3.3 0.03 0.03 0.07 0.11 0.23 0.29 0.24    0
+PSS_1.4 0.04 0.03 0.03 0.07 0.15 0.30 0.37    0
+PSS_2.4 0.05 0.05 0.04 0.11 0.19 0.29 0.27    0
+PSS_3.4 0.03 0.03 0.07 0.10 0.25 0.26 0.26    0
+```
+
+---
+
+### A quick reliability analysis demo
+
+Perceived social support scale (Demo dataset from Week 05)
+
+
+``` r
+# The omega approach
+psych::omega(dat_SS[,1:12], nfactors = 3)
+```
+
+![](PSYC5318W06Slides_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+```
+Omega 
+Call: omegah(m = m, nfactors = nfactors, fm = fm, key = key, flip = flip, 
+    digits = digits, title = title, sl = sl, labels = labels, 
+    plot = plot, n.obs = n.obs, rotate = rotate, Phi = Phi, option = option, 
+    covar = covar)
+Alpha:                 0.92 
+G.6:                   0.97 
+Omega Hierarchical:    0.71 
+Omega H asymptotic:    0.73 
+Omega Total            0.97 
+
+Schmid Leiman Factor loadings greater than  0.2 
+           g   F1*   F2*   F3*   h2   h2   u2   p2  com
+PSS_1.1 0.74  0.53             0.83 0.83 0.17 0.65 1.83
+PSS_1.2 0.75  0.59             0.90 0.90 0.10 0.62 1.90
+PSS_2.1 0.59              0.66 0.79 0.79 0.21 0.44 1.98
+PSS_2.2 0.62              0.69 0.86 0.86 0.14 0.45 1.99
+PSS_1.3 0.75  0.56             0.88 0.88 0.12 0.64 1.86
+PSS_3.1 0.53        0.75       0.85 0.85 0.15 0.34 1.82
+PSS_3.2 0.54        0.72       0.81 0.81 0.19 0.36 1.87
+PSS_2.3 0.61              0.62 0.76 0.76 0.24 0.48 2.01
+PSS_3.3 0.55        0.73       0.84 0.84 0.16 0.36 1.87
+PSS_1.4 0.72  0.54             0.82 0.82 0.18 0.64 1.85
+PSS_2.4 0.55              0.65 0.73 0.73 0.27 0.42 1.96
+PSS_3.4 0.51        0.72       0.78 0.78 0.22 0.33 1.81
+
+With Sums of squares  of:
+  g F1* F2* F3*  h2 
+4.7 1.2 2.1 1.7 8.1 
+
+general/max  0.58   max/min =   6.49
+mean percent general =  0.48    with sd =  0.13 and cv of  0.27 
+Explained Common Variance of the general factor =  0.48 
+
+The degrees of freedom are 33  and the fit is  0.67 
+The number of observations was  403  with Chi Square =  264.26  with prob &lt;  6.8e-38
+The root mean square of the residuals is  0.02 
+The df corrected root mean square of the residuals is  0.03
+RMSEA index =  0.132  and the 90 % confidence intervals are  0.118 0.147
+BIC =  66.29
+
+Compare this with the adequacy of just a general factor and no group factors
+The degrees of freedom for just the general factor are 54  and the fit is  7.27 
+The number of observations was  403  with Chi Square =  2882.55  with prob &lt;  0
+The root mean square of the residuals is  0.23 
+The df corrected root mean square of the residuals is  0.25 
+
+RMSEA index =  0.361  and the 90 % confidence intervals are  0.35 0.372
+BIC =  2558.61 
+
+Measures of factor score adequacy             
+                                                 g  F1*  F2*  F3*
+Correlation of scores with factors            0.86 0.73 0.90 0.85
+Multiple R square of scores with factors      0.73 0.53 0.81 0.73
+Minimum correlation of factor score estimates 0.47 0.06 0.61 0.45
+
+ Total, General and Subset omega for each subset
+                                                 g  F1*  F2*  F3*
+Omega total for total scores and subscales    0.97 0.96 0.95 0.94
+Omega general for total scores and subscales  0.71 0.61 0.33 0.42
+Omega group for total scores and subscales    0.26 0.35 0.62 0.52
+```
+
+???
+Total, General and Subset omega for each subset
+The omega general is the amount of variance in the group that is accounted for by the general factor, the omega total is the amount of variance in the group accounted for by general + group.
+---
+
+## Troubleshooting based on reliability
+
+When reliability is low:
+- Dimensions of constructs (multidimensionality)?
+- Weak loadings (items don’t strongly reflect the factor)?
+- Large residual variances (noise / method / specificity dominates)?
+
+Key caution:
+- Reliability is necessary for validity, but not sufficient.
+- Thus, **decisions should not be made based on reliability only**.
+
+???
+This is a good moment to remind them:
+“Reliability = precision; Validity = meaning.”
+---
+
+![randv](https://www.hoganassessments.com/wp-content/uploads/2017/05/Val_Rel_Target_Model_2_800.png)
+
+---
+
+## Validity is not one statistic
+
+&gt; Validity is an argument involving **interpretations and uses**: test (measurement) validity and experimental (Inference) validity
+
+.center[
+![:scale 45%](https://txwes.pressbooks.pub/app/uploads/sites/51/2025/07/2-6-768x533.png)
+]
+
+---
+
+## Types of test validity related to LVM
+
+- **Construct validity**: Is the measure really measuring the construct it claims to measure?
+  - **Content validity**: What’s in the items and are they doing the jobs?
+  - **Structural validity**: Internal structure and dimensionality
+  - **Convergent and divergent validity**: Is this construct overlapping with other constructs that shares (or not) theoretical similarity and association?
+  - **Predictive and concurrent validity**: Relations to selected criterion variables
+  
+- **External validity**: Generalizability across groups, time, and real world settings
+
+---
+
+## Validity evidence from LVM
+
+LVM (EFA/CFA/SEM) can inform:
+- **Structural validity**: 
+  - Dimensionality (how many factors?)
+  - Pattern of loadings (which indicators define which construct?)
+- **Criterion validity**
+  - Factor loadings (are measures align with their purposes?)
+  - Factor correlations and regressions (are constructs associated?)
+- **External validity**
+  - Invariance analyses and causal analyses
+  - Residual structure (method effects, wording overlap, local dependence)
+
+&gt; **But factor models cannot "prove" validity by themselves**
+
+---
+
+## Factor loadings for validity
+
+Factor loadings as **operationalizations**:
+
+- Loading is a reflection of item reliability, but also indicators of validity when **considering the content in the manifest variables**
+ - LVM of items/trials or LVM of composites
+
+- Strong primary loadings: convergent evidence (**align with the intended construct**)
+
+- Weak or diffuse loadings: possible construct underrepresentation? .rt[Item exclusion]?
+
+- Cross-loadings: vaguely stated or operated manifest indicators (items, trials, conditions, etc.)
+
+---
+
+## Factor correlations for validity
+
+Within an **uniquely identified construct (but has multiple identified dimensions)**
+
+- Measurement model of the construct (what are different components/dimensions of the construct and how they work with each other)
+
+Across **multiple uniquely identified constructs**
+
+- Measurement model for later analyses (assuming all constructs are freely correlated, what is the baseline fit)
+
+---
+
+## LVM intuition on validity: 
+
+.pull-left[
+### .rt[Strucutural validity]
+### .yt[Convergent validity]
+### .yt[Divergent validity]
+]
+
+.pull-right[
+### .gt[Concurrent validity]
+### .gt[Predictive validity]
+### .bt[External validity]
+]
+
+---
+
+## Local diagnostics as validity insights
+
+High MIs: the measurement model may be missing a essential link
+- Cross-loading item, omitted factor correlation, or correlated residual (method)
+
+Large residual correlations: indicators share something beyond the factor
+- Wording/format issues, shared stimuli/paradigms, redundant content
+
+Interpretation needed: construct-relevant or construct-irrelevant variance
+- “Is this a meaningful aspect, or just a method artifact?”
+
+---
+
+## Not a demo: Social support scale logic
+
+- 1-factor model: “general perceived support”
+- 3-factor model: family / friends / significant other
+- Higher-order model and bi-factor model?
+
+Validity framing:
+- If 3-factor fits better and factors are not redundant,
+  it supports a multidimensional construct interpretation.
+- Perceived social support includes those from family, friends, partners, .rt[and...]?
+- If factors are highly correlated and a general social support "index" is necessary, a higher-order or general factor story may be discussed.
+
+---
+
+## Invariance and SEM as validity evidence
+
+Measurement invariance is a prerequisite for structural claims considering generalizablity and stability (External validity)
+- Compare groups/time and test whether the measurement model is consistent across groups/timepoints
+
+SEM uses latent correlation and regression to test conditional causal associations
+
+---
+
+## Ending notes
+
+- Paper Critique Seminar 2: CFA in Psychometrics
+
+- [Murray &amp; Johnson (2013)](https://www.sciencedirect.com/science/article/pii/S0160289613000779) The limitations of model fit in comparing the bi-factor versus
+higher-order models of human cognitive ability structure
+
+- [Morgan et al. (2015)](https://www.mdpi.com/2079-3200/3/1/2) Are Fit Indices Biased in Favor of Bi-Factor Models in
+Cognitive Ability Research?
+
+- [Zinbarg et al. (2005)](https://www.cambridge.org/core/journals/psychometrika/article/abs/cronbachs-revelles-and-mcdonalds-h-their-relations-with-each-other-and-two-alternative-conceptualizations-of-reliability/CFCDB5AD81BBA6D35BB84661FA89CE8D)Cronbach’s alpha, Revelle’s beta, and Mcdonald’s omega: their Relations with Each Other and Two Alternative Conceptualizations of Reliability
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
