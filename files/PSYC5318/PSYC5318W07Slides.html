@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Multi-group Invariance Comparison</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Han Hao" />
+    <script src="libs/header-attrs-2.30/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="scrollable.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: title-slide, middle
+
+
+
+&lt;div style = "position:fixed; visibility: hidden"&gt;
+`$$\require{color}\definecolor{red}{rgb}{0.698039215686274, 0.133333333333333, 0.133333333333333}$$`
+`$$\require{color}\definecolor{green}{rgb}{0.125490196078431, 0.698039215686274, 0.666666666666667}$$`
+`$$\require{color}\definecolor{blue}{rgb}{0.274509803921569, 0.509803921568627, 0.705882352941177}$$`
+`$$\require{color}\definecolor{yellow}{rgb}{0.823529411764706, 0.411764705882353, 0.117647058823529}$$`
+`$$\require{color}\definecolor{purple}{rgb}{0.866666666666667, 0.627450980392157, 0.866666666666667}$$`
+&lt;/div&gt;
+
+&lt;script type="text/x-mathjax-config"&gt;
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      red: ["{\\color{red}{#1}}", 1],
+      green: ["{\\color{green}{#1}}", 1],
+      blue: ["{\\color{blue}{#1}}", 1],
+      yellow: ["{\\color{yellow}{#1}}", 1],
+      purple: ["{\\color{purple}{#1}}", 1]
+    },
+    loader: {load: ['[tex]/color']},
+    tex: {packages: {'[+]': ['color']}}
+  }
+});
+&lt;/script&gt;
+
+&lt;style&gt;
+.red {color: #B22222;}
+.green {color: #20B2AA;}
+.blue {color: #4682B4;}
+.yellow {color: #D2691E;}
+.purple {color: #DDA0DD;}
+&lt;/style&gt;
+
+
+
+
+
+
+
+### Statistical Modeling in Experimental Psychology
+# W07 Multi-group Invariance Comparison
+## And how to do that with "lavaan" in R
+
+**Han Hao @ Tarleton State University**
+
+---
+
+## Agenda
+
+- Advanced measurement structures: correlated factors vs higher-order vs bi-factor
+
+- Why “measurement model” is the statistical version of psychometrics terms
+
+- Reliability as variance decomposition
+
+- Validity as an argument for constructs
+
+
+---
+
+## The basic problem of "multi-groups"
+
+We often need to consider the existence of groups (e.g., Sex) on **latent constructs** (e.g., Perceived Social Support)
+
+But a group difference can reflect:
+  - True construct difference, **or**
+  - Different **measurement meaning** (measures function differently for different groups)
+
+**Invariance analysis**: Does the (measurement, or even structural) model work in the same way across groups (are we comparing 🍎 to 🍊 in the LVM?).
+
+---
+class: inverse, middle
+
+### Measurement invariance is not a fix for a bad measurement model.
+#### It is an inspection of (potential) parameter differences that could lead to differences in quantitative meanings of the latent constructs across groups.
+
+---
+
+## A (hopefully) lay-friendly starter
+
+If **measurement invariance holds across groups**, it means that across these groups,
+
+**The same latent variable is being measured** by the manifest indicators:
+
+- Under a same **conceptualization** of the construct (Configural Invariance)
+
+- With equivalent **prioritization** of indicators (Metric/Weak Invariance)
+
+- At a comparable **baseline calibration** of indicators (Strong/Scalar Invariance)
+
+- On a similar level of measurement **precision** (Strict Invariance)
+
+---
+
+## The CFA measurement model (continuous indicators)
+
+We conceptualize items (manifest variables) as:
+
+$$
+\mathbf{x} = \boldsymbol{\upsilon} + \mathbf{\Lambda}\boldsymbol{f} + \boldsymbol{\epsilon}
+$$
+
+- `\(\boldsymbol{f}\)`: latent factors (the "cause", the .purple[one ring to rule them all])
+
+- `\(\boldsymbol{\upsilon}\)`: item **intercepts** (the "start" point)
+
+- `\(\mathbf{\Lambda}\)`: **loadings** (units of change)
+
+- `\(\boldsymbol{\epsilon}\)`: **residuals** (noise)
+
+
+---
+
+## (Extended) For ordinal manifests
+
+For ordinal items, we often assume an underlying continuous response `\(x^*\)`:
+
+$$
+\mathbf{x}^* = \boldsymbol{\tau_i} + \mathbf{\Lambda}\boldsymbol{\eta} + \boldsymbol{\epsilon}
+$$
+
+Observed categories are determined by **thresholds** (cut-points) on `\(x^*\)`.
+
+**Practical consequence for invariance analysis:** “calibration of the baseline” usually means **equal thresholds** (instead of intercepts) for ordinal variables (see Step 3).
+
+**Note**: This is only for your future reference rather than for our practices and assignments in class. "lavaan" package does come with the features to run LVMs on ordinal variables.
+
+---
+## A ladder-up workflow
+
+---
+
+## Step 0: single-group CFAs
+.pull-left[
+Before invariance tests across groups:
+
+- Subset the data by groups that we want to compare
+- Fit the same CFA structure **within each group**
+- If fit is poor for any group, invariance analyses will not be meaningful
+
+&gt; **This a "sanity-check" step that is sometimes skipped but actually important.** 
+
+]
+
+.pull-right[
+
+.center[![:scale 65%](image/lvl1.png)]
+]
+---
+
+## Step 1: Configural invariance
+
+.pull-left[
+Fit the **configural invariance** model to ensure a same `\(conceptualization\)` of the construct
+
+**Constraints across groups:** none (beyond basic specification)
+
+]
+
+
+.pull-right[
+.center[![:scale 65%](image/lvl1.png)]
+]
+
+---
+
+## Step 1: Configural invariance
+
+.pull-left[
+For a 2-groups case:
+
+$$
+Group_1: x_i = \upsilon_1{_i} + \Lambda_1{_i}f + \epsilon_1{_i}
+$$
+$$
+Group_2: x_i = \upsilon_2{_i} + \Lambda_2{_i}f + \epsilon_2{_i}
+$$
+**Meaning if this model fits:**
+
+Qualitative similarity in *conceptual structure* of the construct (which manifests `\(\leftarrow\)` which factors)
+]
+
+.pull-right[
+.center[![:scale 65%](image/lvl1.png)]
+]
+
+---
+
+## Step 2: Metric/Weak invariance
+
+.pull-left[
+Fit the **weak invariance** model to ensure equivalent **prioritization** of indicators
+
+**Constraints across groups:** 
+
+Specify equal .red[factor loadings] across groups
+
+]
+
+
+.pull-right[
+.center[![:scale 65%](image/lvl2.png)]
+]
+
+---
+
+## Step 2: Metric/Weak invariance
+
+.pull-left[
+
+For a 2-groups case:
+
+$$
+Group_1: x_i = \upsilon_1{_i} + \red{\Lambda_i}f + \epsilon_1{_i}
+$$
+$$
+Group_2: x_i = \upsilon_2{_i} + \red{\Lambda_i}f + \epsilon_2{_i}
+$$
+
+**Meaning if this model fits:**
+
+Items relate to the factor in the same `\(weighted\)` way across groups.
+
+]
+
+.pull-right[
+.center[![:scale 65%](image/lvl2.png)]
+]
+
+---
+
+## Step 3: Strong/Scalar invariance
+
+.pull-left[
+Fit the **strong invariance** model to ensure comparable **baseline calibration** of indicators
+
+**Constraints across groups:**
+
+Specify equal .red[factor loadings] `\(and\)` .blue[intercepts] (or .blue[thresholds], if ordinal) across groups
+
+]
+
+.pull-right[
+.center[![:scale 65%](image/lvl3.png)]
+]
+
+---
+
+## Step 3: Strong/Scalar invariance
+
+.pull-left[
+
+For a 2-groups case:
+
+$$
+Group_1: x_i = \blue{\upsilon{_i}} + \red{\Lambda}f + \epsilon_1{_i}
+$$
+$$
+Group_2: x_i = \blue{\upsilon{_i}} + \red{\Lambda}f + \epsilon_2{_i}
+$$
+**Meaning if this model fits:**
+- Groups share the same **"zero" point** of the measurement scale
+- Same observed response level corresponds to same latent level
+
+]
+
+.pull-right[
+.center[![:scale 65%](image/lvl3.png)]
+]
+
+---
+
+## Step 4: Strict invariance (Optional)
+
+.pull-left[
+Fit the **strict invariance** model to ensure same level of measurement **precision**
+- Relatively "strict" and sometimes considered "less likely" in psych research
+
+**Constraints across groups:**
+
+Specify equal .red[factor loadings], .blue[intercepts] (or .blue[thresholds], if ordinal), `\(and\)` .yellow[residual (co)variances] across groups
+
+]
+
+.pull-right[
+.center[![:scale 65%](image/lvl4.png)]
+]
+
+---
+
+## Step 4: Strict invariance (Optional)
+
+.pull-left[
+
+For a 2-groups case:
+
+$$
+Group_1: x_i = \blue{\upsilon{_i}} + \red{\Lambda}f + \yellow{\epsilon_i}
+$$
+$$
+Group_2: x_i = \blue{\upsilon{_i}} + \red{\Lambda}f + \yellow{\epsilon_i}
+$$
+**Meaning if this model fits:**
+- Items have comparable *measurement precision* (measurement error "situations") across groups
+
+]
+
+.pull-right[
+.center[![:scale 65%](image/lvl4.png)]
+]
+
+---
+
+## Step 5 (?): Structural invariance
+
+.pull-left[
+Measurement invariance asks: *Do items measure the latent factors the same way across groups?*
+
+Structural invariance asks: *Given comparable measurement, are the **relations among latent variables** the same across groups?*
+
+]
+
+.pull-right[
+.center[![:scale 65%](image/lvl5.png)]
+]
+
+
+---
+
+## Step 5 (?): Structural invariance
+
+.pull-left[
+
+**Workflow rule:** test structural invariance `\(after\)` at least **weak/metric** ( **strong/scalar** preferred) invariance is supported
+
+- constrain .green[factor variances and covariances] across groups for CFA
+
+- constrain .green[latent regressions] for SEM models
+
+
+]
+
+.pull-right[
+.center[![:scale 65%](image/lvl5.png)]
+]
+
+---
+## Quick summary: what ea. “secures”
+
+- **Configural:** same *structure* (“same map”)
+
+- **Weak/Metric:** same *loadings* (“same ruler mark units”)
+
+- **Strong/Scalar:** same *intercepts* (“same zero point”)
+
+- **Strict:** same *residual (co)variances* (“same noise level”)
+
+- **Structrual:** same *relationships among factors* ("same theory")
+
+---
+
+## How invariance is evaluated
+
+#### At each level of invariance models:
+- look at overall fit (CFI/TLI/RMSEA/SRMR) of that level
+- then examine **fit change** from previous step (ΔCFI, ΔRMSEA, ΔSRMR)
+- compensate by a **model comparison test**
+- treat this as **theory comparison** (nested constraints)
+
+#### If fit worsens “too much” compared to the previous level:
+- this level of invariance may not hold
+- move to diagnostics / partial invariance if needed
+
+---
+
+## If measurement invariance fails
+
+Partial invariance as an compromise and exploration
+
+- Measurement invariance failure is **information**, not **bad news**
+
+- Often only a few parameters are non-invariant
+
+- Partial invariance strategy:
+  - Keep most constraints
+  - Free a few with theoretical justification
+  - Be transparent and be cautious (if a lot of constraints have to be freed)
+
+---
+
+class: inverse, middle
+
+## In-Class Demo: Perceived Social Support (socsupp.csv)
+
+---
+
+## Wrap-up: measurement invariance as a validity argument
+
+- measurement invariance is evidence about **comparability** of latent constructs
+- It protects against misleading group differences
+- It turns “group comparison” into a more defensible claim about constructs
+- Non-invariance is informative: it points to *which items* behave differently
+
+---
+
+## Repeated-measures invariance testing
+
+&gt; **Are the measurement properties upholding across time points?**
+
+[Linnell, D. J., Hao, H., McKlin, T. (2024)](https://osf.io/tnxc5/overview) Choosing between the traditional and retrospective pretest: A tutorial for using measurement invariance testing in R. OSF Preprint.
+
+---
+
+## Invariance and SEM as validity evidence
+
+Measurement invariance is a prerequisite for structural claims considering generalizablity and stability (External validity)
+- Compare groups/time and test whether the measurement model is consistent across groups/timepoints
+
+SEM uses latent correlation and regression to test conditional causal associations
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
