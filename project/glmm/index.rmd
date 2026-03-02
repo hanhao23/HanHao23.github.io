@@ -1,4 +1,3 @@
-
 ---
 date: '2021-4-07'
 external_link: ""
@@ -15,6 +14,7 @@ tags:
 - Academic
 title: Intro to Generalized Mixed Effects Model in R
 subtitle: An Tutorial with Repeated Measures Data
+author: Han Hao
 url_code: ""
 url_pdf: ""
 url_slides: ""

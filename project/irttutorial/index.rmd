@@ -1,4 +1,3 @@
-
 ---
 date: '2022-05-12'
 external_link: ""
@@ -15,6 +14,7 @@ tags:
 - Stats
 title: Intro to Item Response Modeling in R
 subtitle: An Tutorial on MIRT Package
+author: Han Hao
 url_code: ""
 url_pdf: ""
 url_slides: ""

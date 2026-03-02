@@ -5,12 +5,39 @@
     <link>https://hanhao23.github.io/tag/academic/</link>
       <atom:link href="https://hanhao23.github.io/tag/academic/index.xml" rel="self" type="application/rss+xml" />
     <description>Academic</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2026</copyright><lastBuildDate>Sat, 15 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2026</copyright><lastBuildDate>Mon, 02 Mar 2026 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
       <title>Academic</title>
       <link>https://hanhao23.github.io/tag/academic/</link>
     </image>
+    
+    <item>
+      <title>PSYC5318 Statistical Modeling in Experimental Psychology</title>
+      <link>https://hanhao23.github.io/project/psyc5318/</link>
+      <pubDate>Mon, 02 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/project/psyc5318/</guid>
+      <description>&lt;h3 id=&#34;week-2&#34;&gt;Week 2&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;EFA Concepts &amp;amp; Workflow&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/PSYC5318/PSYC5318W02Slides.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Slides&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;week-3&#34;&gt;Week 3&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;EFA Reporting &amp;amp; More&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/PSYC5318/PSYC5318W02Slides.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Slides&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;week-4&#34;&gt;Week 4&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;CFA Concepts &amp;amp; Workflow&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/PSYC5318/PSYC5318W02Slides.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Slides&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;week-5&#34;&gt;Week 5&lt;/h3&gt;
+&lt;h3 id=&#34;week-6&#34;&gt;Week 6&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Psychometrics&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/PSYC5318/PSYC5318W06Slides.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Slides&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;week-7&#34;&gt;Week 7&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Multi-group Invariance Comparison&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/PSYC5318/PSYC5318W07Slides.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Slides&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;week-8&#34;&gt;Week 8&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Path Modeling&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/PSYC5318/PSYC5318W08Slides.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Slides&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Trial by &#34;Trial&#34;</title>
@@ -21,7 +48,7 @@
     </item>
     
     <item>
-      <title>PSYC 5316 Advanced Quant Methods Materials</title>
+      <title>PSYC5316 Advanced Quant Methods Materials</title>
       <link>https://hanhao23.github.io/project/psyc5316/</link>
       <pubDate>Sun, 21 Sep 2025 00:00:00 +0000</pubDate>
       <guid>https://hanhao23.github.io/project/psyc5316/</guid>

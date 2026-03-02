@@ -4,26 +4,61 @@
     <title>Confirmatory Factor Analysis: Concepts and Executive Workflow</title>
     <meta charset="utf-8" />
     <meta name="author" content="Han Hao" />
-    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
-    <link rel="stylesheet" href="hh.css" type="text/css" />
     <link rel="stylesheet" href="scrollable.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 
+class: title-slide, middle
 
 
 
-class: inverse middle
+&lt;div style = "position:fixed; visibility: hidden"&gt;
+`$$\require{color}\definecolor{red}{rgb}{0.698039215686274, 0.133333333333333, 0.133333333333333}$$`
+`$$\require{color}\definecolor{green}{rgb}{0.125490196078431, 0.698039215686274, 0.666666666666667}$$`
+`$$\require{color}\definecolor{blue}{rgb}{0.274509803921569, 0.509803921568627, 0.705882352941177}$$`
+`$$\require{color}\definecolor{yellow}{rgb}{0.823529411764706, 0.411764705882353, 0.117647058823529}$$`
+`$$\require{color}\definecolor{purple}{rgb}{0.866666666666667, 0.627450980392157, 0.866666666666667}$$`
+&lt;/div&gt;
 
-# Confirmatory Factor Analysis
+&lt;script type="text/x-mathjax-config"&gt;
+MathJax.Hub.Config({
+  TeX: {
+    Macros: {
+      red: ["{\\color{red}{#1}}", 1],
+      green: ["{\\color{green}{#1}}", 1],
+      blue: ["{\\color{blue}{#1}}", 1],
+      yellow: ["{\\color{yellow}{#1}}", 1],
+      purple: ["{\\color{purple}{#1}}", 1]
+    },
+    loader: {load: ['[tex]/color']},
+    tex: {packages: {'[+]': ['color']}}
+  }
+});
+&lt;/script&gt;
 
-### PSYC 5318 Week 04
-#### Han Hao 2026
+&lt;style&gt;
+.red {color: #B22222;}
+.green {color: #20B2AA;}
+.blue {color: #4682B4;}
+.yellow {color: #D2691E;}
+.purple {color: #DDA0DD;}
+&lt;/style&gt;
+
+
+
+
+
+
+### Statistical Modeling in Experimental Psychology
+# W04 Confirmatory Factor Analysis
+## Concepts and Executive Workflow
+
+#### Han Hao @ Tarleton State University
 
 ---
-class: inverse
 layout: true
 
 ## Agenda (For these two weeks)
@@ -35,24 +70,11 @@ layout: true
 3. Statistical foundations (measurement model + model-implied covariance)
 4. Identification and scaling (why df matters)
 5. Model fit: χ² + common fit indices (equations + heuristics)
-6. Multiple plausible CFA specifications (continue)
-   - 1-factor model
-   - 3-factor correlated model (Fluid, Verbal, Spatial)
-
----
-
-6. Multiple plausible CFA specifications (continue)
-   - Higher-order model
-   - Bifactor model
-7. Diagnostics and ethical respecification
+6. Diagnostics
    - Modification indices
    - Correlated residuals
-8. Practical workflow + reporting checklist
-9. Lab 2 Demo: CFA Practice in R
-
-???
-
-Goal: you should be able to translate a theoretical statement into a CFA model, anticipate what constraints it implies, and interpret global + local evidence without “fit-chasing.”
+7. Practical workflow + reporting checklist
+8. Lab 2 Demo: CFA Practice in R
 
 ---
 layout: false
@@ -86,7 +108,7 @@ Common purposes in CFA are confirming **the detailed measurement structure** of 
 
 - Whether residuals are uncorrelated (often a starting assumption in estimation)
 
-- .pt[Equal constraints (multi-group or longitudinal invariance; more in W07)]
+- .purple[Equal constraints (multi-group or longitudinal invariance; more in W07)]
 
 ???
 
@@ -106,15 +128,12 @@ x_3 = \mu_3 + {\lambda_3}_1 f_1 + {\lambda_3}_2 f_2 + \cdots + \epsilon_3 \\
 
 Or simply,
 
-\\[
+$$
 x = \mu + \Lambda f + \epsilon
-\\]
+$$
 
 But they ask different questions: **what is fixed vs free** (constraints in pattern matrix).
 
-???
-
-EFA asks “what low-dimensional structure is suggested by data?” CFA asks “does this particular theory-consistent structure hold up?”
 
 ---
 
@@ -132,11 +151,6 @@ EFA asks “what low-dimensional structure is suggested by data?” CFA asks “
 ![:scale 90%](image/EFAVSCFA.jpeg)
 ]
 
---
-
-???
-
-EFA is often where measurement begins.
 
 ---
 
@@ -154,9 +168,6 @@ EFA is often where measurement begins.
 ![:scale 90%](image/EFAVSCFA.jpeg)
 ]
 
-???
-
-CFA is most valuable when constraints are meaningful scientific claims.
 
 ---
 
@@ -164,13 +175,13 @@ CFA is most valuable when constraints are meaningful scientific claims.
 
 The fundamental equation stays the same:
 
-\\[
+$$
 \mathbf{\Sigma} = \mathbf{\Lambda}\mathbf{\Phi}\mathbf{\Lambda}^\top + \mathbf{\Psi}
-\\]
+$$
 
-- \\(\mathbf{\Lambda}\\): factor loadings
-- \\(\mathbf{\Phi}\\): factor covariance matrix
-- \\(\mathbf{\Psi}\\): residual covariance matrix
+- `\(\mathbf{\Lambda}\)`: factor loadings
+- `\(\mathbf{\Phi}\)`: factor covariance matrix
+- `\(\mathbf{\Psi}\)`: residual covariance matrix
 
 CFA estimates parameters to reproduce a **model-implied convariance matrix** `\(\Sigma\)` that approximates the **sample (observed) covariance matrix** `\(S\)`.
 
@@ -192,10 +203,6 @@ CFA estimates parameters to reproduce a **model-implied convariance matrix** `\(
   - Factor correlations and other issues
   - Modification indices (MI) for dignostics suggestions
 
-
-???
-
-Never stop at global fit. Local diagnostics tell you what is wrong, and whether “fixes” make theoretical sense.
 
 ---
 
@@ -258,12 +265,9 @@ What you hope to see:
 
 .pull-right[
 
-![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-8-1.svg)&lt;!-- --&gt;
+![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-2-1.svg)&lt;!-- --&gt;
 ]
 
-???
-
-This is not “doing EFA again.” It’s a sanity check that your measurement story is at least plausible.
 
 
 ---
@@ -294,7 +298,7 @@ An unidimensional **reflective** theory of intelligence: All 9 indicators are im
 
 &gt; What should be the directions of the arrows in a diagram?
 
-Grammar for model specification in lavaan (.gt[the simple version]):
+Grammar for model specification in lavaan (.green[the simple version]):
 
 
 ``` r
@@ -305,14 +309,10 @@ g =~ F1 + F2 + F3 + V1 + V2 + V3 + S1 + S2 + S3
 
 The operator "**=~**" connects the named **reflective** factor (left) and the corresponding manifest variables (right)
 
-???
-
-If this fits well and loadings are strong, you might argue a strong general factor story (at least at this measurement level).
-
 ---
 ### Model 1: fitting results
 
-Fitting the specified model (.gt[*the simple version*]) with the "cfa()" function:
+Fitting the specified model (.red[*the simple version*]) with the "cfa()" function:
 &gt; This surpasses the basic lavaan() function because it sets a few default arguments that automatically specify residual variances, factor variances and factor covariances for CFA models, so we can use a simple version of model specification (our "m1") instead of a full set of specifications.
 
 
@@ -337,9 +337,6 @@ Two common scale-setting choices:
 
 2. **Unit variance**: fix each factor variance to 1 (free estimation of all loadings, recommended and default in my illustrations)
 
-???
-
-Scaling is not just a technicality. It affects the meaning of unstandardized parameters.
 
 ---
 
@@ -361,19 +358,15 @@ Model identification can be quantified by the **degrees of freedom** of the mode
 
 Unique elements in observed covariances matrix (`\(S\)`) for `\(p\)` observed variables is our total number of "observations" from the data:
 
-\\[
+$$
 \frac{p(p+1)}{2}
-\\]
+$$
 
 ####  Model degrees of freedom df = # of unique elements in S - # of estimated parameters
 
 - df &gt; 0 overidentified: **testable model**
 - df = 0 just-identified: saturated model
 - df &lt; 0 underidentified: cannot estimate
-
-???
-
-CFA becomes interesting when df &gt; 0 because constraints create a testable prediction.
 
 ---
 
@@ -389,12 +382,8 @@ The **correlation** matrix here has 36 unique correlations ("standardized covari
 
 .pull-right[
 
-![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-11-1.svg)&lt;!-- --&gt;
+![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-5-1.svg)&lt;!-- --&gt;
 ]
-
-???
-
-Your constraints mostly come from fixing cross-loadings to 0.
 
 ---
 
@@ -430,7 +419,7 @@ summary(m1_result, standardized = T, fit.measures = T)
 ```
 
 ```
-lavaan 0.6-19 ended normally after 21 iterations
+lavaan 0.6-21 ended normally after 21 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
@@ -541,7 +530,7 @@ In SEM/CFA, **ML chooses parameters (`\(\theta\)`)** to make `\(\Sigma\)` as clo
 \hat{\theta}_{ML} = \arg \max L(\theta | S)
 \\]
 
-&gt; .rt[The estimation of the parameters based on ML] (`\(\hat{\theta}_{ML}\)`) finds the value of parameters `\(\theta\)` that maximize the .bt[likelihood of observing S given those parameters] (`\(L(\theta | S)\)`)
+&gt; .red[The estimation of the parameters based on ML] (`\(\hat{\theta}_{ML}\)`) finds the value of parameters `\(\theta\)` that maximize the .blue[likelihood of observing S given those parameters] (`\(L(\theta | S)\)`)
 
 
 ---
@@ -600,12 +589,9 @@ worse fit → larger `\(F_{ML}\)` → larger χ²
 For large N?
 -  **χ² is best not to be treated as the single criterion of fitness**
 
-In practice we sometimes also report `\(\chi^2/df\)` .rt[(≤ 3 "good")]
+In practice we sometimes also report `\(\chi^2/df\)` .red[(≤ 3 "good")]
 ]
 
-???
-
-It is normal for χ² to reject in large samples even when the model is “good enough” for measurement purposes.
 
 ---
 
@@ -629,10 +615,10 @@ CFI is relative to an “independence model.” If your indicators are weakly co
 
 Common form:
 
-\\[
+$$
 TLI = \frac{\chi^2_0/df_0 - \chi^2/df}
 {\chi^2_0/df_0 - 1}
-\\]
+$$
 
 Heuristics:
 - similar to CFI: ≥ .90 "acceptable"; ≥ .95 "great"
@@ -646,9 +632,9 @@ TLI penalizes complexity more strongly and can exceed 1 or go negative. Treat as
 ### RMSEA
 ### Root Mean Square Error of Approximation
 
-\\[
+$$
 \text{RMSEA} = \sqrt{\max\left(\frac{\chi^2 - df}{df(N-1)},\,0\right)}
-\\]
+$$
 
 Heuristics:
 - Report RMSEA with the corresponding **confidence interval**
@@ -664,9 +650,9 @@ RMSEA is sensitive to df and can behave oddly in very low-df models.
 #### Standardized Root Mean Square Residual
 
 
-\\[
+$$
 SRMR = \sqrt{2\sum ({r_i}_j - \hat {r_i}_j)^2/k(k+1)}
-\\]
+$$
 
 SRMR summarizes the average standardized differences between observed and implied correlations/covariances.
 
@@ -777,7 +763,7 @@ summary(m3c_result, standardized = T, fit.measures = T)
 ```
 
 ```
-lavaan 0.6-19 ended normally after 22 iterations
+lavaan 0.6-21 ended normally after 22 iterations
 
   Estimator                                         ML
   Optimization method                           NLMINB
@@ -996,16 +982,12 @@ modindices(m1_result, sort = T)
 A practical ethical rule-set:
 
 1. **Start from a defensible theory model** (don’t start from MI)
-2. Use MI to generate a *short list* of candidates
+2. Use MI to generate a **.red[short list]** of candidates
 3. Only free parameters with a clear substantive rationale
 4. Make small, interpretable changes (avoid chains of tweaks)
 5. Treat post-hoc changes as exploratory
 6. Validate: replicate or cross-validate (new sample or split sample)
 7. Report everything you did and why
-
-???
-
-MI-driven tweaking without theory is basically turning CFA back into a disguised EFA.
 
 ---
 
@@ -1022,9 +1004,6 @@ Possible problematic reasons:
 - compensating for misspecified factor structure
 - fit-chasing based on only MIs
 
-???
-
-Correlated residuals are not automatically wrong, but they are a strong claim about leftover shared variance.
 ---
 ## Visualizations
 
@@ -1044,7 +1023,7 @@ semPaths(m3c_result,what = "mod",
 
 .pull-right[
 
-![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+![](PSYC5318W04Slides_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -1098,10 +1077,6 @@ lavPredict(m3c_result, newdata = CFAvars,
 8. Compare competing models (theory-driven)
 9. Finalize and report transparently (including any exploratory steps)
 
-???
-
-The “ethical” part is baked into the workflow: you constrain first, then diagnose, then justify, then validate, then report.
-
 ---
 
 ## Reporting checklist template
@@ -1116,9 +1091,6 @@ The “ethical” part is baked into the workflow: you constrain first, then dia
 - Any respecification: what was changed, when, and why
 - Diagrams as visualizations
 
-???
-
-A reader should be able to reconstruct your model and evaluate whether your modifications were principled.
 
 ---
 
@@ -1164,44 +1136,6 @@ S1 ~ 1
 S2 ~ 1
 S3 ~ 1
 '
-```
-
----
-### More types of model specifications
-
-#### Higher-order model
-
-
-``` r
-m3h &lt;- '
-Fluid  =~ F1 + F2 + F3
-Verbal =~ V1 + V2 + V3
-Spatial =~ S1 + S2 + S3
-# A higher-order factor
-g =~ Fluid + Verbal + Spatial
-'
-m3h_result &lt;- cfa(m3h, data = CFAvars,
-                  orthogonal = F, std.lv = T)
-summary(m3h_result, standardized = T, fit.measures = T)
-```
-
----
-### More types of model specifications
-
-#### Bi-factor model
-
-
-``` r
-m3b &lt;- '
-Fluid  =~ F1 + F2 + F3
-Verbal =~ V1 + V2 + V3
-Spatial =~ S1 + S2 + S3
-# A general factor and 3 sub-factors
-g =~ F1 + F2 + F3 + V1 + V2 + V3 + S1 + S2 + S3
-'
-m3b_result &lt;- cfa(m3b, data = CFAvars,
-                  orthogonal = F, std.lv = T)
-summary(m3b_result, standardized = T, fit.measures = T)
 ```
 
 ---
