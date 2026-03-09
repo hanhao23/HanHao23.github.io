@@ -156,8 +156,8 @@ head(dat1)&lt;/code&gt;&lt;/pre&gt;
 ## The degrees of freedom for the model is 33  and the fit was  0.07 
 ## The number of observations was  262  with Chi Square =  17.75  with prob &amp;lt;  0.99 
 ## 
-## The root mean square of the residuals is  0.03 
-## The df corrected root mean square of the residuals is  0.04 
+## The root mean square of the residuals is  0.02 
+## The df corrected root mean square of the residuals is  0.03 
 ## 
 ## RMSEA and the  0.9 confidence intervals are  0 0 0
 ## BIC =  -166.01Explained Common Variance of the general factor =  0.58 
@@ -283,17 +283,17 @@ coef(uniDich.result1,simplify = TRUE, IRTpar = TRUE)$items&lt;/code&gt;&lt;/pre&
 We can start with the item trace plots for the 12 items. The item trace plots visualize the probability of responding “1” to an item as a function of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. According to the item trace plot of this example, the 3 items with item size 2 (S1.2,S2.2,S3.2) are relatively easy items, in which subjects with average ability (&lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; = 0) are estimated to have about 80% to 90% of chance to answer correctly. On the other hand, the 3 items with size 5 are relatively hard items, in which subjects with average ability are estimated to have about only 10% to 20% of chance to answer correctly.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# In the function we cam specify the range of theta we&amp;#39;d like to visualize on the x axis of the plots. In this example we set it to -4 to 4 (4 SDs below and above average).
 plot(uniDich.result1, type = &amp;quot;trace&amp;quot;, theta_lim = c(-4,4))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting1-1.png&#34; alt=&#34;&#34; width=&#34;672&#34; /&gt;
 Other than the item trace plots, we can also look at the item information plots. Item information plots visualize how much “information” about the latent trait ability an item can provide. Conceptually, higher information implies less error of measure, and the peak of an item information curve is at the point of its b parameter. Thus, for easy items (such as the 3 items in the most left column below), little information are provided on subjects with high ability levels (because they will almost always answer correctly).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We can specify the exact set of items we want to plot in the ploting function of mirt. Here we can also only visualize the 1st, 5th, and 9th item from the dataset by addin an argument &amp;quot;which.items = c(1,5,9)&amp;quot; in the function. This will make the function to only plot the 3 items with set size 2 in the task. Please feel free to give a try.
 plot(uniDich.result1, type = &amp;quot;infotrace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting2-1.png&#34; alt=&#34;&#34; width=&#34;672&#34; /&gt;
 The “itemplot” function can provides more details regarding an item. This is an example that visualize the item trace plot of item 1 with confidence envelope.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;itemplot(uniDich.result1, item = 1, type = &amp;quot;trace&amp;quot;, CE = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting3-1.png&#34; width=&#34;672&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting3-1.png&#34; alt=&#34;&#34; width=&#34;672&#34; /&gt;
 Lastly, we can plot the information curve for the entire test. This is based on the sum of all item information curves and indicate how much information a test can provide at different latent trait levels based on the model. As aforementioned, high information indicate less error (low SE) of measurement. An ideal (but impossible) test would have high test information at all levels of latent trait levels.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result1, type = &amp;quot;infoSE&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%20Rasch%20ploting4-1.png&#34; alt=&#34;&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;pl-model&#34; class=&#34;section level2&#34;&gt;
@@ -347,10 +347,10 @@ uniDich.result2 &amp;lt;- mirt::mirt(dat1, uniDich.model2, itemtype = &amp;quot;
 &lt;h3&gt;Visualizing the Item and Scale Plots&lt;/h3&gt;
 &lt;p&gt;Comparing to the Rasch model, the estimated &lt;em&gt;a&lt;/em&gt; parameters in a 2PL model are also reflected in item trace plots, such that the differences in &lt;em&gt;a&lt;/em&gt;s are reflected by the changes in the steepness of the item trace curves. Higher &lt;em&gt;a&lt;/em&gt;s would be reflected as steeper item trace curves.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result2, type = &amp;quot;trace&amp;quot;, theta_lim = c(-4,4))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%202PL%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%202PL%20ploting1-1.png&#34; alt=&#34;&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The freely estimated discrimination parameters are also reflected in the item information plots. As we can see, comparing to the Rasch model, the peaks of information curves are varying across items in the 2PL model.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(uniDich.result2, type = &amp;quot;infotrace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%202PL%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unidich%202PL%20ploting2-1.png&#34; alt=&#34;&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;model-specifications&#34; class=&#34;section level2&#34;&gt;
@@ -445,10 +445,10 @@ unipoly.result1 &amp;lt;- mirt::mirt(dat2, uniDich.model2, itemtype = &amp;quot;
 &lt;h3&gt;Visualizing the Item and Scale Plots&lt;/h3&gt;
 &lt;p&gt;Similar to the dichotomous 2PL model, the estimated &lt;em&gt;a&lt;/em&gt; parameters in a GPCM model are reflected in item trace plots, such that the differences in &lt;em&gt;a&lt;/em&gt;s are reflected by the changes in the steepness of the item trace curves. Higher &lt;em&gt;a&lt;/em&gt;s would be reflected as steeper item trace curves. On the other hand, the estimated &lt;em&gt;b&lt;/em&gt; parameters in a GPCM model are reflected as (x-axis values for) the adjacent points between trace curves for different categories. For example, for Item S3.2, the current GPCM model estimated two threshold parameters: b1 = -1.36 (the adjacent point between curve P1 and P2) and b2 = -3.01 (the adjacent point between curve P2 and P3).&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(unipoly.result1, type = &amp;quot;trace&amp;quot;, theta_lim = c(-4,4))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20ploting1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20ploting1-1.png&#34; alt=&#34;&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Similar to the dichotomous 2PL model, the freely estimated discrimination parameters are also reflected in the item information plots.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(unipoly.result1, type = &amp;quot;infotrace&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20ploting2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20ploting2-1.png&#34; alt=&#34;&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;individual-scoring&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Individual Scoring&lt;/h3&gt;
@@ -470,10 +470,10 @@ head(est.theta)&lt;/code&gt;&lt;/pre&gt;
     geom_density(alpha=.2, fill=&amp;quot;aquamarine2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
 ## ℹ Please use `after_stat(density)` instead.
-## This warning is displayed once every 8 hours.
+## This warning is displayed once per session.
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
 ## generated.&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20scoring-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://hanhao23.github.io/project/irttutorial/index_files/figure-html/unipoly%202PL%20scoring-1.png&#34; alt=&#34;&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

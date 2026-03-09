@@ -1,26 +1,18 @@
 ---
-date: '2021-4-07'
-external_link: ""
-image:
-  focal_point: Smart
-slides: 
+title: "Intro to Generalized Mixed Effects Model in R"
+author: "Han Hao"
+date: "2021-4-07"
 summary: An example of generalized mixed effects model (GLMM) in with lmer package.
+categories: R
 tags:
 - Repeated Measures
 - Mixed Effects Model
-- R/Python
-- Stats
-- Psychometrics
+- Statistics
 - Academic
-title: Intro to Generalized Mixed Effects Model in R
+image:
+  focal_point: Smart
 subtitle: An Tutorial with Repeated Measures Data
-author: Han Hao
-url_code: ""
-url_pdf: ""
-url_slides: ""
-url_video: ""
 ---
-
 
 # Overview
 

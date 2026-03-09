@@ -1,24 +1,18 @@
 ---
-date: '2022-05-12'
-external_link: ""
+title: "Intro to Item Response Modeling in R"
+author: "Han Hao"
+date: "2022-05-12"
+subtitle: An Tutorial on MIRT Package
 image:
   focal_point: Smart
-slides: 
 summary: An example of item response modeling with the mirt package.
+categories: R
 tags:
 - Item Response Theory
 - Working Memory
-- R/Python
 - Psychometrics
 - Academic
-- Stats
-title: Intro to Item Response Modeling in R
-subtitle: An Tutorial on MIRT Package
-author: Han Hao
-url_code: ""
-url_pdf: ""
-url_slides: ""
-url_video: ""
+- Statistics
 ---
 
 # Overview
