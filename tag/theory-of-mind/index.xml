@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Theory of Mind | Han Hao Cog Psych</title>
+    <link>https://hanhao23.github.io/tag/theory-of-mind/</link>
+      <atom:link href="https://hanhao23.github.io/tag/theory-of-mind/index.xml" rel="self" type="application/rss+xml" />
+    <description>Theory of Mind</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2026</copyright><lastBuildDate>Sat, 15 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
+      <title>Theory of Mind</title>
+      <link>https://hanhao23.github.io/tag/theory-of-mind/</link>
+    </image>
+    
+    <item>
+      <title>Trial by &#34;Trial&#34;</title>
+      <link>https://hanhao23.github.io/talk/2025psychonomics/</link>
+      <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/2025psychonomics/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
