@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ester D. Navarro | Han Hao Cog Psych</title>
+    <link>https://hanhao23.github.io/author/ester-d.-navarro/</link>
+      <atom:link href="https://hanhao23.github.io/author/ester-d.-navarro/index.xml" rel="self" type="application/rss+xml" />
+    <description>Ester D. Navarro</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>hanhao23 © 2026</copyright><lastBuildDate>Fri, 27 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://hanhao23.github.io/img/Titleboard.jpg</url>
+      <title>Ester D. Navarro</title>
+      <link>https://hanhao23.github.io/author/ester-d.-navarro/</link>
+    </image>
+    
+    <item>
+      <title>Trial, Task, And Trait of Theory of Mind</title>
+      <link>https://hanhao23.github.io/talk/tometrics/</link>
+      <pubDate>Fri, 27 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/talk/tometrics/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
