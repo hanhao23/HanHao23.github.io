@@ -28,5 +28,24 @@
 </description>
     </item>
     
+    <item>
+      <title>Nothing Significant For this World</title>
+      <link>https://hanhao23.github.io/project/nsfw/</link>
+      <pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>https://hanhao23.github.io/project/nsfw/</guid>
+      <description>&lt;h3 id=&#34;fun-visualizations&#34;&gt;Fun Visualizations&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Viz with base R&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/NSFW/Christmas_Tree_in_R.R&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Christmas tree&lt;/a&gt;
+&lt;strong&gt;Viz with gganimate&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/NSFW/Snowman.R&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Snowman&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;shiny&#34;&gt;Shiny&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Shiny app code&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/NSFW/ScatterplotShiny.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Draw a scatterplot that generates data&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mini-tutorials&#34;&gt;Mini-tutorials&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Power&lt;/strong&gt; 
+&lt;a href=&#34;https://hanhao23.github.io/files/NSFW/power_analysis_demo.R&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Power analysis with pwr &amp;amp; simr&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
